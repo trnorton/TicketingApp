@@ -1,0 +1,17 @@
+{"Plays": [
+  {
+    "id": 1,
+    "name": "",
+    "ageRating": "",
+    "offRating": "",
+    "producers": ["", "", ""],
+    "majorActors": ["", "", ""]
+  }, {
+    "id": 2,
+    "name": "",
+    "ageRating": "",
+    "offRating": "",
+    "producers": ["", "", ""],
+    "majorActors": ["", "", ""]
+  }
+]}
