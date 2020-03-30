@@ -7,6 +7,7 @@ public abstract class Show {
 	private int ageRating;
 	private ArrayList<String> reviews;
 	private ArrayList<Integer> custRatings;
+	private ArrayList<String> producers;
 
 	public String getName() {
 		return name;
@@ -68,5 +69,46 @@ public abstract class Show {
 		return sum / custRatings.size();
 	}
 
-	public abstract String toString();
+	public void addProducer(String producer){
+		if(producer == null){
+			System.out.println("Can't add null producer...");
+			return;
+		}
+
+		System.out.println("Adding producer " + producer);
+		producers.add(producer);
+	}
+
+	public void removeProducer(String producer){
+		if(producer == null){
+			System.out.println("Can't remove null producer...");
+			return;
+		}
+
+		if(!producers.contains(producer)){
+			System.out.println("Producer " + producer + " not in list...not removed");
+			return;
+		}
+
+		System.out.println("Removing producer " + producer);
+		producers.remove(producer);
+	}
+
+	public void setProducers(ArrayList<String> producers){
+		this.producers = producers;
+	}
+
+	public ArrayList<String> getProducers() {
+		return producers;
+	}
+
+
+	public String toString() {
+		StringBuilder producersString = new StringBuilder();
+		for(String producer : producers)
+			producersString.append(producer).append(", ");
+
+
+		return "Show Name: " + this.getName() + " Rating: " + getAgeRating() + " Producers: " + producersString;
+	}
 }
