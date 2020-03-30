@@ -9,6 +9,7 @@ public class Event {
 		this.setShow(null);
 		this.setDate("Default Event Date");
 		this.setTime("Default event time");
+
 	}
 
 	public Event(Show show, String date, String time) {

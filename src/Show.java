@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * @author Taylor Norton, Lukacs Ablonczy
+ */
 public abstract class Show {
 
 	private String name;
@@ -106,7 +109,7 @@ public abstract class Show {
 	public String toString() {
 		StringBuilder producersString = new StringBuilder();
 		for(String producer : producers)
-			producersString.append(producer).append(", ");
+			producersString.append(producer).append(" ");
 
 
 		return "Show Name: " + this.getName() + " Rating: " + getAgeRating() + " Producers: " + producersString;

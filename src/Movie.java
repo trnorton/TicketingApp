@@ -1,16 +1,23 @@
 import java.util.ArrayList;
 
-public class Movie extends Show{
+/**
+ * @author Lukacs Ablonczy
+ * Defines the Movie Show type
+ */
+public class Movie extends Show {
 
 	private ArrayList<String> majorActors;
-
 	private String genre;
 
-	public Movie(){
-
-	}
-
-	public Movie(String name, int ageRating, String genre, ArrayList<String> majorActors, ArrayList<String> producers){
+	/**
+	 * Constructor for Concert type
+	 * @param name Name of show
+	 * @param ageRating AgeRating of show
+	 * @param genre Genre of movie
+	 * @param majorActors String Arraylist of actors of movie
+	 * @param producers producers of show
+	 */
+	public Movie(String name, int ageRating, String genre, ArrayList<String> majorActors, ArrayList<String> producers) {
 		this.setName(name);
 		this.setAgeRating(ageRating);
 		this.setGenre(genre);
@@ -18,13 +25,20 @@ public class Movie extends Show{
 		this.setMajorActors(majorActors);
 	}
 
-
+	/**
+	 * Getter for genre attribute
+	 * @return String genre of this movie
+	 */
 	public String getGenre() {
 		return genre;
 	}
 
+	/**
+	 * Setter for genre attribute
+	 * @param genre String genre for this movie
+	 */
 	public void setGenre(String genre) {
-		if(genre == null){
+		if (genre == null) {
 			System.out.println("Cannot set null genre...");
 			return;
 		}
@@ -32,14 +46,17 @@ public class Movie extends Show{
 		this.genre = genre;
 	}
 
-
-	public void addMajorActor(String actor){
-		if(actor == null){
+	/**
+	 * Places actor's name into majorActors ArrayList
+	 * @param actor String name of actors
+	 */
+	public void addMajorActor(String actor) {
+		if (actor == null) {
 			System.out.println("Cannot add null actor...");
 			return;
 		}
 
-		if(majorActors.contains(actor)){
+		if (majorActors.contains(actor)) {
 			System.out.println("Actor " + actor + " is already in list...will not add again");
 			return;
 		}
@@ -47,13 +64,17 @@ public class Movie extends Show{
 		majorActors.add(actor);
 	}
 
-	public void removeMajorActor(String actor){
-		if(actor == null){
+	/**
+	 * Removes name from majorActors arraylist
+	 * @param actor String name of actor to remove
+	 */
+	public void removeMajorActor(String actor) {
+		if (actor == null) {
 			System.out.println("Can't remove null actor...");
 			return;
 		}
 
-		if(!actor.contains(actor)){
+		if (!actor.contains(actor)) {
 			System.out.println("Actor " + actor + " not in list...not removed");
 			return;
 		}
@@ -62,13 +83,20 @@ public class Movie extends Show{
 		majorActors.remove(actor);
 	}
 
-
+	/**
+	 * Returns arraylist of major actors
+	 * @return String arraylist majorActors
+	 */
 	public ArrayList<String> getMajorActors() {
 		return majorActors;
 	}
 
+	/**
+	 * Setter for this movie's majorActors
+	 * @param majorActors String arraylist of actor's names
+	 */
 	public void setMajorActors(ArrayList<String> majorActors) {
-		if(majorActors == null){
+		if (majorActors == null) {
 			System.out.println(this + " can't set majorActors bc it is null");
 			return;
 		}
@@ -76,13 +104,16 @@ public class Movie extends Show{
 		this.majorActors = majorActors;
 	}
 
-
+	/**
+	 * Returns string describing movie
+	 * @return Name: Ratings: Producers: Genre: Famous Actors:
+	 */
 	@Override
 	public String toString() {
 		StringBuilder actorsString = new StringBuilder();
-		for(String actor : majorActors)
-			actorsString.append(actor).append(", ");
+		for (String actor : majorActors)
+			actorsString.append(actor).append(" ");
 
-		return super.toString() + " Famous Actors: " + actorsString;
+		return super.toString() + "Genre " + this.genre + " Famous Actors: " + actorsString;
 	}
 }
