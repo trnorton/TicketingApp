@@ -4,16 +4,34 @@ public class Movie extends Show{
 
 	private ArrayList<String> majorActors;
 
+	private String genre;
+
 	public Movie(){
 
 	}
 
-	public Movie(String name, int ageRating, ArrayList<String> majorActors, ArrayList<String> producers){
-		super.setName(name);
-		super.setAgeRating(ageRating);
-		super.setProducers(producers);
+	public Movie(String name, int ageRating, String genre, ArrayList<String> majorActors, ArrayList<String> producers){
+		this.setName(name);
+		this.setAgeRating(ageRating);
+		this.setGenre(genre);
+		this.setProducers(producers);
 		this.setMajorActors(majorActors);
 	}
+
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		if(genre == null){
+			System.out.println("Cannot set null genre...");
+			return;
+		}
+
+		this.genre = genre;
+	}
+
 
 	public void addMajorActor(String actor){
 		if(actor == null){
