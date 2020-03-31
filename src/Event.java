@@ -5,6 +5,13 @@ public class Event {
 	private String date;
 	private String time;
 
+	public Event(){
+		this.setShow(null);
+		this.setDate("Default Event Date");
+		this.setTime("Default event time");
+
+	}
+
 	public Event(Show show, String date, String time) {
 		this.show = show;
 		this.date = date;
