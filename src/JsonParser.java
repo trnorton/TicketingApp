@@ -7,10 +7,19 @@ import java.util.ArrayList;
 
 public class JsonParser {
 
-	private static final String[] ATTRIBUTES = {"name", "offRating", "ageRating", "reviews", "custRatings", "producers"};
-	private static final String[] MOVIE_ATTRS = {"majorActors", "genre"};
-	private static final String PLAY_ATTR = "majorActors";
-	private static final String CONCERT_ATTR = "performers";
+//	private static final String[] ATTRIBUTES = {"name", "offRating", "ageRating", "reviews", "custRatings", "producers"};
+//	private static final String[] MOVIE_ATTRS = {"majorActors", "genre"};
+
+	private static final String NAME = "name";
+	private static final String OFFRATING = "offRating";
+	private static final String AGERATING = "ageRating";
+	private static final String REVIEWS = "reviews";
+	private static final String CUSTRATING = "custRatings";
+	private static final String PRODUCERS = "producers";
+	private static final String MAJORACTORS = "majorActors";
+	private static final String GENRE = "genre";
+	private static final String PERFORMERS = "performers";
+
 	private static final String TYPE_MOVIE = "Movies";
 	private static final String TYPE_PLAY = "Plays";
 	private static final String TYPE_CONCERT = "Concerts";
@@ -28,30 +37,30 @@ public class JsonParser {
 			e.printStackTrace();
 		}
 
-		String name = (String)json.get(ATTRIBUTES[0]);
+		String name = (String)json.get(NAME);
 		show.setName(name);
 
-		int offRating = Integer.parseInt(json.get(ATTRIBUTES[1]).toString());
+		int offRating = Integer.parseInt(json.get(OFFRATING).toString());
 		show.setOffRating(offRating);
 
-		int ageRating = Integer.parseInt(json.get(ATTRIBUTES[2]).toString());
+		int ageRating = Integer.parseInt(json.get(AGERATING).toString());
 		show.setAgeRating(ageRating);
 
 		ArrayList<String> reviews = new ArrayList<>();
-		JSONArray reviewArray = (JSONArray)json.get(ATTRIBUTES[3]);
+		JSONArray reviewArray = (JSONArray)json.get(REVIEWS);
 		for(Object review : reviewArray)
 			reviews.add((String)(review));
 		show.setReviews(reviews);
 
 		ArrayList<Integer> custRatings = new ArrayList<>();
-		JSONArray custRatingsArray = (JSONArray)(json.get(ATTRIBUTES[4]));
+		JSONArray custRatingsArray = (JSONArray)(json.get(CUSTRATING));
 
 		for(Object rating : custRatingsArray)
 			custRatings.add(Math.toIntExact((Long)rating));
 		show.setCustRatings(custRatings);
 
 		ArrayList<String> producers= new ArrayList<>();
-		JSONArray producerArray = (JSONArray)json.get(ATTRIBUTES[5]);
+		JSONArray producerArray = (JSONArray)json.get(PRODUCERS);
 		for(Object producer : producerArray)
 			producers.add((String)(producer));
 		show.setProducers(producers);
@@ -61,11 +70,11 @@ public class JsonParser {
 
 	private static Movie addMovieAttributes(JSONObject json, Movie movie){
 		ArrayList<String> majorActors = new ArrayList<>();
-		JSONArray majorActorsArray = (JSONArray) json.get(MOVIE_ATTRS[0]);
+		JSONArray majorActorsArray = (JSONArray) json.get(MAJORACTORS);
 		for (Object majorActor : majorActorsArray)
 			majorActors.add((String) (majorActor));
 
-		String genre = json.get(MOVIE_ATTRS[1]).toString();
+		String genre = json.get(GENRE).toString();
 		movie.setMajorActors(majorActors);
 		movie.setGenre(genre);
 
@@ -74,7 +83,7 @@ public class JsonParser {
 
 	private static Play addPlayAttributes(JSONObject json, Play play){
 		ArrayList<String> majorActors = new ArrayList<>();
-		JSONArray majorActorsArray = (JSONArray)json.get(PLAY_ATTR);
+		JSONArray majorActorsArray = (JSONArray)json.get(MAJORACTORS);
 		for(Object majorActor : majorActorsArray)
 			majorActors.add((String)(majorActor));
 
@@ -85,7 +94,7 @@ public class JsonParser {
 
 	private static Concert addConcertAttributes(JSONObject json, Concert concert){
 		ArrayList<String> performers = new ArrayList<>();
-		JSONArray performersArray = (JSONArray)json.get(CONCERT_ATTR);
+		JSONArray performersArray = (JSONArray)json.get(PERFORMERS);
 		for(Object performer : performersArray)
 			performers.add((String)(performer));
 
@@ -134,11 +143,11 @@ public class JsonParser {
 				Movie movie = loadBasicsFromFile(json, new Movie());
 
 				ArrayList<String> majorActors = new ArrayList<>();
-				JSONArray majorActorsArray = (JSONArray)json.get(MOVIE_ATTRS[0]);
+				JSONArray majorActorsArray = (JSONArray)json.get(MAJORACTORS);
 				for(Object majorActor : majorActorsArray)
 					majorActors.add((String)(majorActor));
 
-				String genre = json.get(MOVIE_ATTRS[1]).toString();
+				String genre = json.get(GENRE).toString();
 				movie.setMajorActors(majorActors);
 				movie.setGenre(genre);
 
@@ -161,27 +170,27 @@ public class JsonParser {
 			for (Object jsonObject : concertsArray) {
 				JSONObject json = (JSONObject) jsonObject;
 
-				String name = (String)json.get(ATTRIBUTES[0]);
-				int offRating = Integer.parseInt(json.get(ATTRIBUTES[1]).toString());
-				int ageRating = Integer.parseInt(json.get(ATTRIBUTES[2]).toString());
+				String name = (String)json.get(NAME);
+				int offRating = Integer.parseInt(json.get(OFFRATING).toString());
+				int ageRating = Integer.parseInt(json.get(AGERATING).toString());
 
 				ArrayList<String> reviews = new ArrayList<>();
-				JSONArray reviewArray = (JSONArray)json.get(ATTRIBUTES[3]);
+				JSONArray reviewArray = (JSONArray)json.get(REVIEWS);
 				for(Object review : reviewArray)
 					reviews.add((String)(review));
 
 				ArrayList<Integer> custRatings = new ArrayList<>();
-				JSONArray custRatingArray = (JSONArray)json.get(ATTRIBUTES[4]);
+				JSONArray custRatingArray = (JSONArray)json.get(CUSTRATING);
 				for(Object rating : custRatingArray)
 					custRatings.add((int)(rating));
 
 				ArrayList<String> producers= new ArrayList<>();
-				JSONArray producerArray = (JSONArray)json.get(ATTRIBUTES[5]);
+				JSONArray producerArray = (JSONArray)json.get(PRODUCERS);
 				for(Object producer : producerArray)
 					producers.add((String)(producer));
 
 				ArrayList<String> performers = new ArrayList<>();
-				JSONArray performersArray = (JSONArray)json.get(CONCERT_ATTR);
+				JSONArray performersArray = (JSONArray)json.get(PERFORMERS);
 				for(Object performer : performersArray)
 					performers.add((String)(performer));
 
@@ -203,27 +212,27 @@ public class JsonParser {
 			for (Object jsonObject : playArray) {
 				JSONObject json = (JSONObject) jsonObject;
 
-				String name = (String)json.get(ATTRIBUTES[0]);
-				int offRating = Integer.parseInt(json.get(ATTRIBUTES[1]).toString());
-				int ageRating = Integer.parseInt(json.get(ATTRIBUTES[2]).toString());
+				String name = (String)json.get(NAME);
+				int offRating = Integer.parseInt(json.get(OFFRATING).toString());
+				int ageRating = Integer.parseInt(json.get(AGERATING).toString());
 
 				ArrayList<String> reviews = new ArrayList<>();
-				JSONArray reviewArray = (JSONArray)json.get(ATTRIBUTES[3]);
+				JSONArray reviewArray = (JSONArray)json.get(REVIEWS);
 				for(Object review : reviewArray)
 					reviews.add((String)(review));
 
 				ArrayList<Integer> custRatings = new ArrayList<>();
-				JSONArray custRatingArray = (JSONArray)json.get(ATTRIBUTES[4]);
+				JSONArray custRatingArray = (JSONArray)json.get(CUSTRATING);
 				for(Object rating : custRatingArray)
 					custRatings.add((int)(rating));
 
 				ArrayList<String> producers= new ArrayList<>();
-				JSONArray producerArray = (JSONArray)json.get(ATTRIBUTES[5]);
+				JSONArray producerArray = (JSONArray)json.get(PRODUCERS);
 				for(Object producer : producerArray)
 					producers.add((String)(producer));
 
 				ArrayList<String> majorActors = new ArrayList<>();
-				JSONArray majorActorsArray = (JSONArray)json.get(PLAY_ATTR);
+				JSONArray majorActorsArray = (JSONArray)json.get(MAJORACTORS);
 				for(Object majorActor : majorActorsArray)
 					majorActors.add((String)(majorActor));
 
@@ -244,8 +253,8 @@ public class JsonParser {
 		JSONArray actorsArray = new JSONArray();
 		actorsArray.addAll(majorActors);
 
-		movieInfo.put(MOVIE_ATTRS[0], actorsArray.toString());
-		movieInfo.put(MOVIE_ATTRS[1], genre);
+		movieInfo.put(MAJORACTORS, actorsArray.toString());
+		movieInfo.put(GENRE, genre);
 
 		return movieInfo;
 	}
@@ -257,7 +266,7 @@ public class JsonParser {
 		JSONArray actorsArray = new JSONArray();
 		actorsArray.addAll(majorActors);
 
-		movieInfo.put(PLAY_ATTR, actorsArray.toString());
+		movieInfo.put(MAJORACTORS, actorsArray.toString());
 
 		return movieInfo;
 	}
@@ -269,7 +278,7 @@ public class JsonParser {
 		JSONArray actorsArray = new JSONArray();
 		actorsArray.addAll(majorActors);
 
-		movieInfo.put(PLAY_ATTR, actorsArray.toString());
+		movieInfo.put(MAJORACTORS, actorsArray.toString());
 
 		return movieInfo;
 	}
@@ -358,15 +367,15 @@ public class JsonParser {
 			JSONArray actorsArray = new JSONArray();
 			actorsArray.addAll(majorActors);
 
-			showInfo.put(MOVIE_ATTRS[0], actorsArray.toJSONString());
-			showInfo.put(MOVIE_ATTRS[1], genre);
+			showInfo.put(MAJORACTORS, actorsArray.toJSONString());
+			showInfo.put(GENRE, genre);
 		}else if(isPlay){
 			Play play = (Play)show;
 			ArrayList<String> majorActors = play.getMajorActors();
 			JSONArray actorsArray = new JSONArray();
 			actorsArray.addAll(majorActors);
 
-			showInfo.put(PLAY_ATTR, actorsArray.toJSONString());
+			showInfo.put(MAJORACTORS, actorsArray.toJSONString());
 		}else if(isConcert){
 			Concert concert = (Concert)show;
 
@@ -374,7 +383,7 @@ public class JsonParser {
 			JSONArray actorsArray = new JSONArray();
 			actorsArray.addAll(majorActors);
 
-			showInfo.put(PLAY_ATTR, actorsArray.toJSONString());
+			showInfo.put(MAJORACTORS, actorsArray.toJSONString());
 		}
 
 		return showInfo;
@@ -400,12 +409,12 @@ public class JsonParser {
 		producersArray.addAll(producers);
 
 
-		showInfo.put(ATTRIBUTES[0], name);
-		showInfo.put(ATTRIBUTES[1], offRating);
-		showInfo.put(ATTRIBUTES[2], ageRating);
-		showInfo.put(ATTRIBUTES[3], reviewsArray.toJSONString());
-		showInfo.put(ATTRIBUTES[4], custRatingsArray.toJSONString());
-		showInfo.put(ATTRIBUTES[5], producersArray.toJSONString());
+		showInfo.put(NAME, name);
+		showInfo.put(OFFRATING, offRating);
+		showInfo.put(AGERATING, ageRating);
+		showInfo.put(REVIEWS, reviewsArray.toJSONString());
+		showInfo.put(CUSTRATING, custRatingsArray.toJSONString());
+		showInfo.put(PRODUCERS, producersArray.toJSONString());
 
 		return showInfo;
 	}
