@@ -4,6 +4,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.lang.invoke.ConstantCallSite;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -17,6 +18,10 @@ public class JsonParser {
 	private static final String TYPE_PLAY = "Plays";
 	private static final String TYPE_CONCERT = "Concerts";
 	private static final String FILENAME_EXTENSION = ".json";
+	private static boolean isMovie = false;
+	private static boolean isConcert = false;
+	private static boolean isPlay = false;
+
 
 	public static ArrayList<Movie> loadMoviesFromFile(){
 		ArrayList<Movie> movies = new ArrayList<Movie>();
@@ -147,7 +152,7 @@ public class JsonParser {
 		return plays;
 	}
 
-	private static JSONObject getShowJSON(Movie movie){
+	/*private static JSONObject getShowJSON(Movie movie){
 		JSONObject movieInfo = getBasicJSON(movie);
 
 		ArrayList<String> majorActors = movie.getMajorActors();
@@ -186,37 +191,9 @@ public class JsonParser {
 		return movieInfo;
 	}
 
-	private static JSONObject getBasicJSON(Show show){
-		JSONObject showInfo = new JSONObject();
+	*/
 
-		String name = show.getName();
-		int offRating = show.getOffRating();
-		int ageRating = show.getAgeRating();
-		ArrayList<String> reviews = show.getReviews();
-		ArrayList<Integer> custRatings = show.getCustRatings();
-		ArrayList<String> producers = show.getProducers();
-
-		JSONArray reviewsArray = new JSONArray();
-		reviewsArray.addAll(reviews);
-
-		JSONArray custRatingsArray = new JSONArray();
-		custRatingsArray.addAll(custRatings);
-
-		JSONArray producersArray = new JSONArray();
-		producersArray.addAll(producers);
-
-
-		showInfo.put(ATTRIBUTES[0], name);
-		showInfo.put(ATTRIBUTES[1], offRating);
-		showInfo.put(ATTRIBUTES[2], ageRating);
-		showInfo.put(ATTRIBUTES[3], reviewsArray.toString());
-		showInfo.put(ATTRIBUTES[4], custRatingsArray.toString());
-		showInfo.put(ATTRIBUTES[5], producersArray.toString());
-
-		return showInfo;
-	}
-
-	public static void saveMovies(ArrayList<Movie> movies){
+/*	public static void saveMovies(ArrayList<Movie> movies){
 		try {
 			FileWriter writer = new FileWriter(new File(TYPE_MOVIE + FILENAME_EXTENSION));
 			JSONArray moviesAsJSON = new JSONArray();
@@ -262,6 +239,121 @@ public class JsonParser {
 			e.printStackTrace();
 		}
 
+	}*/
+
+	public static void saveData(ArrayList<Show> showList){
+		Show tester = showList.get(0);
+		setType(tester);
+
+		String filepath = getFilePath(tester);
+
+		try {
+			FileWriter writer = new FileWriter(new File(filepath + FILENAME_EXTENSION));
+			JSONArray showJson = new JSONArray();
+
+			for(Show show : showList)
+				showJson.add(getShowJSON(show));
+
+			writer.write(showJson.toString());
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static JSONObject getShowJSON(Show show){
+		JSONObject showInfo = getBasicJSON(show);
+
+		if(isMovie){
+			Movie movie = (Movie)show;
+			ArrayList<String> majorActors = movie.getMajorActors();
+			String genre = movie.getGenre();
+
+			JSONArray actorsArray = new JSONArray();
+			actorsArray.addAll(majorActors);
+
+			showInfo.put(MOVIE_ATTRS[0], actorsArray.toString());
+			showInfo.put(MOVIE_ATTRS[1], genre);
+		}else if(isPlay){
+			Play play = (Play)show;
+			ArrayList<String> majorActors = play.getMajorActors();
+			JSONArray actorsArray = new JSONArray();
+			actorsArray.addAll(majorActors);
+
+			showInfo.put(PLAY_ATTR, actorsArray.toString());
+		}else if(isConcert){
+			Concert concert = (Concert)show;
+
+			ArrayList<String> majorActors = concert.getPerformers();
+			JSONArray actorsArray = new JSONArray();
+			actorsArray.addAll(majorActors);
+
+			showInfo.put(PLAY_ATTR, actorsArray.toString());
+		}
+
+		return showInfo;
+	}
+
+	private static JSONObject getBasicJSON(Show show){
+		JSONObject showInfo = new JSONObject();
+
+		String name = show.getName();
+		int offRating = show.getOffRating();
+		int ageRating = show.getAgeRating();
+		ArrayList<String> reviews = show.getReviews();
+		ArrayList<Integer> custRatings = show.getCustRatings();
+		ArrayList<String> producers = show.getProducers();
+
+		JSONArray reviewsArray = new JSONArray();
+		reviewsArray.addAll(reviews);
+
+		JSONArray custRatingsArray = new JSONArray();
+		custRatingsArray.addAll(custRatings);
+
+		JSONArray producersArray = new JSONArray();
+		producersArray.addAll(producers);
+
+
+		showInfo.put(ATTRIBUTES[0], name);
+		showInfo.put(ATTRIBUTES[1], offRating);
+		showInfo.put(ATTRIBUTES[2], ageRating);
+		showInfo.put(ATTRIBUTES[3], reviewsArray.toString());
+		showInfo.put(ATTRIBUTES[4], custRatingsArray.toString());
+		showInfo.put(ATTRIBUTES[5], producersArray.toString());
+
+		return showInfo;
+	}
+
+	private static String getFilePath(Show show){
+		Show typeChecker = show;
+		if(isMovie)
+			return  TYPE_MOVIE;
+		else if(isPlay)
+			return TYPE_PLAY;
+		else if(isConcert)
+			return TYPE_CONCERT;
+		else{
+			System.out.println("Not a show type");
+			return null;
+		}
+	}
+
+	private static void setType(Show show){
+		if(show instanceof Movie) {
+			isMovie = true;
+			isConcert = false;
+			isPlay = false;
+		}
+		else if(show instanceof Play) {
+			isMovie = false;
+			isConcert = false;
+			isPlay = true;
+		}
+		else if(show instanceof  Concert) {
+			isMovie = false;
+			isConcert = true;
+			isPlay = false;
+		}
 	}
 
 }
