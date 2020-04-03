@@ -1,18 +1,1 @@
-[{
-    "name": "",
-    "offRating": "",
-    "ageRating": "",
-    "reviews": [],
-    "ratings": [],
-    "producers": ["", "", ""],
-    "performers": ["", "", ""]
-  }, {
-    "name": "",
-    "offRating": "",
-    "ageRating": "",
-    "reviews": [],
-    "ratings": [],
-    "producers": ["", "", ""],
-    "performers": ["", "", ""]
-  }
-]
+[{"custRatings":[0,0,0],"performers":["","",""],"reviews":["","",""],"offRating":0,"name":"","ageRating":0,"producers":["","",""]}]
