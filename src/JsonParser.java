@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class JsonParser {
 
-	private static final String[] ATTRIBUTES = {"name", "offRating", "ageRating", "reviews", "customerRatings", "producers"};
+	private static final String[] ATTRIBUTES = {"name", "offRating", "ageRating", "reviews", "custRatings", "producers"};
 	private static final String[] MOVIE_ATTRS = {"majorActors", "genre"};
 	private static final String PLAY_ATTR = "majorActors";
 	private static final String CONCERT_ATTR = "performers";
@@ -20,7 +20,14 @@ public class JsonParser {
 	private static boolean isPlay = false;
 
 
-	private static <T extends Show> T loadBasicsFromFile(JSONObject json, T show){
+	private static <T extends Show> T loadBasicsFromFile(JSONObject json, Class<T> newShow){
+		T show = null;
+		try {
+			show = newShow.getDeclaredConstructor().newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		String name = (String)json.get(ATTRIBUTES[0]);
 		show.setName(name);
 
@@ -37,9 +44,10 @@ public class JsonParser {
 		show.setReviews(reviews);
 
 		ArrayList<Integer> custRatings = new ArrayList<>();
-		JSONArray custRatingArray = (JSONArray)json.get(ATTRIBUTES[4]);
-		for(Object rating : custRatingArray)
-			custRatings.add((int)(rating));
+		JSONArray custRatingsArray = (JSONArray)(json.get(ATTRIBUTES[4]));
+
+		for(Object rating : custRatingsArray)
+			custRatings.add(Math.toIntExact((Long)rating));
 		show.setCustRatings(custRatings);
 
 		ArrayList<String> producers= new ArrayList<>();
@@ -94,7 +102,7 @@ public class JsonParser {
 
 			for (Object jsonObject : showArray) {
 				JSONObject json = (JSONObject) jsonObject;
-				T newShow = loadBasicsFromFile(json, show);
+				T newShow = (T) loadBasicsFromFile(json, show.getClass());
 
 				if(isMovie){
 					Movie movie = addMovieAttributes(json, (Movie)newShow);

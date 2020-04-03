@@ -9,6 +9,9 @@ public class Concert extends Show {
 
 	private ArrayList<String> performers;
 
+	/**
+	 * Blank constructor, used for creating empty Show types
+	 */
 	public Concert(){
 
 	}
@@ -114,6 +117,6 @@ public class Concert extends Show {
 		for (String actor : performers)
 			performersString.append(actor).append(" ");
 
-		return super.toString() + " Performers: " + performersString;
+		return super.toString() + "\nPerformers: " + performersString + "\n";
 	}
 }
