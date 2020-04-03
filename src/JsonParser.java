@@ -7,6 +7,8 @@ import java.io.*;
 import java.lang.invoke.ConstantCallSite;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class JsonParser {
 
@@ -23,9 +25,92 @@ public class JsonParser {
 	private static boolean isPlay = false;
 
 
-	public static ArrayList<Movie> loadMoviesFromFile(){
-		ArrayList<Movie> movies = new ArrayList<Movie>();
+	private static <T extends Show> T loadBasicsFromFile(JSONObject json, T show){
+		String name = (String)json.get(ATTRIBUTES[0]);
+		show.setName(name);
 
+		int offRating = Integer.parseInt(json.get(ATTRIBUTES[1]).toString());
+		show.setOffRating(offRating);
+
+		int ageRating = Integer.parseInt(json.get(ATTRIBUTES[2]).toString());
+		show.setAgeRating(ageRating);
+
+		ArrayList<String> reviews = new ArrayList<>();
+		JSONArray reviewArray = (JSONArray)json.get(ATTRIBUTES[3]);
+		for(Object review : reviewArray)
+			reviews.add((String)(review));
+		show.setReviews(reviews);
+
+		ArrayList<Integer> custRatings = new ArrayList<>();
+		JSONArray custRatingArray = (JSONArray)json.get(ATTRIBUTES[4]);
+		for(Object rating : custRatingArray)
+			custRatings.add((int)(rating));
+		show.setCustRatings(custRatings);
+
+		ArrayList<String> producers= new ArrayList<>();
+		JSONArray producerArray = (JSONArray)json.get(ATTRIBUTES[5]);
+		for(Object producer : producerArray)
+			producers.add((String)(producer));
+		show.setProducers(producers);
+
+		return show;
+	}
+
+	public static <T extends Show> ArrayList<T> loadDataFromFile(T show){
+		setType(show);
+
+		ArrayList<T> shows = new ArrayList<>();
+		try {
+			JSONParser parser = new JSONParser();
+			JSONArray showArray = (JSONArray)new JSONParser().parse(new FileReader(getFilePath(show) + FILENAME_EXTENSION));
+
+			for (Object jsonObject : showArray) {
+				JSONObject json = (JSONObject) jsonObject;
+
+				T newShow = loadBasicsFromFile(json, show);
+
+				if(isMovie){
+					Movie movie = (Movie)newShow;
+
+					ArrayList<String> majorActors = new ArrayList<>();
+					JSONArray majorActorsArray = (JSONArray) json.get(MOVIE_ATTRS[0]);
+					for (Object majorActor : majorActorsArray)
+						majorActors.add((String) (majorActor));
+
+					String genre = json.get(MOVIE_ATTRS[1]).toString();
+					movie.setMajorActors(majorActors);
+					movie.setGenre(genre);
+
+					shows.add((T)movie);
+				} else if(isConcert){
+					Concert concert = (Concert)newShow;
+
+					ArrayList<String> performers = new ArrayList<>();
+					JSONArray performersArray = (JSONArray)json.get(CONCERT_ATTR);
+					for(Object performer : performersArray)
+						performers.add((String)(performer));
+
+					concert.setPerformers(performers);
+				} else if(isPlay) {
+					Play play = (Play)newShow;
+
+					ArrayList<String> majorActors = new ArrayList<>();
+					JSONArray majorActorsArray = (JSONArray)json.get(PLAY_ATTR);
+					for(Object majorActor : majorActorsArray)
+						majorActors.add((String)(majorActor));
+
+					play.setMajorActors(majorActors);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return shows;
+	}
+
+/*	public static ArrayList<Movie> loadMoviesFromFile(){
+		ArrayList<Movie> movies = new ArrayList<>();
 		try {
 			JSONParser parser = new JSONParser();
 			JSONArray moviesArray = (JSONArray)new JSONParser().parse(new FileReader(TYPE_MOVIE + FILENAME_EXTENSION));
@@ -33,24 +118,7 @@ public class JsonParser {
 			for (Object jsonObject : moviesArray) {
 				JSONObject json = (JSONObject) jsonObject;
 
-				String name = (String)json.get(ATTRIBUTES[0]);
-				int offRating = Integer.parseInt(json.get(ATTRIBUTES[1]).toString());
-				int ageRating = Integer.parseInt(json.get(ATTRIBUTES[2]).toString());
-
-				ArrayList<String> reviews = new ArrayList<>();
-				JSONArray reviewArray = (JSONArray)json.get(ATTRIBUTES[3]);
-				for(Object review : reviewArray)
-					reviews.add((String)(review));
-
-				ArrayList<Integer> custRatings = new ArrayList<>();
-				JSONArray custRatingArray = (JSONArray)json.get(ATTRIBUTES[4]);
-				for(Object rating : custRatingArray)
-					custRatings.add((int)(rating));
-
-				ArrayList<String> producers= new ArrayList<>();
-				JSONArray producerArray = (JSONArray)json.get(ATTRIBUTES[5]);
-				for(Object producer : producerArray)
-					producers.add((String)(producer));
+				Movie movie = loadBasicsFromFile(json, new Movie());
 
 				ArrayList<String> majorActors = new ArrayList<>();
 				JSONArray majorActorsArray = (JSONArray)json.get(MOVIE_ATTRS[0]);
@@ -58,8 +126,10 @@ public class JsonParser {
 					majorActors.add((String)(majorActor));
 
 				String genre = json.get(MOVIE_ATTRS[1]).toString();
+				movie.setMajorActors(majorActors);
+				movie.setGenre(genre);
 
-				movies.add(new Movie(name, offRating, ageRating, reviews, custRatings, producers, majorActors, genre));
+				movies.add(movie);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -150,7 +220,7 @@ public class JsonParser {
 			e.printStackTrace();
 		}
 		return plays;
-	}
+	}*/
 
 	/*private static JSONObject getShowJSON(Movie movie){
 		JSONObject movieInfo = getBasicJSON(movie);
