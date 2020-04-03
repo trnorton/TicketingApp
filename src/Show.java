@@ -128,6 +128,6 @@ public abstract class Show {
 			producersString.append(producer).append(" ");
 
 
-		return "Show Name: " + this.getName() + "\nIMdB Rating: " + offRating + "\nAge Rating: " + getAgeRating() + "Overall Viewer Rating: " + getAverageCustRating() + "\nProducers: " + producersString;
+		return " Name: " + this.getName() + "\nIMDB Rating: " + offRating + "\nAge Rating: " + getAgeRating() + "\nOverall Viewer Rating: " + getAverageCustRating() + "\nProducers: " + producersString;
 	}
 }

@@ -9,6 +9,9 @@ public class Movie extends Show {
 	private ArrayList<String> majorActors;
 	private String genre;
 
+	/**
+	 * Blank constructor, used for creating empty Show types
+	 */
 	public Movie(){
 
 	}
@@ -140,6 +143,6 @@ public class Movie extends Show {
 		for (String actor : majorActors)
 			actorsString.append(actor).append(" ");
 
-		return super.toString() + "Genre " + this.genre + " Famous Actors: " + actorsString;
+		return "Movie " + super.toString() + "\nGenre: " + this.genre + "\nFamous Actors: " + actorsString + "\n";
 	}
 }
