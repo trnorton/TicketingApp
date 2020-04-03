@@ -12,8 +12,8 @@ public class TicketingAppUI {
 	private ArrayList<String> mainMenuOptions;
 	private String[] watchlistMenuOptions = { "Add to watchlist", "Remove from watchlist", "Back" };
 	private String[] venueMenuOptions = { "Add to venue list", "Remove from venue list", "Back" };
-	private String[] showSearchMenuOptions = { "Display info", "Book tickets", "Rate", "Write review", "Add to watchlist",
-			"Return to main menu" };
+	private String[] showSearchMenuOptions = { "Display info", "Book tickets", "Rate", "Write review",
+			"Add to watchlist", "Return to main menu" };
 	private String[] venueSearchMenuOptions = { "Make this venue your home venue", "Return to main menu" };
 
 	TicketingAppUI() {
@@ -28,20 +28,24 @@ public class TicketingAppUI {
 
 		// ask if user is guest or not, login/proceed as needed
 		logIn();
+
 		while (true) {
 			// display Main Menu, which has options on how to proceed
 			displayMenuOptions();
 
 			// value for user commands
 			comm = getUserCommand(mainMenuOptions.size());
+
 			// invalid value goes to a continue
 			if (comm == -1) {
 				System.out.println("Not a valid command");
 				continue;
 			}
+
 			// break if logging out
 			if (comm == mainMenuOptions.size() - 1)
 				break;
+
 			// switch case for different cases
 			// TODO if user is customer
 			takeActionCustomer();
@@ -262,189 +266,385 @@ public class TicketingAppUI {
 		System.out.println("\n********** Create New Account **********");
 		System.out.println("Type in your name");
 		String name = scanner.nextLine();
+
 		System.out.println("Type in your birthday (MM/DD/YYYY");
 		String birthday = scanner.nextLine();
+
 		System.out.println("Type in your phone number");
 		int phoneNum = Integer.parseInt(scanner.nextLine());
+
 		System.out.println("Type in your home address");
 		String address = scanner.nextLine();
+
 		System.out.println("Type in your email");
 		String email = scanner.nextLine();
+
 		// TODO user.createAccount(); ----- (turns a guest into a Customer)
+
 		System.out.println("Your account has been created");
 	}
 
 	private void findMovie() {
 		System.out.println("\n********** Search for Movie **********");
 		System.out.println("Type in the movie you want to search for");
-		String movie = scanner.nextLine();
-		// TODO user.searchForEvent(movie);
-		while (true) {
-			System.out.println("What would you like to do?");
-			for (int i = 0; i < showSearchMenuOptions.length; i++) {
-				System.out.println((i + 1) + ". " + showSearchMenuOptions[i]);
-			}
-			System.out.println();
-			comm = getUserCommand(showSearchMenuOptions.length);
-			if (comm == showSearchMenuOptions.length - 1)
+		
+		String movie = "";
+		while(true) {
+			movie = scanner.nextLine();
+			try {
+				// TODO user.searchForEvent(movie);
 				break;
-			switch (comm) {
-			case (0):
-				System.out.println("Movie Info:");
-				// TODO user.lookAtBasicEventInfo(movie);
-			case (1):
-				System.out.println("Type in the date you want to see this movie (MM/DD/YYYY");
-				String date = scanner.nextLine();
-				System.out.println("Type in the time you want to see this movie");
-				String time = scanner.nextLine();
-				System.out.println("Type in the number of adult tickets you want to purchase");
-				int numAdultTickets = Integer.parseInt(scanner.nextLine());
-				System.out.println("Type in the number of child tickets you want to purchase");
-				int numChildTickets = Integer.parseInt(scanner.nextLine());
-				// TODO user.bookTickets(movie, date, time, numAdultTickets, numChildTickets);
-				System.out.println("Tickets have been booked!");
-				System.out.println("Would you like a receipt? (Y/N)");
-				nextLine = scanner.nextLine();
-				if (nextLine.equals("Y")) {
-					// TODO user.createReceipt()
-					System.out.println("Your receipt has been created");
-				} else if (nextLine.equals("N"))
-					continue;
-			case (2):
-				System.out.println("Type in your rating for this movie on a scale of 1 to 5");
-				int rating = Integer.parseInt(scanner.nextLine());
-				// TODO user.rateEvent(movie, rating);
-				System.out.println("Rating has been recorded");
-			case (3):
-				System.out.println("Type in your review for this movie");
-				String review = scanner.nextLine();
-				// TODO user.rateEvent(movie, review);
-				System.out.println("Review has been recorded");
-			case (4):
-				// TODO user.addToWatchlist(movie);
-				System.out.println("Added to watchlist");
+			} catch(Exception e) {
+				System.out.println("Movie not found. Type in another movie");
+				continue;
 			}
 		}
+
+		while (true) {
+			displaySubMenuOptions(showSearchMenuOptions);
+
+			comm = getUserCommand(showSearchMenuOptions.length);
+
+			if (comm == -1) {
+				System.out.println("Not a valid command");
+				continue;
+			}
+
+			if (comm == showSearchMenuOptions.length - 1)
+				break;
+
+			switch (comm) {
+			case (0):
+				displayMovieInfo();
+				break;
+			case (1):
+				bookMovieTickets();
+				break;
+			case (2):
+				rateMovie();
+				break;
+			case (3):
+				writeMovieReview();
+				break;
+			case (4):
+				addToWatchlist(movie);
+				break;
+			}
+		}
+	}
+
+	private void displayMovieInfo() {
+		System.out.println("Movie Info:");
+		// TODO user.lookAtBasicEventInfo(movie);
+	}
+
+	private void bookMovieTickets() {
+		System.out.println("Type in the date you want to see this movie (MM/DD/YYYY");
+		String date = scanner.nextLine();
+
+		System.out.println("Type in the time you want to see this movie");
+		String time = scanner.nextLine();
+
+		System.out.println("Type in the number of adult tickets you want to purchase");
+		int numAdultTickets = Integer.parseInt(scanner.nextLine());
+
+		System.out.println("Type in the number of child tickets you want to purchase");
+		int numChildTickets = Integer.parseInt(scanner.nextLine());
+
+		// TODO user.bookTickets(movie, date, time, numAdultTickets, numChildTickets);
+
+		System.out.println("Tickets have been booked!");
+
+		System.out.println("Would you like a receipt? (Y/N)");
+		while (true) {
+			nextLine = scanner.nextLine();
+			if (nextLine.equals("Y")) {
+				// TODO user.createReceipt()
+				System.out.println("Your receipt has been created");
+			} else if (nextLine.equals("N")) {
+				break;
+			} else {
+				System.out.println("Invalid input, only Y/N");
+			}
+		}
+	}
+
+	private void rateMovie() {
+		System.out.println("Type in your rating for this movie on a scale of 1 to 5");
+		
+		while(true) {
+			try {
+				int rating = Integer.parseInt(scanner.nextLine());
+				if(rating < 1 || rating > 5) {
+					System.out.println("Please rate it on a scale of 1 to 5 only");
+					continue;
+				}
+				break;
+			} catch(Exception e) {
+				System.out.println("Please rate it on a scale of 1 to 5 only");
+				continue;
+			}
+		}
+		
+		// TODO user.rateEvent(movie, rating);
+		System.out.println("Rating has been recorded");
+	}
+
+	private void writeMovieReview() {
+		System.out.println("Type in your review for this movie");
+		String review = scanner.nextLine();
+		// TODO user.writeEventReview(movie, review);
+		System.out.println("Review has been recorded");
 	}
 
 	private void findPlay() {
 		System.out.println("\n********** Search for Play **********");
 		System.out.println("Type in the play you want to search for");
-		String play = scanner.nextLine();
-		// TODO user.searchForEvent(play);
-		while (true) {
-			System.out.println("What would you like to do?");
-			for (int i = 0; i < showSearchMenuOptions.length; i++) {
-				System.out.println((i + 1) + ". " + showSearchMenuOptions[i]);
-			}
-			System.out.println();
-			comm = getUserCommand(showSearchMenuOptions.length);
-			if (comm == showSearchMenuOptions.length - 1)
+		
+		String play = "";
+		while(true) {
+			try {
+				play = scanner.nextLine();
+				// TODO user.searchForEvent(play);
 				break;
-			switch (comm) {
-			case (0):
-				System.out.println("Play Info:");
-				// TODO user.lookAtBasicEventInfo(play);
-			case (1):
-				System.out.println("Type in the date you want to see this play (MM/DD/YYYY");
-				String date = scanner.nextLine();
-				System.out.println("Type in the time you want to see this play");
-				String time = scanner.nextLine();
-				System.out.println("Type in the number of adult tickets you want to purchase");
-				int numAdultTickets = Integer.parseInt(scanner.nextLine());
-				System.out.println("Type in the number of child tickets you want to purchase");
-				int numChildTickets = Integer.parseInt(scanner.nextLine());
-				// TODO user.bookTickets(play, date, time, numAdultTickets, numChildTickets);
-				System.out.println("Tickets have been booked!");
-				System.out.println("Would you like a receipt? (Y/N)");
-				nextLine = scanner.nextLine();
-				if (nextLine.equals("Y")) {
-					// TODO user.createReceipt()
-					System.out.println("Your receipt has been created");
-				} else if (nextLine.equals("N"))
-					continue;
-			case (2):
-				System.out.println("Type in your rating for this play on a scale of 1 to 5");
-				int rating = Integer.parseInt(scanner.nextLine());
-				// TODO user.rateEvent(play, rating);
-				System.out.println("Rating has been recorded");
-			case (3):
-				System.out.println("Type in your review for this play");
-				String review = scanner.nextLine();
-				// TODO user.rateEvent(play, review);
-				System.out.println("Review has been recorded");
-			case (4):
-				// TODO user.addToWatchlist(play);
-				System.out.println("Added to watchlist");
+			} catch(Exception e) {
+				System.out.println("Play not found. Type in another play");
+				continue;
 			}
 		}
+
+		while (true) {
+			displaySubMenuOptions(showSearchMenuOptions);
+
+			comm = getUserCommand(showSearchMenuOptions.length);
+
+			if (comm == -1) {
+				System.out.println("Not a valid command");
+				continue;
+			}
+
+			if (comm == showSearchMenuOptions.length - 1)
+				break;
+
+			switch (comm) {
+			case (0):
+				displayPlayInfo();
+				break;
+			case (1):
+				bookPlayTickets();
+				break;
+			case (2):
+				ratePlay();
+				break;
+			case (3):
+				writePlayReview();
+				break;
+			case (4):
+				addToWatchlist(play);
+				break;
+			}
+		}
+	}
+
+	private void displayPlayInfo() {
+		System.out.println("Play Info:");
+		// TODO user.lookAtBasicEventInfo(play);
+	}
+
+	private void bookPlayTickets() {
+		System.out.println("Type in the date you want to see this play (MM/DD/YYYY");
+		String date = scanner.nextLine();
+
+		System.out.println("Type in the time you want to see this play");
+		String time = scanner.nextLine();
+
+		System.out.println("Type in the number of adult tickets you want to purchase");
+		int numAdultTickets = Integer.parseInt(scanner.nextLine());
+
+		System.out.println("Type in the number of child tickets you want to purchase");
+		int numChildTickets = Integer.parseInt(scanner.nextLine());
+
+		// TODO user.bookTickets(play, date, time, numAdultTickets, numChildTickets);
+
+		System.out.println("Tickets have been booked!");
+
+		System.out.println("Would you like a receipt? (Y/N)");
+		while (true) {
+			nextLine = scanner.nextLine();
+			if (nextLine.equals("Y")) {
+				// TODO user.createReceipt()
+				System.out.println("Your receipt has been created");
+			} else if (nextLine.equals("N")) {
+				continue;
+			} else {
+				System.out.println("Invalid input, only Y/N");
+			}
+		}
+	}
+
+	private void ratePlay() {
+		System.out.println("Type in your rating for this play on a scale of 1 to 5");
+		
+		while(true) {
+			try {
+				int rating = Integer.parseInt(scanner.nextLine());
+				if(rating < 1 || rating > 5) {
+					System.out.println("Please rate it on a scale of 1 to 5 only");
+					continue;
+				}
+				break;
+			} catch(Exception e) {
+				System.out.println("Please rate it on a scale of 1 to 5 only");
+				continue;
+			}
+		}
+		
+		// TODO user.rateEvent(play, rating);
+		System.out.println("Rating has been recorded");
+	}
+
+	private void writePlayReview() {
+		System.out.println("Type in your review for this play");
+		String review = scanner.nextLine();
+		// TODO user.writeEventReview(play, review);
+		System.out.println("Review has been recorded");
 	}
 
 	private void findConcert() {
 		System.out.println("\n********** Search for Concert **********");
 		System.out.println("Type in the concert you want to search for");
-		String concert = scanner.nextLine();
-		// TODO user.searchForEvent(concert);
-		while (true) {
-			System.out.println("What would you like to do?");
-			for (int i = 0; i < showSearchMenuOptions.length; i++) {
-				System.out.println((i + 1) + ". " + showSearchMenuOptions[i]);
-			}
-			System.out.println();
-			comm = getUserCommand(showSearchMenuOptions.length);
-			if (comm == showSearchMenuOptions.length - 1)
+		
+		String concert = "";
+		while(true) {
+			try {
+				concert = scanner.nextLine();
+				// TODO user.searchForEvent(play);
 				break;
-			switch (comm) {
-			case (0):
-				System.out.println("Concert Info:");
-				// TODO user.lookAtBasicEventInfo(concert);
-			case (1):
-				System.out.println("Type in the date you want to see this concert (MM/DD/YYYY");
-				String date = scanner.nextLine();
-				System.out.println("Type in the time you want to see this concert");
-				String time = scanner.nextLine();
-				System.out.println("Type in the number of adult tickets you want to purchase");
-				int numAdultTickets = Integer.parseInt(scanner.nextLine());
-				System.out.println("Type in the number of child tickets you want to purchase");
-				int numChildTickets = Integer.parseInt(scanner.nextLine());
-				// TODO user.bookTickets(concert, date, time, numAdultTickets, numChildTickets);
-				System.out.println("Tickets have been booked!");
-				System.out.println("Would you like a receipt? (Y/N)");
-				nextLine = scanner.nextLine();
-				if (nextLine.equals("Y")) {
-					// TODO user.createReceipt()
-					System.out.println("Your receipt has been created");
-				} else if (nextLine.equals("N"))
-					continue;
-			case (2):
-				System.out.println("Type in your rating for this concert on a scale of 1 to 5");
-				int rating = Integer.parseInt(scanner.nextLine());
-				// TODO user.rateEvent(concert, rating);
-				System.out.println("Rating has been recorded");
-			case (3):
-				System.out.println("Type in your review for this concert");
-				String review = scanner.nextLine();
-				// TODO user.rateEvent(concert, review);
-				System.out.println("Review has been recorded");
-			case (4):
-				// TODO user.addToWatchlist(concert);
-				System.out.println("Added to watchlist");
+			} catch(Exception e) {
+				System.out.println("Concert not found. Type in another concert");
+				continue;
 			}
 		}
+
+		while (true) {
+			displaySubMenuOptions(showSearchMenuOptions);
+
+			comm = getUserCommand(showSearchMenuOptions.length);
+
+			if (comm == -1) {
+				System.out.println("Not a valid command");
+				continue;
+			}
+
+			if (comm == showSearchMenuOptions.length - 1)
+				break;
+
+			switch (comm) {
+			case (0):
+				displayConcertInfo();
+				break;
+			case (1):
+				bookConcertTickets();
+				break;
+			case (2):
+				rateConcert();
+				break;
+			case (3):
+				writeConcertReview();
+				break;
+			case (4):
+				addToWatchlist(concert);
+				break;
+			}
+		}
+	}
+
+	private void displayConcertInfo() {
+		System.out.println("Concert Info:");
+		// TODO user.lookAtBasicEventInfo(concert);
+	}
+
+	private void bookConcertTickets() {
+		System.out.println("Type in the date you want to see this concert (MM/DD/YYYY");
+		String date = scanner.nextLine();
+
+		System.out.println("Type in the time you want to see this concert");
+		String time = scanner.nextLine();
+
+		System.out.println("Type in the number of adult tickets you want to purchase");
+		int numAdultTickets = Integer.parseInt(scanner.nextLine());
+
+		System.out.println("Type in the number of child tickets you want to purchase");
+		int numChildTickets = Integer.parseInt(scanner.nextLine());
+
+		// TODO user.bookTickets(concert, date, time, numAdultTickets, numChildTickets);
+
+		System.out.println("Tickets have been booked!");
+
+		System.out.println("Would you like a receipt? (Y/N)");
+		while (true) {
+			nextLine = scanner.nextLine();
+			if (nextLine.equals("Y")) {
+				// TODO user.createReceipt()
+				System.out.println("Your receipt has been created");
+			} else if (nextLine.equals("N")) {
+				continue;
+			} else {
+				System.out.println("Invalid input, only Y/N");
+			}
+		}
+	}
+
+	private void rateConcert() {
+		System.out.println("Type in your rating for this concert on a scale of 1 to 5");
+		
+		while(true) {
+			try {
+				int rating = Integer.parseInt(scanner.nextLine());
+				if(rating < 1 || rating > 5) {
+					System.out.println("Please rate it on a scale of 1 to 5 only");
+					continue;
+				}
+				break;
+			} catch(Exception e) {
+				System.out.println("Please rate it on a scale of 1 to 5 only");
+				continue;
+			}
+		}
+		
+		// TODO user.rateEvent(concert, rating);
+		System.out.println("Rating has been recorded");
+	}
+
+	private void writeConcertReview() {
+		System.out.println("Type in your review for this concert");
+		String review = scanner.nextLine();
+		// TODO user.writeEventReview(concert, review);
+		System.out.println("Review has been recorded");
+	}
+
+	private void addToWatchlist(String event) {
+		// TODO user.addToWatchlist(event);
+		System.out.println("Added to watchlist");
 	}
 
 	private void viewWatchlist() {
 		while (true) {
 			System.out.println("\n********** Watchlist **********");
 			// TODO user.displayWatchlist();
-			System.out.println("What would you like to do?");
-			for (int i = 0; i < watchlistMenuOptions.length; i++) {
-				System.out.println((i + 1) + ". " + watchlistMenuOptions[i]);
-			}
-			System.out.println();
+
+			displaySubMenuOptions(watchlistMenuOptions);
+
 			comm = getUserCommand(watchlistMenuOptions.length);
+
+			if (comm == -1) {
+				System.out.println("Not a valid command");
+				continue;
+			}
+
 			if (comm == watchlistMenuOptions.length - 1)
 				break;
+
 			switch (comm) {
 			case (0):
 				System.out.println("Type in the name of the show you want to add to the watchlist");
@@ -458,20 +658,35 @@ public class TicketingAppUI {
 		}
 	}
 
-	private void findVenue() {//TODO expand on this?
+	private void findVenue() {// TODO expand on this?
 		System.out.println("\n********** Search for Concert **********");
 		System.out.println("Type in the concert you want to search for");
-		String venue = scanner.nextLine();
-		// TODO user.searchForVenue(venue);
-		while (true) {
-			System.out.println("What would you like to do?");
-			for (int i = 0; i < venueSearchMenuOptions.length; i++) {
-				System.out.println((i + 1) + ". " + venueSearchMenuOptions[i]);
+		
+		String venue = "";
+		while(true) {
+			try {
+				venue = scanner.nextLine();
+				// TODO user.searchForVenue(venue);
+				break;
+			} catch(Exception e) {
+				System.out.println("Venue not found. Type in another venue");
+				continue;
 			}
-			System.out.println();
+		}
+
+		while (true) {
+			displaySubMenuOptions(venueSearchMenuOptions);
+
 			comm = getUserCommand(venueSearchMenuOptions.length);
+
+			if (comm == -1) {
+				System.out.println("Not a valid command");
+				continue;
+			}
+
 			if (comm == venueSearchMenuOptions.length - 1)
 				break;
+
 			switch (comm) {
 			case (0):
 				// TODO user.updateHomeVenue(venue);
@@ -493,6 +708,7 @@ public class TicketingAppUI {
 	private void viewCustomerSupport() {
 		System.out.println("\n********** Customer Support **********");
 		// TODO main.displaySupportInfo();
+
 		while (true) {
 			System.out.println("Type 'Back' to go back to the main menu");
 			nextLine = scanner.nextLine();
@@ -508,48 +724,66 @@ public class TicketingAppUI {
 	private void inputEvent() {
 		System.out.println("\nType in the type of the show to be inputted");
 		String showType = scanner.nextLine();
+
 		System.out.println("Type in the name of the show");
 		String showName = scanner.nextLine();
+
 		System.out.println("Type in the date this show is occurring");
 		String date = scanner.nextLine();
+
 		System.out.println("Type in the time this show is occurring on this date");
 		String time = scanner.nextLine();
+
 		System.out.println("Type in the official rating of this show");
 		int rating = Integer.parseInt(scanner.nextLine());
+
 		System.out.println("Type in the age rating of this show");
 		int ageRating = Integer.parseInt(scanner.nextLine());
+
 		// TODO user.inputEvent(showType, showName, date, time, rating, ageRating);
+
 		System.out.println("This event has been added");
 	}
 
 	private void inputTheaterInfo() {
 		System.out.println("\nType in the name of the theater");
 		char theaterName = scanner.nextLine().charAt(0);
+
 		System.out.println("Type in the type of the show to be inputted");
 		String showType = scanner.nextLine();
+
 		System.out.println("Type in the name of the show at this theater");
 		String showName = scanner.nextLine();
+
 		System.out.println("Type in the date this show is occurring");
 		String date = scanner.nextLine();
+
 		System.out.println("Type in the time this show is occurring on this date");
 		String time = scanner.nextLine();
+
 		// TODO user.inputTheaterInfo(theaterName, showType, showName, date, time);
+
 		System.out.println("This theater's info. has been updated");
 	}
 
 	private void inputDiscount() {
 		System.out.println("\nType in the percent discount");
 		int discount = Integer.parseInt(scanner.nextLine());
+
 		// TODO user.inputDiscount(discount);
+
 		System.out.println("Discount has been applied");
 	}
 
 	private void inputTicketPrices() {
 		System.out.println("\nType in the price of an adult ticket");
 		double adultTicketPrice = Double.parseDouble(scanner.nextLine());
+
 		System.out.println("Type in the price of a child ticket");
 		double childTicketPrice = Double.parseDouble(scanner.nextLine());
+
 		// TODO user.inputTicketPrices(adultTicketPrice, childTicketPrice);
+
 		System.out.println("Ticket prices have been set");
 	}
 
@@ -557,7 +791,9 @@ public class TicketingAppUI {
 		// TODO user.displayTicketsRefunded();
 		System.out.println("Type in the name of the customer to give a refund to");
 		String customerName = scanner.nextLine();
+
 		// TODO user.refundTickets(customer);
+
 		System.out.println("Customer's refund has been processed");
 	}
 
@@ -565,14 +801,19 @@ public class TicketingAppUI {
 		while (true) {
 			System.out.println("\n********** Venues **********");
 			// TODO user.displayVenues();
-			System.out.println("What would you like to do?");
-			for (int i = 0; i < venueMenuOptions.length; i++) {
-				System.out.println((i + 1) + ". " + venueMenuOptions[i]);
-			}
-			System.out.println();
+
+			displaySubMenuOptions(venueMenuOptions);
+
 			comm = getUserCommand(venueMenuOptions.length);
+
+			if (comm == -1) {
+				System.out.println("Not a valid command");
+				continue;
+			}
+
 			if (comm == venueMenuOptions.length - 1)
 				break;
+
 			switch (comm) {
 			case (0):
 				System.out.println("Type in the name of the venue you want to add to the list");
@@ -584,6 +825,14 @@ public class TicketingAppUI {
 				// TODO user.removeVenue(venueRemoved);
 			}
 		}
+	}
+
+	private void displaySubMenuOptions(String[] subMenuOptions) {
+		System.out.println("What would you like to do?");
+		for (int i = 0; i < subMenuOptions.length; i++) {
+			System.out.println((i + 1) + ". " + subMenuOptions[i]);
+		}
+		System.out.println();
 	}
 
 	public static void main(String[] args) {
