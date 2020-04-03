@@ -13,6 +13,7 @@ public class Theater {
 		for (int i = 0; i < seats.length; i++) {
 			for (int j = 0; j < seats[i].length; j++) {
 				seats[i][j] = new Seat(alphabet[i], j + 1, "Regular");
+				// TODO handicap seats?
 			}
 		}
 	}
@@ -28,9 +29,25 @@ public class Theater {
 	public void displaySeats() {
 		for (int i = 0; i < seats.length; i++) {
 			for (int j = 0; j < seats[i].length; j++) {
-				System.out.print(seats[i][j] + " ");
+				if (seats[i][j].checkIfTaken() == true)
+					seats[i][j].setSeatStatus("X");
+				System.out.print(seats[i][j] + "");
 			}
 			System.out.println();
+		}
+	}
+
+	public void addEvent(Event e) {
+		events.add(e);
+	}
+
+	public void removeEvent(Event e) {
+		events.remove(e);
+	}
+
+	public void displayEvents() {
+		for (Event e : events) {
+			System.out.println(e);
 		}
 	}
 }
