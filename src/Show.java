@@ -8,10 +8,11 @@ public abstract class Show {
 	private String name;
 	private int offRating;
 	private int ageRating;
+
 	private ArrayList<String> reviews;
+
 	private ArrayList<Integer> custRatings;
 	private ArrayList<String> producers;
-
 	public String getName() {
 		return name;
 	}
@@ -105,6 +106,21 @@ public abstract class Show {
 		return producers;
 	}
 
+	public ArrayList<String> getReviews(){
+		return this.reviews;
+	}
+
+	public void setReviews(ArrayList<String> reviews) {
+		this.reviews = reviews;
+	}
+
+	public ArrayList<Integer> getCustRatings() {
+		return custRatings;
+	}
+
+	public void setCustRatings(ArrayList<Integer> custRatings) {
+		this.custRatings = custRatings;
+	}
 
 	public String toString() {
 		StringBuilder producersString = new StringBuilder();

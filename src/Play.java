@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 /**
  * @author Lukacs Ablonczy
@@ -90,7 +91,7 @@ public class Play extends Show {
 		StringBuilder actorsString = new StringBuilder();
 		for (String actor : majorActors)
 			actorsString.append(actor).append(" ");
-
+		
 		return super.toString() + " Famous Actors: " + actorsString;
 	}
 }
