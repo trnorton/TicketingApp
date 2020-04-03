@@ -10,7 +10,7 @@ public class Play extends Show {
 	private ArrayList<String> majorActors;
 
 	/**
-	 * Constructor for Concert type
+	 * Constructor for Play type
 	 * @param name Name of show
 	 * @param ageRating AgeRating of show
 	 * @param majorActors String Arraylist of actors of movie
@@ -19,6 +19,26 @@ public class Play extends Show {
 	public Play(String name, int ageRating, ArrayList<String> majorActors, ArrayList<String> producers) {
 		this.setName(name);
 		this.setAgeRating(ageRating);
+		this.setProducers(producers);
+		this.setMajorActors(majorActors);
+	}
+
+	/**
+	 * Constructor for Play type
+	 * @param name Name of show
+	 * @param offRating IMDB Rating of show
+	 * @param ageRating AgeRating of show
+	 * @param reviews Reviews of show
+	 * @param custRatings Customer Ratings of show
+	 * @param producers producers of show
+	 * @param majorActors String Arraylist of actors of movie
+	 */
+	public Play(String name, int offRating, int ageRating, ArrayList<String> reviews, ArrayList<Integer> custRatings, ArrayList<String> producers, ArrayList<String> majorActors) {
+		this.setName(name);
+		this.setOffRating(offRating);
+		this.setAgeRating(ageRating);
+		this.setReviews(reviews);
+		this.setCustRatings(custRatings);
 		this.setProducers(producers);
 		this.setMajorActors(majorActors);
 	}

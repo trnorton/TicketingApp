@@ -26,6 +26,28 @@ public class Movie extends Show {
 	}
 
 	/**
+	 * Constructor for Concert type
+	 * @param name Name of show
+	 * @param offRating IMDB Rating of show
+	 * @param ageRating AgeRating of show
+	 * @param reviews Reviews of show
+	 * @param custRatings Customer Ratings of show
+	 * @param producers producers of show
+	 * @param majorActors String Arraylist of actors of movie
+	 * @param genre Genre of movie
+	 */
+	public Movie(String name, int offRating, int ageRating, ArrayList<String> reviews, ArrayList<Integer> custRatings, ArrayList<String> producers, ArrayList<String> majorActors, String genre) {
+		this.setName(name);
+		this.setOffRating(offRating);
+		this.setAgeRating(ageRating);
+		this.setReviews(reviews);
+		this.setCustRatings(custRatings);
+		this.setProducers(producers);
+		this.setMajorActors(majorActors);
+		this.setGenre(genre);
+	}
+
+	/**
 	 * Getter for genre attribute
 	 * @return String genre of this movie
 	 */

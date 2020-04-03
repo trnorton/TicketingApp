@@ -1,15 +1,17 @@
 [{
     "name": "",
-    "ageRating": "",
     "offRating": "",
-    "producers": ["", "", ""],
-    "performers": ["", "", ""],
+    "ageRating": "",
     "reviews": [],
-    "ratings": []
+    "ratings": [],
+    "producers": ["", "", ""],
+    "performers": ["", "", ""]
   }, {
     "name": "",
-    "ageRating": "",
     "offRating": "",
+    "ageRating": "",
+    "reviews": [],
+    "ratings": [],
     "producers": ["", "", ""],
     "performers": ["", "", ""]
   }

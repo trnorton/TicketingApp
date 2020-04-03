@@ -1,8 +1,9 @@
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -17,13 +18,143 @@ public class JsonParser {
 	private static final String TYPE_CONCERT = "Concerts";
 	private static final String FILENAME_EXTENSION = ".json";
 
+	public static ArrayList<Movie> loadMoviesFromFile(){
+		ArrayList<Movie> movies = new ArrayList<Movie>();
+
+		try {
+			JSONParser parser = new JSONParser();
+			JSONArray moviesArray = (JSONArray)new JSONParser().parse(new FileReader(TYPE_MOVIE + FILENAME_EXTENSION));
+
+			for (Object jsonObject : moviesArray) {
+				JSONObject json = (JSONObject) jsonObject;
+
+				String name = (String)json.get(ATTRIBUTES[0]);
+				int offRating = Integer.parseInt(json.get(ATTRIBUTES[1]).toString());
+				int ageRating = Integer.parseInt(json.get(ATTRIBUTES[2]).toString());
+
+				ArrayList<String> reviews = new ArrayList<>();
+				JSONArray reviewArray = (JSONArray)json.get(ATTRIBUTES[3]);
+				for(Object review : reviewArray)
+					reviews.add((String)(review));
+
+				ArrayList<Integer> custRatings = new ArrayList<>();
+				JSONArray custRatingArray = (JSONArray)json.get(ATTRIBUTES[4]);
+				for(Object rating : custRatingArray)
+					custRatings.add((int)(rating));
+
+				ArrayList<String> producers= new ArrayList<>();
+				JSONArray producerArray = (JSONArray)json.get(ATTRIBUTES[5]);
+				for(Object producer : producerArray)
+					producers.add((String)(producer));
+
+				ArrayList<String> majorActors = new ArrayList<>();
+				JSONArray majorActorsArray = (JSONArray)json.get(MOVIE_ATTRS[0]);
+				for(Object majorActor : majorActorsArray)
+					majorActors.add((String)(majorActor));
+
+				String genre = json.get(MOVIE_ATTRS[1]).toString();
+
+				movies.add(new Movie(name, offRating, ageRating, reviews, custRatings, producers, majorActors, genre));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return movies;
+	}
+
+	public static ArrayList<Concert> loadConcertsFromFile(){
+		ArrayList<Concert> concerts = new ArrayList<Concert>();
+
+		try {
+			JSONParser parser = new JSONParser();
+			JSONArray concertsArray = (JSONArray)new JSONParser().parse(new FileReader(TYPE_CONCERT + FILENAME_EXTENSION));
+
+			for (Object jsonObject : concertsArray) {
+				JSONObject json = (JSONObject) jsonObject;
+
+				String name = (String)json.get(ATTRIBUTES[0]);
+				int offRating = Integer.parseInt(json.get(ATTRIBUTES[1]).toString());
+				int ageRating = Integer.parseInt(json.get(ATTRIBUTES[2]).toString());
+
+				ArrayList<String> reviews = new ArrayList<>();
+				JSONArray reviewArray = (JSONArray)json.get(ATTRIBUTES[3]);
+				for(Object review : reviewArray)
+					reviews.add((String)(review));
+
+				ArrayList<Integer> custRatings = new ArrayList<>();
+				JSONArray custRatingArray = (JSONArray)json.get(ATTRIBUTES[4]);
+				for(Object rating : custRatingArray)
+					custRatings.add((int)(rating));
+
+				ArrayList<String> producers= new ArrayList<>();
+				JSONArray producerArray = (JSONArray)json.get(ATTRIBUTES[5]);
+				for(Object producer : producerArray)
+					producers.add((String)(producer));
+
+				ArrayList<String> performers = new ArrayList<>();
+				JSONArray performersArray = (JSONArray)json.get(CONCERT_ATTR);
+				for(Object performer : performersArray)
+					performers.add((String)(performer));
+
+				concerts.add(new Concert(name, offRating, ageRating, reviews, custRatings, producers, performers));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return concerts;
+	}
+
+	public static ArrayList<Play> loadPlaysFromFile(){
+		ArrayList<Play> plays = new ArrayList<>();
+
+		try {
+			JSONParser parser = new JSONParser();
+			JSONArray playArray = (JSONArray)new JSONParser().parse(new FileReader(TYPE_PLAY + FILENAME_EXTENSION));
+
+			for (Object jsonObject : playArray) {
+				JSONObject json = (JSONObject) jsonObject;
+
+				String name = (String)json.get(ATTRIBUTES[0]);
+				int offRating = Integer.parseInt(json.get(ATTRIBUTES[1]).toString());
+				int ageRating = Integer.parseInt(json.get(ATTRIBUTES[2]).toString());
+
+				ArrayList<String> reviews = new ArrayList<>();
+				JSONArray reviewArray = (JSONArray)json.get(ATTRIBUTES[3]);
+				for(Object review : reviewArray)
+					reviews.add((String)(review));
+
+				ArrayList<Integer> custRatings = new ArrayList<>();
+				JSONArray custRatingArray = (JSONArray)json.get(ATTRIBUTES[4]);
+				for(Object rating : custRatingArray)
+					custRatings.add((int)(rating));
+
+				ArrayList<String> producers= new ArrayList<>();
+				JSONArray producerArray = (JSONArray)json.get(ATTRIBUTES[5]);
+				for(Object producer : producerArray)
+					producers.add((String)(producer));
+
+				ArrayList<String> majorActors = new ArrayList<>();
+				JSONArray majorActorsArray = (JSONArray)json.get(PLAY_ATTR);
+				for(Object majorActor : majorActorsArray)
+					majorActors.add((String)(majorActor));
+
+				plays.add(new Play(name, offRating, ageRating, reviews, custRatings, producers, majorActors));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return plays;
+	}
+
 	private static JSONObject getShowJSON(Movie movie){
 		JSONObject movieInfo = getBasicJSON(movie);
 
 		ArrayList<String> majorActors = movie.getMajorActors();
 		String genre = movie.getGenre();
 
-		JSONArray actorsArray = new JSONArray(majorActors);
+		JSONArray actorsArray = new JSONArray();
+		actorsArray.addAll(majorActors);
 
 		movieInfo.put(MOVIE_ATTRS[0], actorsArray.toString());
 		movieInfo.put(MOVIE_ATTRS[1], genre);
@@ -35,7 +166,8 @@ public class JsonParser {
 		JSONObject movieInfo = getBasicJSON(play);
 
 		ArrayList<String> majorActors = play.getMajorActors();
-		JSONArray actorsArray = new JSONArray(majorActors);
+		JSONArray actorsArray = new JSONArray();
+		actorsArray.addAll(majorActors);
 
 		movieInfo.put(PLAY_ATTR, actorsArray.toString());
 
@@ -46,7 +178,8 @@ public class JsonParser {
 		JSONObject movieInfo = getBasicJSON(concert);
 
 		ArrayList<String> majorActors = concert.getPerformers();
-		JSONArray actorsArray = new JSONArray(majorActors);
+		JSONArray actorsArray = new JSONArray();
+		actorsArray.addAll(majorActors);
 
 		movieInfo.put(PLAY_ATTR, actorsArray.toString());
 
@@ -63,9 +196,14 @@ public class JsonParser {
 		ArrayList<Integer> custRatings = show.getCustRatings();
 		ArrayList<String> producers = show.getProducers();
 
-		JSONArray reviewsArray = new JSONArray(reviews);
-		JSONArray custRatingsArray = new JSONArray(custRatings);
-		JSONArray producersArray = new JSONArray(producers);
+		JSONArray reviewsArray = new JSONArray();
+		reviewsArray.addAll(reviews);
+
+		JSONArray custRatingsArray = new JSONArray();
+		custRatingsArray.addAll(custRatings);
+
+		JSONArray producersArray = new JSONArray();
+		producersArray.addAll(producers);
 
 
 		showInfo.put(ATTRIBUTES[0], name);
@@ -84,7 +222,7 @@ public class JsonParser {
 			JSONArray moviesAsJSON = new JSONArray();
 
 			for(Movie movie : movies)
-				moviesAsJSON.put(getShowJSON(movie));
+				moviesAsJSON.add(getShowJSON(movie));
 
 			writer.write(moviesAsJSON.toString());
 			writer.close();
@@ -96,11 +234,11 @@ public class JsonParser {
 
 	public static void savePlays(ArrayList<Play> plays){
 		try {
-			FileWriter writer = new FileWriter(new File(TYPE_MOVIE + FILENAME_EXTENSION));
+			FileWriter writer = new FileWriter(new File(TYPE_PLAY + FILENAME_EXTENSION));
 			JSONArray playsAsJSON = new JSONArray();
 
 			for(Play play : plays)
-				playsAsJSON.put(getShowJSON(play));
+				playsAsJSON.add(getShowJSON(play));
 
 			writer.write(playsAsJSON.toString());
 			writer.close();
@@ -112,11 +250,11 @@ public class JsonParser {
 
 	public static void saveConcerts(ArrayList<Concert> concerts){
 		try {
-			FileWriter writer = new FileWriter(new File(TYPE_MOVIE + FILENAME_EXTENSION));
+			FileWriter writer = new FileWriter(new File(TYPE_CONCERT + FILENAME_EXTENSION));
 			JSONArray concertsAsJSON = new JSONArray();
 
 			for(Concert concert: concerts)
-				concertsAsJSON.put(getShowJSON(concert));
+				concertsAsJSON.add(getShowJSON(concert));
 
 			writer.write(concertsAsJSON.toString());
 			writer.close();

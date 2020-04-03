@@ -24,6 +24,26 @@ public class Concert extends Show {
 	}
 
 	/**
+	 * Constructor for Concert type
+	 * @param name Name of show
+	 * @param offRating IMDB Rating of show
+	 * @param ageRating AgeRating of show
+	 * @param reviews Reviews of show
+	 * @param custRatings Customer Ratings of show
+	 * @param producers producers of show
+	 * @param performers Performers of Concert
+	 */
+	public Concert(String name, int offRating, int ageRating, ArrayList<String> reviews, ArrayList<Integer> custRatings, ArrayList<String> producers, ArrayList<String> performers) {
+		this.setName(name);
+		this.setOffRating(offRating);
+		this.setAgeRating(ageRating);
+		this.setReviews(reviews);
+		this.setCustRatings(custRatings);
+		this.setProducers(producers);
+		this.setPerformers(performers);
+	}
+
+	/**
 	 * Place a performer into this concert's list of performers
 	 * @param performer String name of performer
 	 */

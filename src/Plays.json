@@ -1,10 +1,10 @@
 [{
     "name": "",
-    "ageRating": "",
     "offRating": "",
-    "producers": ["", "", ""],
-    "majorActors": ["", "", ""],
+    "ageRating": "",
     "reviews": [],
-    "ratings": []
+    "ratings": [],
+    "producers": ["", "", ""],
+    "majorActors": ["", "", ""]
   }
 ]
