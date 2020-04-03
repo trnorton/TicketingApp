@@ -143,6 +143,6 @@ public class Movie extends Show {
 		for (String actor : majorActors)
 			actorsString.append(actor).append(" ");
 
-		return super.toString() + "\nGenre " + this.genre + "\nFamous Actors: " + actorsString + "\n";
+		return "Movie " + super.toString() + "\nGenre: " + this.genre + "\nFamous Actors: " + actorsString + "\n";
 	}
 }

@@ -324,27 +324,30 @@ public class JsonParser {
 
 	}*/
 
-	public static void saveData(ArrayList<Show> showList){
-		Show tester = showList.get(0);
-		setType(tester);
-
-		String filepath = getFilePath(tester);
+	public static <T extends Show> void saveData(ArrayList<T> showList){
+		T typeChecker = showList.get(0);
+		setType(typeChecker);
+		String filepath = getFilePath(typeChecker);
 
 		try {
 			FileWriter writer = new FileWriter(new File(filepath + FILENAME_EXTENSION));
 			JSONArray showJson = new JSONArray();
 
-			for(Show show : showList)
+			for(T show : showList)
 				showJson.add(getShowJSON(show));
 
-			writer.write(showJson.toString());
+			writer.write(fixJson(showJson.toJSONString()));
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static JSONObject getShowJSON(Show show){
+	private static String fixJson(String json){
+		return json.replace("\"[", "[").replace("]\"", "]").replace("\\\"", "\"");
+	}
+
+	private static <T extends Show> JSONObject getShowJSON(T show){
 		JSONObject showInfo = getBasicJSON(show);
 
 		if(isMovie){
@@ -355,7 +358,7 @@ public class JsonParser {
 			JSONArray actorsArray = new JSONArray();
 			actorsArray.addAll(majorActors);
 
-			showInfo.put(MOVIE_ATTRS[0], actorsArray.toString());
+			showInfo.put(MOVIE_ATTRS[0], actorsArray.toJSONString());
 			showInfo.put(MOVIE_ATTRS[1], genre);
 		}else if(isPlay){
 			Play play = (Play)show;
@@ -363,7 +366,7 @@ public class JsonParser {
 			JSONArray actorsArray = new JSONArray();
 			actorsArray.addAll(majorActors);
 
-			showInfo.put(PLAY_ATTR, actorsArray.toString());
+			showInfo.put(PLAY_ATTR, actorsArray.toJSONString());
 		}else if(isConcert){
 			Concert concert = (Concert)show;
 
@@ -371,13 +374,13 @@ public class JsonParser {
 			JSONArray actorsArray = new JSONArray();
 			actorsArray.addAll(majorActors);
 
-			showInfo.put(PLAY_ATTR, actorsArray.toString());
+			showInfo.put(PLAY_ATTR, actorsArray.toJSONString());
 		}
 
 		return showInfo;
 	}
 
-	private static JSONObject getBasicJSON(Show show){
+	private static <T extends Show> JSONObject getBasicJSON(T show){
 		JSONObject showInfo = new JSONObject();
 
 		String name = show.getName();
@@ -400,9 +403,9 @@ public class JsonParser {
 		showInfo.put(ATTRIBUTES[0], name);
 		showInfo.put(ATTRIBUTES[1], offRating);
 		showInfo.put(ATTRIBUTES[2], ageRating);
-		showInfo.put(ATTRIBUTES[3], reviewsArray.toString());
-		showInfo.put(ATTRIBUTES[4], custRatingsArray.toString());
-		showInfo.put(ATTRIBUTES[5], producersArray.toString());
+		showInfo.put(ATTRIBUTES[3], reviewsArray.toJSONString());
+		showInfo.put(ATTRIBUTES[4], custRatingsArray.toJSONString());
+		showInfo.put(ATTRIBUTES[5], producersArray.toJSONString());
 
 		return showInfo;
 	}
@@ -421,7 +424,7 @@ public class JsonParser {
 		}
 	}
 
-	private static void setType(Show show){
+	private static <T extends Show> void setType(T show){
 		if(show instanceof Movie) {
 			isMovie = true;
 			isConcert = false;

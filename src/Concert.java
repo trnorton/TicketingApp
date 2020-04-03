@@ -117,6 +117,6 @@ public class Concert extends Show {
 		for (String actor : performers)
 			performersString.append(actor).append(" ");
 
-		return super.toString() + "\nPerformers: " + performersString + "\n";
+		return "Concert " + super.toString() + "\nPerformers: " + performersString + "\n";
 	}
 }
