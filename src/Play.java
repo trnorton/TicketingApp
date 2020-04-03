@@ -9,6 +9,9 @@ public class Play extends Show {
 
 	private ArrayList<String> majorActors;
 
+	public Play(){
+
+	}
 	/**
 	 * Constructor for Play type
 	 * @param name Name of show

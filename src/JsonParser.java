@@ -1,14 +1,9 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.lang.invoke.ConstantCallSite;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class JsonParser {
 
@@ -56,6 +51,39 @@ public class JsonParser {
 		return show;
 	}
 
+	private static Movie addMovieAttributes(JSONObject json, Movie movie){
+		ArrayList<String> majorActors = new ArrayList<>();
+		JSONArray majorActorsArray = (JSONArray) json.get(MOVIE_ATTRS[0]);
+		for (Object majorActor : majorActorsArray)
+			majorActors.add((String) (majorActor));
+
+		String genre = json.get(MOVIE_ATTRS[1]).toString();
+		movie.setMajorActors(majorActors);
+		movie.setGenre(genre);
+
+		return movie;
+	}
+
+	private static Play addPlayAttributes(JSONObject json, Play play){
+		ArrayList<String> majorActors = new ArrayList<>();
+		JSONArray majorActorsArray = (JSONArray)json.get(PLAY_ATTR);
+		for(Object majorActor : majorActorsArray)
+			majorActors.add((String)(majorActor));
+
+		play.setMajorActors(majorActors);
+
+		return play;
+	}
+
+	private static Concert addConcertAttributes(JSONObject json, Concert concert){
+		ArrayList<String> performers = new ArrayList<>();
+		JSONArray performersArray = (JSONArray)json.get(CONCERT_ATTR);
+		for(Object performer : performersArray)
+			performers.add((String)(performer));
+
+		return concert;
+	}
+
 	public static <T extends Show> ArrayList<T> loadDataFromFile(T show){
 		setType(show);
 
@@ -66,40 +94,17 @@ public class JsonParser {
 
 			for (Object jsonObject : showArray) {
 				JSONObject json = (JSONObject) jsonObject;
-
 				T newShow = loadBasicsFromFile(json, show);
 
 				if(isMovie){
-					Movie movie = (Movie)newShow;
-
-					ArrayList<String> majorActors = new ArrayList<>();
-					JSONArray majorActorsArray = (JSONArray) json.get(MOVIE_ATTRS[0]);
-					for (Object majorActor : majorActorsArray)
-						majorActors.add((String) (majorActor));
-
-					String genre = json.get(MOVIE_ATTRS[1]).toString();
-					movie.setMajorActors(majorActors);
-					movie.setGenre(genre);
-
+					Movie movie = addMovieAttributes(json, (Movie)newShow);
 					shows.add((T)movie);
 				} else if(isConcert){
-					Concert concert = (Concert)newShow;
-
-					ArrayList<String> performers = new ArrayList<>();
-					JSONArray performersArray = (JSONArray)json.get(CONCERT_ATTR);
-					for(Object performer : performersArray)
-						performers.add((String)(performer));
-
-					concert.setPerformers(performers);
+					Concert concert = addConcertAttributes(json, (Concert)newShow);
+					shows.add((T)concert);
 				} else if(isPlay) {
-					Play play = (Play)newShow;
-
-					ArrayList<String> majorActors = new ArrayList<>();
-					JSONArray majorActorsArray = (JSONArray)json.get(PLAY_ATTR);
-					for(Object majorActor : majorActorsArray)
-						majorActors.add((String)(majorActor));
-
-					play.setMajorActors(majorActors);
+					Play play = addPlayAttributes(json, (Play)newShow);
+					shows.add((T)play);
 				}
 			}
 		} catch (Exception e) {

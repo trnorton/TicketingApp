@@ -9,6 +9,9 @@ public class Concert extends Show {
 
 	private ArrayList<String> performers;
 
+	public Concert(){
+
+	}
 	/**
 	 * Constructor for Concert type
 	 * @param name Name of show
