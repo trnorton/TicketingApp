@@ -5,12 +5,14 @@ public class Seat {
 	private int column;
 	private String type;
 	private boolean isTaken;
+	private String seatStatus;
 
 	public Seat(char row, int column, String type) {
 		this.row = row;
 		this.column = column;
 		this.type = type;
 		isTaken = false;
+		seatStatus = " ";
 	}
 
 	public char getRow() {
@@ -41,11 +43,19 @@ public class Seat {
 		return isTaken;
 	}
 
+	public String getSeatStatus() {
+		return seatStatus;
+	}
+
+	public void setSeatStatus(String seatStatus) {
+		this.seatStatus = seatStatus;
+	}
+
 	public void changeSeatAvailability() {
 		isTaken = !isTaken;
 	}
 
 	public String toString() {
-		return "" + row + column;
+		return "[" + seatStatus + "]";
 	}
 }
