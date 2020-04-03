@@ -13,6 +13,30 @@ public class Seat {
 		isTaken = false;
 	}
 
+	public char getRow() {
+		return row;
+	}
+
+	public void setRow(char row) {
+		this.row = row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public boolean checkIfTaken() {
 		return isTaken;
 	}

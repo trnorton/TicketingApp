@@ -74,4 +74,7 @@ public class Venue {
 		return sum / custRatings.size();
 	}
 
+	public String toString() {
+		return "Name: " + name + "\nAddress: " + address + "\nOverall Customer Rating: " + getAverageCustRating();
+	}
 }
