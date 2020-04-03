@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 
 public class Theater {
 
 	private char name;
 	private Seat[][] seats;
+	private ArrayList<Event> events;
 	private static char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
 	public Theater(char name, int numRows, int numColumns) {
