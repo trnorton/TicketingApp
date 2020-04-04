@@ -57,12 +57,13 @@ public class TicketingAppUI {
 
 			// switch case for different cases
 			// TODO if user is customer
+			if(user instanceof Customer) {
 			takeActionCustomer();
-			// TODO if user is employee
+			}// TODO else if(user instanceof Employee) {
 			takeActionEmployee();
-			// TODO if user is admin
+			// TODO } else if(user instanceof Admin) {
 			takeActionAdmin();
-			// TODO if user is guest
+			// TODO } else {
 			takeActionGuest();
 		}
 
@@ -77,13 +78,12 @@ public class TicketingAppUI {
 			nextLine = scanner.nextLine();
 			try {
 				if (nextLine.equals("0")) {
-					//TODO user = new User("Guest", );// ------> basic guest user
+					user = new User("Guest", 0, 0, "", "");// ------> basic guest user
 					fillRemainingMenuOptions();
 					break;
 				} else {
 					int acctId = Integer.parseInt(nextLine);
-					// TODO make user into a new user from list of users in database based on given
-					// acctId
+					user = main.findUser(acctId); //TODO put some users into the main system
 					fillRemainingMenuOptions();
 					break;
 				}
@@ -113,21 +113,22 @@ public class TicketingAppUI {
 	 * The rest of the main menu options are filled in depending on the type of User currently using this app.
 	 */
 	private void fillRemainingMenuOptions() {
-		// TODO if user is customer
+		if(user instanceof Customer) {
 		mainMenuOptions.add("Logout");
-		// TODO if user is employee
+		}
+		// TODO else if(user instanceof Employee) {
 		mainMenuOptions.add("Input Event");
 		mainMenuOptions.add("Input Theater Info");
 		mainMenuOptions.add("Input Discount");
 		mainMenuOptions.add("Input Ticket Prices");
 		mainMenuOptions.add("Refund Ticket");
 		mainMenuOptions.add("Logout");
-		// TODO if user is admin
+		// TODO } else if(user instanceof Admin) {
 		mainMenuOptions.add("Input Event");
 		mainMenuOptions.add("Input Theater Info");
 		mainMenuOptions.add("Manage Venues");
 		mainMenuOptions.add("Logout");
-		// TODO if user is guest
+		// TODO else {
 		mainMenuOptions.add(0, "Create Account");
 		mainMenuOptions.add("Exit");
 	}
@@ -347,8 +348,6 @@ public class TicketingAppUI {
 		String email = scanner.nextLine();
 
 		//TODO user.createAccount();// ----- (turns a guest into a Customer)
-		
-		//TODO address the switch from guest to customer
 
 		System.out.println("Your account has been created");
 	}
@@ -364,7 +363,7 @@ public class TicketingAppUI {
 		while(true) {
 			movie = scanner.nextLine();
 			try {
-				user.searchForEvent(movie);
+				//TODO user.searchForEvent(movie);
 				break;
 			} catch(Exception e) {
 				System.out.println("Movie not found. Type in another movie");
@@ -411,7 +410,7 @@ public class TicketingAppUI {
 	 */
 	private void displayMovieInfo(String movie) {
 		System.out.println("Movie Info:");
-		user.lookAtBasicEventInfo(movie);
+		//TODO user.lookAtBasicEventInfo(movie);
 	}
 
 	/**
@@ -431,7 +430,7 @@ public class TicketingAppUI {
 		System.out.println("Type in the number of child tickets you want to purchase");
 		int numChildTickets = Integer.parseInt(scanner.nextLine());
 
-		user.bookTickets(movie, date, time, numAdultTickets, numChildTickets);
+		//TODO user.bookTickets(movie, date, time, numAdultTickets, numChildTickets);
 
 		System.out.println("Tickets have been booked!");
 
@@ -439,7 +438,7 @@ public class TicketingAppUI {
 		while (true) {
 			nextLine = scanner.nextLine();
 			if (nextLine.equals("Y")) {
-				user.createReceipt();
+				//TODO user.createReceipt();
 				System.out.println("Your receipt has been created");
 			} else if (nextLine.equals("N")) {
 				break;
@@ -497,7 +496,7 @@ public class TicketingAppUI {
 		while(true) {
 			try {
 				play = scanner.nextLine();
-				user.searchForEvent(play);
+				//TODO user.searchForEvent(play);
 				break;
 			} catch(Exception e) {
 				System.out.println("Play not found. Type in another play");
@@ -544,7 +543,7 @@ public class TicketingAppUI {
 	 */
 	private void displayPlayInfo(String play) {
 		System.out.println("Play Info:");
-		user.lookAtBasicEventInfo(play);
+		//TODO user.lookAtBasicEventInfo(play);
 	}
 
 	/**
@@ -564,7 +563,7 @@ public class TicketingAppUI {
 		System.out.println("Type in the number of child tickets you want to purchase");
 		int numChildTickets = Integer.parseInt(scanner.nextLine());
 
-		user.bookTickets(play, date, time, numAdultTickets, numChildTickets);
+		//TODO user.bookTickets(play, date, time, numAdultTickets, numChildTickets);
 
 		System.out.println("Tickets have been booked!");
 
@@ -572,7 +571,7 @@ public class TicketingAppUI {
 		while (true) {
 			nextLine = scanner.nextLine();
 			if (nextLine.equals("Y")) {
-				user.createReceipt();
+				//TODO user.createReceipt();
 				System.out.println("Your receipt has been created");
 			} else if (nextLine.equals("N")) {
 				continue;
@@ -630,7 +629,7 @@ public class TicketingAppUI {
 		while(true) {
 			try {
 				concert = scanner.nextLine();
-				user.searchForEvent(concert);
+				//TODO user.searchForEvent(concert);
 				break;
 			} catch(Exception e) {
 				System.out.println("Concert not found. Type in another concert");
@@ -677,7 +676,7 @@ public class TicketingAppUI {
 	 */
 	private void displayConcertInfo(String concert) {
 		System.out.println("Concert Info:");
-		user.lookAtBasicEventInfo(concert);
+		//TODO user.lookAtBasicEventInfo(concert);
 	}
 
 	/**
@@ -697,7 +696,7 @@ public class TicketingAppUI {
 		System.out.println("Type in the number of child tickets you want to purchase");
 		int numChildTickets = Integer.parseInt(scanner.nextLine());
 
-		user.bookTickets(concert, date, time, numAdultTickets, numChildTickets);
+		//TODO user.bookTickets(concert, date, time, numAdultTickets, numChildTickets);
 
 		System.out.println("Tickets have been booked!");
 
@@ -705,7 +704,7 @@ public class TicketingAppUI {
 		while (true) {
 			nextLine = scanner.nextLine();
 			if (nextLine.equals("Y")) {
-				user.createReceipt();
+				//TODO user.createReceipt();
 				System.out.println("Your receipt has been created");
 			} else if (nextLine.equals("N")) {
 				continue;
@@ -767,7 +766,7 @@ public class TicketingAppUI {
 	private void viewWatchlist() {
 		while (true) {
 			System.out.println("\n********** Watchlist **********");
-			user.displayWatchlist();
+			//TODO user.displayWatchlist();
 
 			displaySubMenuOptions(watchlistMenuOptions);
 
@@ -828,7 +827,7 @@ public class TicketingAppUI {
 
 			switch (comm) {
 			case (0):
-				user.updateHomeVenue(venue);
+				//TODO user.updateHomeVenue(venue);
 				System.out.println("Your home venue has been updated");
 			}
 		}
@@ -861,7 +860,7 @@ public class TicketingAppUI {
 		String eventRefunded = scanner.nextLine();
 		System.out.println("Type in the number of tickets you want to refund");
 		int numTicketsRefunded = Integer.parseInt(scanner.nextLine());
-		user.requestRefund(eventRefunded, numTicketsRefunded);
+		//TODO user.requestRefund(eventRefunded, numTicketsRefunded);
 		System.out.println("Your refund request has been sent to be processed");
 	}
 	

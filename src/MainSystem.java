@@ -24,7 +24,11 @@ public class MainSystem {
 	}
 	
 	public void searchForLocation(String location) {
-		
+		for(Venue v : venues) {
+			if(v.getName().equals(location)) {
+				System.out.println(v);
+			}
+		}
 	}
 	
 	//TODO ask about this
@@ -61,5 +65,14 @@ public class MainSystem {
 	
 	public void displayConcessions() {
 		concess.showConcessions();
+	}
+	
+	public User findUser(int acctID) {
+		for(User u : users) {
+			if(u.getAccountID() == acctID) {
+				return u;
+			}
+		}
+		return null;
 	}
 }
