@@ -118,6 +118,6 @@ public class Play extends Show {
 		for (String actor : majorActors)
 			actorsString.append(actor).append(" ");
 		
-		return "Play " + super.toString() + "\nFamous Actors: " + actorsString + "\n";
+		return "Play" + super.toString() + "\nFamous Actors: " + actorsString + "\n";
 	}
 }
