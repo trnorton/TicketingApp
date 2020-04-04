@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * TicketingAppUI.java - Represents the driver class for this app.
+ * 
+ * @author Taylor Norton
+ *
+ */
 public class TicketingAppUI {
 
 	private static final String WELCOME_MESSAGE = "Welcome to our Ticketing App";
@@ -23,6 +29,9 @@ public class TicketingAppUI {
 		fillBasicMainMenuOptions();
 	}
 
+	/**
+	 * Makes the this ticketing app run.
+	 */
 	public void run() {
 		System.out.println(WELCOME_MESSAGE);
 
@@ -59,6 +68,9 @@ public class TicketingAppUI {
 
 	}
 
+	/**
+	 * Checks to see if the user is an existing user within the system or a guest.
+	 */
 	private void logIn() {
 		while (true) {
 			System.out.println("If you are a returning user, type in your account ID. Otherwise, type 0");
@@ -82,6 +94,9 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * These are the basic main menu options available for all types of users.
+	 */
 	private void fillBasicMainMenuOptions() {
 		mainMenuOptions.add("Search for Movie");
 		mainMenuOptions.add("Search for Play");
@@ -94,6 +109,9 @@ public class TicketingAppUI {
 		mainMenuOptions.add("View Customer Support Information");
 	}
 
+	/**
+	 * The rest of the main menu options are filled in depending on the type of User currently using this app.
+	 */
 	private void fillRemainingMenuOptions() {
 		// TODO if user is customer
 		mainMenuOptions.add("Logout");
@@ -114,6 +132,9 @@ public class TicketingAppUI {
 		mainMenuOptions.add("Exit");
 	}
 
+	/**
+	 * Shows the main menu options for this user.
+	 */
 	private void displayMenuOptions() {
 		System.out.println("\n********** Main Menu **********");
 		for (int i = 0; i < mainMenuOptions.size(); i++) {
@@ -122,6 +143,12 @@ public class TicketingAppUI {
 		System.out.println();
 	}
 
+	/**
+	 * This method helps in selecting a menu option.
+	 * 
+	 * @param numCommands - The number of commands in the menu
+	 * @return int - The option chosen by the user.
+	 */
 	private int getUserCommand(int numCommands) {
 		System.out.println("Type the number corresponding to the action you want to take");
 		nextLine = scanner.nextLine();
@@ -132,6 +159,9 @@ public class TicketingAppUI {
 
 	}
 
+	/**
+	 * Handles different cases for the chosen command for a customer's (existing user's) menu options
+	 */
 	private void takeActionCustomer() {
 		switch (comm) {
 		case (0):
@@ -164,6 +194,9 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Handles different cases for the chosen command for an employee's menu options
+	 */
 	private void takeActionEmployee() {
 		switch (comm) {
 		case (0):
@@ -211,6 +244,9 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Handles different cases for the chosen command for an admin's menu options
+	 */
 	private void takeActionAdmin() {
 		switch (comm) {
 		case (0):
@@ -252,6 +288,9 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Handles different cases for the chosen command for a guest's menu options
+	 */
 	private void takeActionGuest() {
 		switch (comm) {
 		case (0):
@@ -287,6 +326,9 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * This occurs when a guest wants to create a new account
+	 */
 	private void createAccount() {
 		System.out.println("\n********** Create New Account **********");
 		System.out.println("Type in your name");
@@ -305,10 +347,15 @@ public class TicketingAppUI {
 		String email = scanner.nextLine();
 
 		//TODO user.createAccount();// ----- (turns a guest into a Customer)
+		
+		//TODO address the switch from guest to customer
 
 		System.out.println("Your account has been created");
 	}
 
+	/**
+	 * Searches for a movie within the system.
+	 */
 	private void findMovie() {
 		System.out.println("\n********** Search for Movie **********");
 		System.out.println("Type in the movie you want to search for");
@@ -358,11 +405,19 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Displays the basic information about a movie.
+	 * @param movie - The movie searched by the user.
+	 */
 	private void displayMovieInfo(String movie) {
 		System.out.println("Movie Info:");
 		user.lookAtBasicEventInfo(movie);
 	}
 
+	/**
+	 * Books tickets for the desired movie.
+	 * @param movie - The movie searched by the user.
+	 */
 	private void bookMovieTickets(String movie) {
 		System.out.println("Type in the date you want to see this movie (MM/DD/YYYY");
 		String date = scanner.nextLine();
@@ -394,6 +449,10 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Rates the movie on a scale of 1 to 5.
+	 * @param movie - The movie searched by the user.
+	 */
 	private void rateMovie(String movie) {
 		System.out.println("Type in your rating for this movie on a scale of 1 to 5");
 		
@@ -416,6 +475,10 @@ public class TicketingAppUI {
 		System.out.println("Rating has been recorded");
 	}
 
+	/**
+	 * Writes a movie review for the desired movie.
+	 * @param movie - The movie searched by the user.
+	 */
 	private void writeMovieReview(String movie) {
 		System.out.println("Type in your review for this movie");
 		String review = scanner.nextLine();
@@ -423,6 +486,9 @@ public class TicketingAppUI {
 		System.out.println("Review has been recorded");
 	}
 
+	/**
+	 * Searches for a play within the system.
+	 */
 	private void findPlay() {
 		System.out.println("\n********** Search for Play **********");
 		System.out.println("Type in the play you want to search for");
@@ -472,11 +538,19 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Displays the basic information about a play.
+	 * @param play - The play searched by the user.
+	 */
 	private void displayPlayInfo(String play) {
 		System.out.println("Play Info:");
 		user.lookAtBasicEventInfo(play);
 	}
 
+	/**
+	 * Books tickets for the desired play.
+	 * @param play - The play searched by the user.
+	 */
 	private void bookPlayTickets(String play) {
 		System.out.println("Type in the date you want to see this play (MM/DD/YYYY");
 		String date = scanner.nextLine();
@@ -508,6 +582,10 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Rates the play on a scale of 1 to 5.
+	 * @param play - The play searched by the user.
+	 */
 	private void ratePlay(String play) {
 		System.out.println("Type in your rating for this play on a scale of 1 to 5");
 		
@@ -530,6 +608,10 @@ public class TicketingAppUI {
 		System.out.println("Rating has been recorded");
 	}
 
+	/**
+	 * Writes a play review for the desired play.
+	 * @param play - The play searched by the user.
+	 */
 	private void writePlayReview(String play) {
 		System.out.println("Type in your review for this play");
 		String review = scanner.nextLine();
@@ -537,6 +619,9 @@ public class TicketingAppUI {
 		System.out.println("Review has been recorded");
 	}
 
+	/**
+	 * Searches for a concert within the system.
+	 */
 	private void findConcert() {
 		System.out.println("\n********** Search for Concert **********");
 		System.out.println("Type in the concert you want to search for");
@@ -586,11 +671,19 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Displays the basic information about a concert.
+	 * @param concert - The concert searched by the user.
+	 */
 	private void displayConcertInfo(String concert) {
 		System.out.println("Concert Info:");
 		user.lookAtBasicEventInfo(concert);
 	}
 
+	/**
+	 * Books tickets for the desired concert.
+	 * @param concert - The concert searched by the user.
+	 */
 	private void bookConcertTickets(String concert) {
 		System.out.println("Type in the date you want to see this concert (MM/DD/YYYY");
 		String date = scanner.nextLine();
@@ -622,6 +715,10 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Rates the concert on a scale of 1 to 5.
+	 * @param concert - The concert searched by the user.
+	 */
 	private void rateConcert(String concert) {
 		System.out.println("Type in your rating for this concert on a scale of 1 to 5");
 		
@@ -644,6 +741,10 @@ public class TicketingAppUI {
 		System.out.println("Rating has been recorded");
 	}
 
+	/**
+	 * Writes a concert review for the desired concert.
+	 * @param concert - The concert searched by the user.
+	 */
 	private void writeConcertReview(String concert) {
 		System.out.println("Type in your review for this concert");
 		String review = scanner.nextLine();
@@ -651,11 +752,18 @@ public class TicketingAppUI {
 		System.out.println("Review has been recorded");
 	}
 
+	/**
+	 * Adds an event to the user's watchlist
+	 * @param event - The event (movie, play, or concert) inputted by the user.
+	 */
 	private void addToWatchlist(String event) {
 		//TODO user.addToWatchlist(event);
 		System.out.println("Added to watchlist");
 	}
 
+	/**
+	 * Displays the user's watchlist.
+	 */
 	private void viewWatchlist() {
 		while (true) {
 			System.out.println("\n********** Watchlist **********");
@@ -686,6 +794,9 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Searches for a venue within the system.
+	 */
 	private void findVenue() {// TODO expand on this?
 		System.out.println("\n********** Search for Concert **********");
 		System.out.println("Type in the concert you want to search for");
@@ -723,6 +834,9 @@ public class TicketingAppUI {
 		}
 	}
 	
+	/**
+	 * Displays the user's tickets.
+	 */
 	private void viewPurchasedTickets() {
 		System.out.println("\n********** Your Tickets **********");
 		//TODO user.displayTickets();
@@ -738,6 +852,9 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * This occurs when a user request for a refund.
+	 */
 	private void requestRefund() {
 		System.out.println("\n********** Request Refund **********");
 		System.out.println("Type in the name of the event you want a refund from");
@@ -748,6 +865,9 @@ public class TicketingAppUI {
 		System.out.println("Your refund request has been sent to be processed");
 	}
 	
+	/**
+	 * This occurs when a user wants to purchase concessions.
+	 */
 	private void purchaseConcessions() {
 		System.out.println("\n********** Purchase Concessions **********");
 		//TODO main.displayConcessions();
@@ -759,6 +879,9 @@ public class TicketingAppUI {
 		System.out.println("A receipt has been made for you. Show this to an employee at the concession counter");
 	}
 
+	/**
+	 * Displays the customer support page.
+	 */
 	private void viewCustomerSupport() {
 		System.out.println("\n********** Customer Support **********");
 		// TODO main.displaySupportInfo();
@@ -775,6 +898,9 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Allows an employee to input a new event into the system.
+	 */
 	private void inputEvent() {
 		System.out.println("\nType in the type of the show to be inputted");
 		String showType = scanner.nextLine();
@@ -799,6 +925,9 @@ public class TicketingAppUI {
 		System.out.println("This event has been added");
 	}
 
+	/**
+	 * Allows an employee to assign events to specific theaters.
+	 */
 	private void inputTheaterInfo() {
 		System.out.println("\nType in the name of the theater");
 		char theaterName = scanner.nextLine().charAt(0);
@@ -820,6 +949,9 @@ public class TicketingAppUI {
 		System.out.println("This theater's info. has been updated");
 	}
 
+	/**
+	 * Allows an employee to apply a discount to the prices of tickets.
+	 */
 	private void inputDiscount() {
 		System.out.println("\nType in the percent discount");
 		int discount = Integer.parseInt(scanner.nextLine());
@@ -829,6 +961,9 @@ public class TicketingAppUI {
 		System.out.println("Discount has been applied");
 	}
 
+	/**
+	 * Allows an employee to change the actual price of a ticket.
+	 */
 	private void inputTicketPrices() {
 		System.out.println("\nType in the price of an adult ticket");
 		double adultTicketPrice = Double.parseDouble(scanner.nextLine());
@@ -841,6 +976,9 @@ public class TicketingAppUI {
 		System.out.println("Ticket prices have been set");
 	}
 
+	/**
+	 * Allows an employee to issue a refund to users who requested a refund.
+	 */
 	private void refundTickets() {
 		// TODO user.displayTicketsRefunded();
 		System.out.println("Type in the name of the customer to give a refund to");
@@ -851,6 +989,9 @@ public class TicketingAppUI {
 		System.out.println("Customer's refund has been processed");
 	}
 
+	/**
+	 * Allows admins to view and manage their venues.
+	 */
 	private void manageVenues() {
 		while (true) {
 			System.out.println("\n********** Venues **********");
@@ -881,6 +1022,10 @@ public class TicketingAppUI {
 		}
 	}
 
+	/**
+	 * Displays sub menu options under a particular main menu option.
+	 * @param subMenuOptions - The menu options under a specific main menu option.
+	 */
 	private void displaySubMenuOptions(String[] subMenuOptions) {
 		System.out.println("What would you like to do?");
 		for (int i = 0; i < subMenuOptions.length; i++) {
