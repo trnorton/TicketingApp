@@ -429,6 +429,16 @@ public class TicketingAppUI {
 
 		System.out.println("Type in the number of child tickets you want to purchase");
 		int numChildTickets = Integer.parseInt(scanner.nextLine());
+		
+		//TODO display theater seats where movie is showing
+		
+		System.out.println("Where would you like to sit?");
+		System.out.println("Type in character corresponding to the row you want to sit on");
+		char row = scanner.nextLine().charAt(0);
+		
+		System.out.println("Type in number corresponding to the seat you want to sit on at that row");
+		int col = Integer.parseInt(scanner.nextLine());
+		//TODO use those input to update the status of the seat, possibly in bookTickets method
 
 		//TODO user.bookTickets(movie, date, time, numAdultTickets, numChildTickets);
 
