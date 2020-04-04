@@ -22,7 +22,25 @@ public class Employee extends User {
 		this.setWorkVenue(workVenue);
 	}
 
-	public void inputEvent(String type, String name, String date, String time, int rating, int ageRating){
+	public void inputEvent(String venueName, ArrayList<Venue> venuesToSearch, String date, String time, Show show){
+		//find venue mainsystem
+		Venue venueToAddEventTo = null;
+		for(Venue venue : venuesToSearch)
+			if(venueName.equals(venue.getName())){
+				venueToAddEventTo = venue;
+				break;
+			}
+
+		if(venueToAddEventTo == null){
+			System.out.println("No Venue matching that name...Event not added");
+		}
+
+		//add new show to new event in found venue
+		Theater[] venueTheaters = venueToAddEventTo.getTheaters();
+
+		Event newEvent = new Event(show, date, time);
+		for(Theater theater : venueTheaters)
+			theater.addEvent(newEvent);
 
 	}
 
@@ -30,13 +48,15 @@ public class Employee extends User {
 
 	}
 
-	public void inputDiscount(int discount){
-
+	public void inputDiscount(double discount, User user){
+		for(Ticket ticket : user.getTickets())
+			ticket.setDiscountMultiplier(discount/100);
 	}
 
-	public void inputTicketPrices(double adult, double child){
+	/*public void inputTicketPrices(double adultPrice, double childPriceMultiplier, ){
 
-	}
+	}*/
+
 
 	public void displayRefundedTickets(){
 		System.out.println("Tickets Refunded: " + ticketsToRefundToCustomers.size());
@@ -53,6 +73,11 @@ public class Employee extends User {
 	}
 
 	public void refundTickets(String refundRequester){
+		//Print name
+		//make list of tickets belonging to user only
+		//do magic
+		//print out total tickets refunded
+		//
 
 	}
 

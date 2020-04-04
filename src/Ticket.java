@@ -9,6 +9,7 @@ public class Ticket {
 	private Event event;
 	private Seat seat;
 	private Venue venue;
+	private double discountMultiplier;
 
 	/**
 	 * Default Constructor
@@ -31,6 +32,18 @@ public class Ticket {
 		this.setEvent(event);
 		this.setSeat(seat);
 		this.setVenue(venue);
+	}
+
+	public double getDiscountMultiplier() {
+		return discountMultiplier;
+	}
+
+	public void setDiscountMultiplier(double discountMultiplier) {
+		this.discountMultiplier = discountMultiplier;
+	}
+
+	public double getPriceWithDiscount(){
+		return price * discountMultiplier;
 	}
 
 	/**
