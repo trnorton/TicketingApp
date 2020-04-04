@@ -21,4 +21,8 @@ public class ConcessionsSystem {
 			System.out.println(c);
 		}
 	}
+	
+	public ArrayList<Concession> getConcessions(){
+		return concessions;
+	}
 }
