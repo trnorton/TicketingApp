@@ -39,11 +39,17 @@ public class Employee extends User {
 	}
 
 	public void displayRefundedTickets(){
-
+		System.out.println("Tickets Refunded: " + ticketsToRefundToCustomers.size());
+		ticketsToRefundToCustomers.forEach(System.out::println);
 	}
 
-	public void addTicket(Ticket t){
+	public void addTicket(Ticket ticket){
+		if(ticket == null){
+			System.out.println("Cannot add null ticket");
+			return;
+		}
 
+		ticketsToRefundToCustomers.add(ticket);
 	}
 
 	public void refundTickets(String refundRequester){
@@ -51,7 +57,7 @@ public class Employee extends User {
 	}
 
 	public String toString(){
-		return "Employee\nName:" + super.getName() + "\nBirthday: " + super.getBirthday + "\nPhone:  " + super.getPhone() + "\nHome Address: " + super.getAddress() + "\nEmail: " + super.getEmail();
+		return "Employee\tName:" + this.getName() + "\nVenue: " + this.getWorkVenue() + "\nBirthday: " + this.getBirthday() + "\nPhone:  " + this.getPhoneNumber() + "\nHome Address: " + this.getAddress() + "\nEmail: " + this.getEmail();
 	}
 
 	public Venue getWorkVenue() {
