@@ -14,7 +14,7 @@ public class TicketingAppUI {
 	private String nextLine;
 	private int comm;
 	private User user;
-	// TODO MainSystem main;
+	MainSystem main;
 	private ArrayList<String> mainMenuOptions;
 	private String[] watchlistMenuOptions = { "Add to watchlist", "Remove from watchlist", "Back" };
 	private String[] venueMenuOptions = { "Add to venue list", "Remove from venue list", "Back" };
@@ -24,7 +24,7 @@ public class TicketingAppUI {
 
 	TicketingAppUI() {
 		scanner = new Scanner(System.in);
-		// TODO main = new MainSystem();
+		main = new MainSystem();
 		mainMenuOptions = new ArrayList<String>();
 		fillBasicMainMenuOptions();
 	}
@@ -870,7 +870,7 @@ public class TicketingAppUI {
 	 */
 	private void purchaseConcessions() {
 		System.out.println("\n********** Purchase Concessions **********");
-		//TODO main.displayConcessions();
+		main.displayConcessions();
 		System.out.println("Type in the concession you want");
 		String type = scanner.nextLine();
 		System.out.println("Quantity of that concession you want");
@@ -884,7 +884,7 @@ public class TicketingAppUI {
 	 */
 	private void viewCustomerSupport() {
 		System.out.println("\n********** Customer Support **********");
-		// TODO main.displaySupportInfo();
+		main.displaySupportInfo();
 
 		while (true) {
 			System.out.println("Type 'Back' to go back to the main menu");

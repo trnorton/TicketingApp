@@ -10,9 +10,15 @@ public class MainSystem {
 	private boolean online;
 	
 	public MainSystem() {
-		
+		venues = new ArrayList<Venue>();
+		users = new ArrayList<User>();
+		filter = new FilterSystem();
+		custSupport = new CustomerSupportSystem();
+		concess = new ConcessionsSystem();
+		online = true;
 	}
 	
+	// TODO, but might not need this
 	public void searchForEvent(String event) {
 		
 	}
@@ -21,27 +27,39 @@ public class MainSystem {
 		
 	}
 	
+	//TODO ask about this
 	private void applySearchFilters() {
 		
 	}
 	
+	//TODO ask about this
 	private void applyRestrictionFilters() {
 		
 	}
 	
 	public boolean checkIfOnline() {
-		return true;
+		return online;
 	}
 	
 	public void displaySupportInfo() {
-		
+		System.out.println(custSupport);
 	}
 	
-	public void distributeConcessions() {
+	public Concession distributeConcessions(String name, int quantity) {
+		Concession concession = new Concession(name, 0.0, quantity);;
+		for(Concession c : concess.getConcessions()) {
+			if(c.getName().equals(name)) {
+				if(c.getQuantity() <= 0) concess.getConcessions().remove(c);
+				c.setQuantity(c.getQuantity() - quantity);
+				if(c.getQuantity() <= 0) concess.getConcessions().remove(c);
+				concession.setPrice(c.getPrice());
+			}
+		}
+		return concession;
 		
 	}
 	
 	public void displayConcessions() {
-		
+		concess.showConcessions();
 	}
 }
