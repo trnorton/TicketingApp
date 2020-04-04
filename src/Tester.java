@@ -38,7 +38,18 @@ public class Tester {
 	}
 
 	public void taylor(){
-
+		//
+		//
+		//
+		//
+		///
+		//
+		//
+		//
+		//
+		//
+		//
+		//
 	}
 
 }
