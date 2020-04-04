@@ -26,4 +26,12 @@ public class Tester {
 
 	}
 
+	public void luke(){
+
+	}
+
+	public void taylor(){
+		
+	}
+
 }
