@@ -12,11 +12,11 @@ public class User {
 
     private String name;
     private int age;
-    private int birthday;
-    private int phoneNumber;
+    private String birthday;
+    private String phoneNumber;
     private String address;
     private String email;
-    // private ArrayList<Ticket> tickets;
+    private ArrayList<Ticket> tickets;
     private ArrayList<Event> watchlist;
     private ArrayList<Concession> concessions;
     private double userDiscount;
@@ -27,12 +27,12 @@ public class User {
     /**
      * Parametrized constructor for User
      * @param name the user's name
-     * @param birthday the user's birthday in ddmmyyyy format
+     * @param birthday the user's birthday in mmddyyyy format
      * @param phoneNumber the user's phone number
      * @param address the user's full address
      * @param email the users email address
      */
-    public User(String name, int birthday, int phoneNumber, String address, String email) {
+    public User(String name, String birthday, String phoneNumber, String address, String email) {
         this.name = name;
         this.birthday = birthday;
         this.age = calculateAge(this.birthday);
@@ -50,15 +50,20 @@ public class User {
 
     /**
      * Private method to calculate the age
-     * @param birthday the user's birthday in ddmmyyyy format (day/month/year)
+     * @param birthday the user's birthday in mmddyyyy format (month/day/year)
      * @return age of the user in years
      */
-    private int calculateAge(int birthday) {
+    private int calculateAge(String birthday) {
         LocalDate date = LocalDate.now();
 
-        int year = birthday % DIGIT4_MOD;
+        String[] split = birthday.split("/");
+        
+        int year = Integer.parseInt(split[2]);
+        int month = Integer.parseInt(split[0]);
+        int day = Integer.parseInt(split[1]);
+        /*int year = birthday % DIGIT4_MOD;
         int month = (birthday / DIGIT4_MOD) % DIGIT2_MOD;
-        int day = ((birthday / DIGIT4_MOD) / DIGIT2_MOD) % DIGIT2_MOD;
+        int day = ((birthday / DIGIT4_MOD) / DIGIT2_MOD) % DIGIT2_MOD;*/
 
         int age = date.getYear() - year;
 
@@ -90,7 +95,7 @@ public class User {
 
     // Ask about implementation later
     public void createReceipt() {
-
+    	
     }
 
     /**
@@ -238,19 +243,19 @@ public class User {
         this.age = age;
     }
 
-    public int getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(int birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

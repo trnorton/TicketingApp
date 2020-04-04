@@ -16,6 +16,11 @@ public class MainSystem {
 		custSupport = new CustomerSupportSystem();
 		concess = new ConcessionsSystem();
 		online = true;
+		
+		venues.add(new Venue("Venue", "123 Movie St", 12));
+		
+		users.add(new Customer("Customer", "01/01/1980", "(803)123-4567", "123 Simple St", "customer@gmail.com"));
+		users.add(new Employee("Employee", "01/01/1980", "(803)123-7890", "123 Circle Dr", "employee@yahoo.com", venues.get(0)));
 	}
 	
 	// TODO, but might not need this
@@ -75,4 +80,9 @@ public class MainSystem {
 		}
 		return null;
 	}
+	
+	//TODO findEmployee
+	 public ArrayList<User> getUsers(){
+		 return users;
+	 }
 }

@@ -73,6 +73,11 @@ public class Venue {
 		}
 		return sum / custRatings.size();
 	}
+	
+	//TODO
+	public Theater[] getTheaters() {
+		return theaters;
+	}
 
 	public String toString() {
 		return "Name: " + name + "\nAddress: " + address + "\nOverall Customer Rating: " + getAverageCustRating();

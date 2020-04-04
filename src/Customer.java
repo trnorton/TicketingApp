@@ -1,7 +1,7 @@
 
 public class Customer extends User {
 
-	public Customer(String name, int birthday, int phoneNumber, String address, String email) {
+	public Customer(String name, String birthday, String phoneNumber, String address, String email) {
 		super(name, birthday, phoneNumber, address, email);
 	}
 	
