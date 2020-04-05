@@ -1004,11 +1004,22 @@ public class TicketingAppUI {
 		System.out.println("\nType in the percent discount");
 		double discount = Double.parseDouble(scanner.nextLine());//change to double
 
-		System.out.println("");
+		System.out.println("What is the name of the user you wish give this discount?");
+		String name = scanner.nextLine();
 
-		User receivingDiscount = this.user;
+		User receivingDiscount = null;
+		for(User user : main.getUsers())
+			if(user.getName().equalsIgnoreCase(name)){
+				receivingDiscount = user;
+				break;
+			}
+
+		if(receivingDiscount == null){
+			System.out.println("No user with that name...");
+			return;
+		}
+
 		employeeUser.inputDiscount(discount, receivingDiscount);
-		// TODO user.inputDiscount(discount);
 
 
 		System.out.println("Discount has been applied");
