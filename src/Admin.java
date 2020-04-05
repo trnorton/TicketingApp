@@ -45,8 +45,25 @@ public class Admin extends User {
         venueList.remove(venue);
     }
 
-    // Probably need json for this?
-    public void inputEvent(String type, String name, String date, String time, int rating, int ageRating) {
+    public void inputEvent(String venueName, ArrayList<Venue> venuesToSearch, String date, String time, Show show){
+        //find venue mainsystem
+        Venue venueToAddEventTo = null;
+        for(Venue venue : venuesToSearch)
+            if(venueName.equals(venue.getName())){
+                venueToAddEventTo = venue;
+                break;
+            }
+
+        if(venueToAddEventTo == null){
+            System.out.println("No Venue matching that name...Event not added");
+        }
+
+        //add new show to new event in found venue
+        Theater[] venueTheaters = venueToAddEventTo.getTheaters();
+
+        Event newEvent = new Event(show, date, time);
+        for(Theater theater : venueTheaters)
+            theater.addEvent(newEvent);
 
     }
 
