@@ -912,6 +912,7 @@ public class TicketingAppUI {
 	 * Allows an employee to input a new event into the system.
 	 */
 	private void inputEvent() {
+		//determines whether user is admin or employee and temporarily treats them as such within this method
 		Admin adminUser = null;
 		Employee employeeUser = null;
 		if(user instanceof Employee){
@@ -985,6 +986,7 @@ public class TicketingAppUI {
 			show = new Concert(showName, ageRating, performers, producers);
 		}
 
+		//ensures that user and admin were set correctly and calls the correct function 
 		if(adminUser != null && employeeUser == null)
 			adminUser.inputEvent(show, date, time);
 		else if(employeeUser != null && adminUser != null)
