@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -83,7 +86,6 @@ public class User {
 
     }
 
-    // Ask about it later
     public void updateHomeVenue(String venue) {
 
     }
@@ -93,9 +95,26 @@ public class User {
 
     }
 
-    // Ask about implementation later
+    // FileWriter stuff
     public void createReceipt() {
-    	
+        try {
+            PrintWriter receiptWriter = new PrintWriter(new FileOutputStream("receipt.txt"));
+            receiptWriter.println("Receipt:");
+            double totalPrice = 0;
+            for (Ticket t : tickets) {
+                receiptWriter.println(t);
+                totalPrice += t.getPrice();
+            }
+            for (Concession c : concessions) {
+                receiptWriter.println(c);
+                totalPrice += c.getPrice();
+            }
+            receiptWriter.println("Total price: $" + totalPrice);
+            receiptWriter.close();
+        }
+        catch(Exception e) {
+            System.out.println("Error: Receipt unable to print");
+        };
     }
 
     /**
@@ -273,6 +292,10 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
     }
 
     /**
