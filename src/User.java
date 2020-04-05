@@ -30,7 +30,7 @@ public class User {
     /**
      * Parametrized constructor for User
      * @param name the user's name
-     * @param birthday the user's birthday in mmddyyyy format
+     * @param birthday the user's birthday in mm/dd/yyyy format
      * @param phoneNumber the user's phone number
      * @param address the user's full address
      * @param email the users email address
@@ -42,7 +42,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
-        // this.tickets = new ArrayList<Tickets>();
+        this.tickets = new ArrayList<Ticket>();
         this.watchlist = new ArrayList<Event>();
         this.concessions = new ArrayList<Concession>();
         this.userDiscount = MIN;
@@ -53,7 +53,7 @@ public class User {
 
     /**
      * Private method to calculate the age
-     * @param birthday the user's birthday in mmddyyyy format (month/day/year)
+     * @param birthday the user's birthday in mm/dd/yyyy format (month/day/year)
      * @return age of the user in years
      */
     private int calculateAge(String birthday) {
@@ -183,7 +183,6 @@ public class User {
         return this.userDiscount;
     }
 
-    // No idea what this does yet
     public void requestRefund(String event, int numTix) {
 
     }
@@ -338,6 +337,16 @@ public class User {
      * @return a summary of the user's information
      */
     public String toString() {
-        return "placeholder";
+        StringBuilder userSummary = new StringBuilder();
+        if (tickets.isEmpty()) {
+            userSummary.append("No tickets purchased. \n");
+        }
+        else {
+            userSummary.append("Tickets in cart:\n");
+            for (Ticket t : tickets) {
+                userSummary.append(t).append("\n");
+            }
+        }
+        return userSummary.toString();
     }
 }
