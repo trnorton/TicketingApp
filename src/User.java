@@ -90,7 +90,7 @@ public class User {
 
     }
 
-    // Creating new ticket
+    // Creating new tickets
     public void bookTickets(String event, String date, String time, int adultTickets, int childTickets) {
 
     }
@@ -115,6 +115,10 @@ public class User {
         catch(Exception e) {
             System.out.println("Error: Receipt unable to print");
         };
+    }
+
+    public void rateEvent(int rating) {
+
     }
 
     /**
@@ -295,7 +299,39 @@ public class User {
     }
 
     public ArrayList<Ticket> getTickets() {
-        return tickets;
+        return this.tickets;
+    }
+
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+    }
+
+    public void removeTicket(Ticket ticket) {
+        tickets.remove(ticket);
+    }
+
+    public ArrayList<Event> getWatchlist() {
+        return watchlist;
+    }
+
+    public void addToList(Event event) {
+        watchlist.add(event);
+    }
+
+    public void removeFromList(Event event) {
+        watchlist.remove(event);
+    }
+
+    public ArrayList<Concession> getConcessions() {
+        return this.concessions;
+    }
+
+    public void addConcession(Concession conc) {
+        concessions.add(conc);
+    }
+
+    public void removeConcession(Concession conc) {
+        concessions.remove(conc);
     }
 
     /**
