@@ -815,7 +815,7 @@ public class TicketingAppUI {
 		while(true) {
 			try {
 				venue = scanner.nextLine();
-				user.searchForVenue(venue);
+				user.searchForVenue(venue, main.getVenues());
 				break;
 			} catch(Exception e) {
 				System.out.println("Venue not found. Type in another venue");
