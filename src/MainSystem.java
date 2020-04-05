@@ -93,4 +93,8 @@ public class MainSystem {
 				}
 			}
 		}
+	 
+	 public void addUserToDatabase(User u) {
+		 users.add(u);
+	 }
 }

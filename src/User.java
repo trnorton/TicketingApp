@@ -20,7 +20,7 @@ public class User {
     private String address;
     private String email;
     private ArrayList<Ticket> tickets;
-    private ArrayList<Event> watchlist;
+    private ArrayList<Show> watchlist;
     private ArrayList<Concession> concessions;
     private double userDiscount;
     private int rewardsPoints;
@@ -30,7 +30,7 @@ public class User {
     /**
      * Parametrized constructor for User
      * @param name the user's name
-     * @param birthday the user's birthday in mm/dd/yyyy format
+     * @param birthday the user's birthday in mmddyyyy format
      * @param phoneNumber the user's phone number
      * @param address the user's full address
      * @param email the users email address
@@ -42,8 +42,8 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
-        this.tickets = new ArrayList<Ticket>();
-        this.watchlist = new ArrayList<Event>();
+        // this.tickets = new ArrayList<Tickets>();
+        this.watchlist = new ArrayList<Show>();
         this.concessions = new ArrayList<Concession>();
         this.userDiscount = MIN;
         this.rewardsPoints = MIN;
@@ -53,7 +53,7 @@ public class User {
 
     /**
      * Private method to calculate the age
-     * @param birthday the user's birthday in mm/dd/yyyy format (month/day/year)
+     * @param birthday the user's birthday in mmddyyyy format (month/day/year)
      * @return age of the user in years
      */
     private int calculateAge(String birthday) {
@@ -76,6 +76,10 @@ public class User {
 
         return age;
     }
+    
+    /*public void createAccount(String name, String birthday, String phoneNum, String address, String email, ArrayList<User> usersList) {
+    	
+    }*/
 
 
     public void searchForEvent(String event) {
@@ -126,27 +130,56 @@ public class User {
      * Prints out each event in the list
      */
     public void displayWatchlist() {
-        for (Event e : watchlist) {
+        for (Show e : watchlist) {
             System.out.println(e);
         }
     }
+    
+    public void displayTickets() {
+    	for (Ticket t : tickets) {
+    		System.out.println(t);
+    	}
+    }
 
     /**
-     * Method which adds an event to the user's watchlist
-     * @param event event to be added
+     * Method which adds a show to the user's watchlist
+     * @param show show to be added
      */
-    public void addToWatchlist(Event event) {
-        if (event != null) {
-            watchlist.add(event);
+    public void addToWatchlist(String show) {
+        ArrayList<Movie> movies = JsonParser.loadMovies();
+        for(Movie m : movies) {
+        	if(show.equals(m.getName())) {
+        		watchlist.add(m);
+        		return;
+        	}
+        }
+        
+        ArrayList<Play> plays = JsonParser.loadPlays();
+        for(Play p : plays) {
+        	if(show.equals(p.getName())) {
+        		watchlist.add(p);
+        		return;
+        	}
+        }
+        
+        ArrayList<Concert> concerts = JsonParser.loadConcerts();
+        for(Concert c : concerts) {
+        	if(show.equals(c.getName())) {
+        		watchlist.add(c);
+        		return;
+        	}
         }
     }
 
     /**
-     * Method which removes an event from the user's watchlist
-     * @param event event to be removed
+     * Method which removes a show from the user's watchlist
+     * @param show show to be removed
      */
-    public void removeFromWatchlist(Event event) {
-        watchlist.remove(event);
+    public void removeFromWatchlist(String show) {
+        for(Show s : watchlist) {
+        	if(s.getName().equals(show))
+        		watchlist.remove(s);
+        }
     }
 
     public void purchaseTickets(Event event, int NumTix) {
@@ -183,6 +216,7 @@ public class User {
         return this.userDiscount;
     }
 
+    // No idea what this does yet
     public void requestRefund(String event, int numTix) {
 
     }
@@ -309,16 +343,16 @@ public class User {
         tickets.remove(ticket);
     }
 
-    public ArrayList<Event> getWatchlist() {
+    public ArrayList<Show> getWatchlist() {
         return watchlist;
     }
 
-    public void addToList(Event event) {
-        watchlist.add(event);
+    public void addToList(Show show) {
+        watchlist.add(show);
     }
 
-    public void removeFromList(Event event) {
-        watchlist.remove(event);
+    public void removeFromList(Show show) {
+        watchlist.remove(show);
     }
 
     public ArrayList<Concession> getConcessions() {
@@ -337,16 +371,6 @@ public class User {
      * @return a summary of the user's information
      */
     public String toString() {
-        StringBuilder userSummary = new StringBuilder();
-        if (tickets.isEmpty()) {
-            userSummary.append("No tickets purchased. \n");
-        }
-        else {
-            userSummary.append("Tickets in cart:\n");
-            for (Ticket t : tickets) {
-                userSummary.append(t).append("\n");
-            }
-        }
-        return userSummary.toString();
+        return "placeholder";
     }
 }

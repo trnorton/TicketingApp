@@ -334,7 +334,7 @@ public class TicketingAppUI {
 		String birthday = scanner.nextLine();
 
 		System.out.println("Type in your phone number");
-		int phoneNum = Integer.parseInt(scanner.nextLine());
+		String phoneNum = scanner.nextLine();
 
 		System.out.println("Type in your home address");
 		String address = scanner.nextLine();
@@ -342,7 +342,9 @@ public class TicketingAppUI {
 		System.out.println("Type in your email");
 		String email = scanner.nextLine();
 
-		user.createAccount(name, birthday, phoneNum, address, email, main.getUsers());// ----- (turns a guest into a Customer)
+		user = new Customer(name, birthday, phoneNum, address, email);
+		main.addUserToDatabase(user);
+		//user.createAccount(name, birthday, phoneNum, address, email, main.getUsers());// ----- (turns a guest into a Customer)
 
 		System.out.println("Your account has been created");
 	}
