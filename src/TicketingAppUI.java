@@ -982,8 +982,9 @@ public class TicketingAppUI {
 			show = new Concert(showName, ageRating, performers, producers);
 		}
 
-		employeeUser.inputEvent(show, date, time);
-		
+		//TODO fix constructor here
+		employeeUser .inputEvent(show, date, time);
+
 		System.out.println("This event has been added");
 	}
 
@@ -991,11 +992,21 @@ public class TicketingAppUI {
 	 * Allows an employee to apply a discount to the prices of tickets.
 	 */
 	private void inputDiscount() {
+		Employee employeeUser = null;
+		if(!(user instanceof Employee)){
+			System.out.println("Only an employee level user can use this function");
+			return;
+		}
+		employeeUser = (Employee)user;
+
 		System.out.println("\nType in the percent discount");
 		double discount = Double.parseDouble(scanner.nextLine());//change to double
 
 		//TODO User input
+		User receivingDiscount = null; //TODO make not null lol
+		employeeUser.inputDiscount(discount, receivingDiscount);
 		// TODO user.inputDiscount(discount);
+
 
 		System.out.println("Discount has been applied");
 	}
