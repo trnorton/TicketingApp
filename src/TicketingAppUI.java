@@ -986,7 +986,7 @@ public class TicketingAppUI {
 			show = new Concert(showName, ageRating, performers, producers);
 		}
 
-		//ensures that user and admin were set correctly and calls the correct function 
+		//ensures that user and admin were set correctly and calls the correct function
 		if(adminUser != null && employeeUser == null)
 			adminUser.inputEvent(show, date, time);
 		else if(employeeUser != null && adminUser != null)
