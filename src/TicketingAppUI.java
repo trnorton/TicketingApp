@@ -982,8 +982,12 @@ public class TicketingAppUI {
 			show = new Concert(showName, ageRating, performers, producers);
 		}
 
-		//TODO fix constructor here
-		employeeUser .inputEvent(show, date, time);
+
+		System.out.println("And at which venue is this event taking place?");
+		String venueName = scanner.nextLine();
+		ArrayList<Venue> allVenues = main.getVenues();
+
+		employeeUser.inputEvent(venueName, allVenues, date, time, show);
 
 		System.out.println("This event has been added");
 	}
