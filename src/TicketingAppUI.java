@@ -1015,6 +1015,7 @@ public class TicketingAppUI {
 	 * Allows an employee to change the actual price of a ticket.
 	 */
 	private void inputTicketPrices() {
+
 		System.out.println("\nType in the price of an adult ticket");
 		double adultTicketPrice = Double.parseDouble(scanner.nextLine());
 
@@ -1031,12 +1032,24 @@ public class TicketingAppUI {
 	 * Allows an employee to issue a refund to users who requested a refund.
 	 */
 	private void refundTickets() {
-		user.displayTicketsRefunded();
+		Employee employeeUser = null;
+		if(!(user instanceof Employee)){
+			System.out.println("Only an employee level user can use this function");
+			return;
+		}
+
+		/*user.displayTicketsRefunded();
 		System.out.println("Type in the name of the customer to give a refund to");
 		String customerName = scanner.nextLine();
 
-		
-		user.refundTickets(customerName, main.getUsers());
+
+		user.refundTickets(customerName, main.getUsers());*/
+
+		//this takes care of all the functions here
+		System.out.println("Type in the name of the customer to give a refund to");
+		String customerName = scanner.nextLine();
+
+		employeeUser.refundTickets(customerName);
 
 		System.out.println("Customer's refund has been processed");
 	}
@@ -1045,9 +1058,16 @@ public class TicketingAppUI {
 	 * Allows admins to view and manage their venues.
 	 */
 	private void manageVenues() {
+		Admin adminUser = null;
+		if(!(user instanceof Admin)){
+			System.out.println("Only an admin level user can use this function");
+			return;
+		}
+		adminUser = (Admin)user;
+
 		while (true) {
 			System.out.println("\n********** Venues **********");
-			user.displayVenues();
+			adminUser.displayVenues();
 
 			displaySubMenuOptions(venueMenuOptions);
 
@@ -1065,11 +1085,11 @@ public class TicketingAppUI {
 			case (0):
 				System.out.println("Type in the name of the venue you want to add to the list");
 				String venueAdded = scanner.nextLine();
-				user.addVenue(venueAdded);
+				adminUser.addVenue(venueAdded); //TODO add Venue takes string not venue
 			case (1):
 				System.out.println("Type in the name of the venue you want to remove from the list");
 				String venueRemoved = scanner.nextLine();
-				user.removeVenue(venueRemoved);
+				adminUser.removeVenue(venueRemoved); //TODO add Venue takes string not venu
 			}
 		}
 	}
