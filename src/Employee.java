@@ -17,7 +17,7 @@ public class Employee extends User {
 	 * @param address     the user's full address
 	 * @param email       the users email address
 	 */
-	public Employee(String name, int birthday, int phoneNumber, String address, String email, Venue workVenue) {
+	public Employee(String name, String birthday, String phoneNumber, String address, String email, Venue workVenue) {
 		super(name, birthday, phoneNumber, address, email);
 		this.setWorkVenue(workVenue);
 	}

@@ -15,7 +15,7 @@ public class Admin extends User {
      * @param address the admin's full address
      * @param email the admin's email address
      */
-    public Admin(String name, int birthday, int phoneNumber, String address, String email) {
+    public Admin(String name, String birthday, String phoneNumber, String address, String email) {
         super(name, birthday, phoneNumber, address, email);
         venueList = new ArrayList<Venue>();
     }

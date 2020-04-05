@@ -73,6 +73,27 @@ public class Venue {
 		}
 		return sum / custRatings.size();
 	}
+	
+	//TODO
+	public Theater[] getTheaters() {
+		return theaters;
+	}
+	
+	public boolean hasAvailableTheater() {
+		for(int i = 0; i<theaters.length;i++) {
+			if(theaters[i].hasAvailableSeat())
+				return true;
+		}
+		return false;
+	}
+	
+	public Theater getAvailableTheater() {
+		for(int i = 0; i<theaters.length;i++) {
+			if(theaters[i].hasAvailableSeat())
+				return theaters[i];
+		}
+		return null;
+	}
 
 	public String toString() {
 		return "Name: " + name + "\nAddress: " + address + "\nOverall Customer Rating: " + getAverageCustRating();
