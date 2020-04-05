@@ -319,11 +319,6 @@ public class User {
     	MainSystem.distributeConcessions(type, quantity);
     }
 
-    // TODO: Calculate price, maybe check if type exists
-    public void receiveConcessions(String type, int quantity) {
-        concessions.add(new Concession(type, 0, quantity));
-    }
-
     /**
      * Standard getter for the user's rewards points
      * @return the user's current rewards points total
