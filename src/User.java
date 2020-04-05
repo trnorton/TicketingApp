@@ -82,9 +82,40 @@ public class User {
     }*/
 
 
-    public void searchForEvent(String event) {
+   /* public void searchForEvent(String event) {
 
+    }*/
+    
+    public void searchForMovie(String movie) {
+    	ArrayList<Movie> movies = JsonParser.loadMovies();
+        for(Movie m : movies) {
+        	if(movie.equals(m.getName())) {
+        		System.out.println(m.getName());
+        		return;
+        	}
+        }
     }
+    
+    public void searchForPlay(String play) {
+    	ArrayList<Play> plays = JsonParser.loadPlays();
+        for(Play p : plays) {
+        	if(play.equals(p.getName())) {
+        		System.out.println(p.getName());
+        		return;
+        	}
+        }
+    }
+    
+    public void searchForConcert(String concert) {
+    	ArrayList<Concert> concerts = JsonParser.loadConcerts();
+        for(Concert c : concerts) {
+        	if(concert.equals(c.getName())) {
+        		System.out.println(c.getName());
+        		return;
+        	}
+        }
+    }
+    
 
     public void lookAtBasicEventInfo(String event) {
 
@@ -121,8 +152,62 @@ public class User {
         };
     }
 
-    public void rateEvent(int rating) {
-
+    public void rateEvent(String event, int rating) {
+    	ArrayList<Movie> movies = JsonParser.loadMovies();
+        for(Movie m : movies) {
+        	if(event.equals(m.getName())) {
+        		m.addCustRating(rating);
+        		JsonParser.saveData(movies);
+        		return;
+        	}
+        }
+        
+        ArrayList<Play> plays = JsonParser.loadPlays();
+        for(Play p : plays) {
+        	if(event.equals(p.getName())) {
+        		p.addCustRating(rating);
+        		JsonParser.saveData(plays);
+        		return;
+        	}
+        }
+        
+        ArrayList<Concert> concerts = JsonParser.loadConcerts();
+        for(Concert c : concerts) {
+        	if(event.equals(c.getName())) {
+        		c.addCustRating(rating);
+        		JsonParser.saveData(concerts);
+        		return;
+        	}
+        }
+    }
+    
+    public void writeEventReview(String event, String review) {
+    	ArrayList<Movie> movies = JsonParser.loadMovies();
+        for(Movie m : movies) {
+        	if(event.equals(m.getName())) {
+        		m.addReview(review);
+        		JsonParser.saveData(movies);
+        		return;
+        	}
+        }
+        
+        ArrayList<Play> plays = JsonParser.loadPlays();
+        for(Play p : plays) {
+        	if(event.equals(p.getName())) {
+        		p.addReview(review);
+        		JsonParser.saveData(plays);
+        		return;
+        	}
+        }
+        
+        ArrayList<Concert> concerts = JsonParser.loadConcerts();
+        for(Concert c : concerts) {
+        	if(event.equals(c.getName())) {
+        		c.addReview(review);
+        		JsonParser.saveData(concerts);
+        		return;
+        	}
+        }
     }
 
     /**
