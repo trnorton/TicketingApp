@@ -63,7 +63,7 @@ public class Employee extends User {
 	 * @param user The user to allow that discount
 	 */
 	public void inputDiscount(double discount, User user){
-		user.getTickets().foreach((ticket) -> ticket.setDiscountMultiplier(discount/100));
+		user.getTickets().forEach((ticket) -> ticket.setDiscountMultiplier(discount/100));
 	}
 
 	/*public void inputTicketPrices(double adultPrice, double childPriceMultiplier, ){
