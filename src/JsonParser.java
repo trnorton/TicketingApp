@@ -22,6 +22,9 @@ public class JsonParser {
 	private static final String GENRE = "genre";
 	private static final String PERFORMERS = "performers";
 
+	//relative filepath finder
+	String currentWorkingDirectory = System.getProperty("user.dir");
+
 	//File names and Show type markers
 	private static final String TYPE_MOVIE = "Movies";
 	private static final String TYPE_PLAY = "Plays";
@@ -68,7 +71,7 @@ public class JsonParser {
 		String filepath = getFilePath(typeChecker);
 
 		try {
-			File jsonFile = new File(filepath + FILENAME_EXTENSION);
+			File jsonFile = new File("src/" + filepath + FILENAME_EXTENSION);
 
 			FileWriter writer = new FileWriter(jsonFile);
 			JSONArray showJson = new JSONArray();
@@ -218,14 +221,14 @@ public class JsonParser {
 			JSONParser parser = new JSONParser();
 
 			String filepath = getFilePath(show);
-			File jsonFile = new File(filepath + FILENAME_EXTENSION);
+			File jsonFile = new File("src/" + filepath + FILENAME_EXTENSION);
 			if(!jsonFile.exists() || jsonFile.length() == 0){
 				System.out.println("No " + filepath + " to load...");
 				return null;
 			}
 
 
-			JSONArray showArray = (JSONArray) new JSONParser().parse(new FileReader(filepath + FILENAME_EXTENSION));
+			JSONArray showArray = (JSONArray) new JSONParser().parse(new FileReader("src/" + filepath + FILENAME_EXTENSION));
 
 			for (Object jsonObject : showArray) {
 				JSONObject json = (JSONObject) jsonObject;

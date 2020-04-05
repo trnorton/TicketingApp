@@ -1019,7 +1019,7 @@ public class TicketingAppUI {
 	 */
 	private void inputTicketPrices() {
 
-		System.out.println("\nType in the price of an adult ticket");
+		/*System.out.println("\nType in the price of an adult ticket");
 		double adultTicketPrice = Double.parseDouble(scanner.nextLine());
 
 		System.out.println("Type in the price of a child ticket");
@@ -1028,7 +1028,7 @@ public class TicketingAppUI {
 		// TODO 
 		user.inputTicketPrices(adultTicketPrice, childPriceMultiplier);
 
-		System.out.println("Ticket prices have been set");
+		System.out.println("Ticket prices have been set");*/
 	}
 
 	/**
