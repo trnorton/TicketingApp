@@ -58,7 +58,7 @@ public class TicketingAppUI {
 			}
 
 			// switch case for different cases
-			if(user instanceof Customer) {
+			if(user instanceof Customer) {//TODO
 			takeActionCustomer();
 			} else if(user instanceof Employee) {
 			takeActionEmployee();
@@ -115,7 +115,7 @@ public class TicketingAppUI {
 	 * The rest of the main menu options are filled in depending on the type of User currently using this app.
 	 */
 	private void fillRemainingMenuOptions() {
-		if(user instanceof Customer) {
+		if(user instanceof Customer) {//TODO
 		mainMenuOptions.add("Logout");
 		}
 		else if(user instanceof Employee) {
@@ -342,7 +342,7 @@ public class TicketingAppUI {
 		System.out.println("Type in your email");
 		String email = scanner.nextLine();
 
-		user = new Customer(name, birthday, phoneNum, address, email);
+		user = new Customer(name, birthday, phoneNum, address, email);//TODO acctID assignment
 		main.addUserToDatabase(user);
 		//user.createAccount(name, birthday, phoneNum, address, email, main.getUsers());// ----- (turns a guest into a Customer)
 
