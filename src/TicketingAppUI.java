@@ -52,8 +52,10 @@ public class TicketingAppUI {
 			}
 
 			// break if logging out
-			if (comm == mainMenuOptions.size() - 1)
+			if (comm == mainMenuOptions.size() - 1) {
+				System.out.println("Goodbye");
 				break;
+			}
 
 			// switch case for different cases
 			if(user instanceof Customer) {
@@ -277,9 +279,6 @@ public class TicketingAppUI {
 			inputEvent();
 			break;
 		case (10):
-			inputTheaterInfo();
-			break;
-		case (11):
 			manageVenues();
 			break;
 		}
@@ -427,7 +426,7 @@ public class TicketingAppUI {
 		System.out.println("Type in the number of child tickets you want to purchase");
 		int numChildTickets = Integer.parseInt(scanner.nextLine());
 		
-		//TODO display theater seats where movie is showing
+		main.displayAvailableTheater();
 		
 		System.out.println("Where would you like to sit?");
 		System.out.println("Type in character corresponding to the row you want to sit on");
@@ -435,9 +434,9 @@ public class TicketingAppUI {
 		
 		System.out.println("Type in number corresponding to the seat you want to sit on at that row");
 		int col = Integer.parseInt(scanner.nextLine());
+		
 		//TODO use those input to update the status of the seat, possibly in bookTickets method
-
-		//TODO seats parameter
+		//TODO seat parameter
 		user.bookTickets(movie, date, time, numAdultTickets, numChildTickets);
 
 		System.out.println("Tickets have been booked!");
@@ -911,7 +910,7 @@ public class TicketingAppUI {
 	 * Allows an employee to input a new event into the system.
 	 */
 	private void inputEvent() {
-		System.out.println("\nType in the type of the show to be inputted");
+		System.out.println("\nType in the type of the show to be inputted (Movie, Play, or Concert)");
 		String showType = scanner.nextLine();
 
 		System.out.println("Type in the name of the show");
@@ -928,36 +927,56 @@ public class TicketingAppUI {
 
 		System.out.println("Type in the age rating of this show");
 		int ageRating = Integer.parseInt(scanner.nextLine());
+		
+		System.out.println("Type in the major producers of this show. Type 'Done' when finished");
+		ArrayList<String> producers = new ArrayList<String>();
+		while(true) {
+			String producer = scanner.nextLine();
+			if(producer.equals("Done")) break;
+			producers.add(producer);
+		}
+		
+		Show show;
+		
+		if(showType.equals("Movie")) {
+			System.out.println("Type in the genre of this movie");
+			String genre = scanner.nextLine();
+			System.out.println("Type in the major actors in this movie. Type 'Done' when finished");
+			ArrayList<String> actors = new ArrayList<String>();
+			while(true) {
+				String actor = scanner.nextLine();
+				if(actor.equals("Done")) break;
+				actors.add(actor);
+			}
+			Movie movie = new Movie(showName, ageRating, genre, actors, producers);
+			show = movie;
+		}
+		else if(showType.equals("Play")) {
+			System.out.println("Type in the major actors in this play. Type 'Done' when finished");
+			ArrayList<String> actors = new ArrayList<String>();
+			while(true) {
+				String actor = scanner.nextLine();
+				if(actor.equals("Done")) break;
+				actors.add(actor);
+			}
+			Play play = new Play(showName, ageRating, actors, producers);
+			show = play;
+		}
+		else if(showType.equals("Concert")) {
+			System.out.println("Type in the major performers in this concert. Type 'Done' when finished");
+			ArrayList<String> performers = new ArrayList<String>();
+			while(true) {
+				String performer = scanner.nextLine();
+				if(performer.equals("Done")) break;
+				performers.add(performer);
+			}
+			Concert concert = new Concert(showName, ageRating, performers, producers);
+			show = concert;
+		}
 
-		//TODO producers, venue input, arraylist of venues from venues
-		//TODO user.inputEvent(showType, showName, date, time, rating, ageRating);
+		user.inputEvent(show, date, time);
 
 		System.out.println("This event has been added");
-	}
-
-	// TODO don't need this
-	/**
-	 * Allows an employee to assign events to specific theaters.
-	 */
-	private void inputTheaterInfo() {
-		System.out.println("\nType in the name of the theater");
-		char theaterName = scanner.nextLine().charAt(0);
-
-		System.out.println("Type in the type of the show to be inputted");
-		String showType = scanner.nextLine();
-
-		System.out.println("Type in the name of the show at this theater");
-		String showName = scanner.nextLine();
-
-		System.out.println("Type in the date this show is occurring");
-		String date = scanner.nextLine();
-
-		System.out.println("Type in the time this show is occurring on this date");
-		String time = scanner.nextLine();
-
-		// TODO user.inputTheaterInfo(theaterName, showType, showName, date, time);
-
-		System.out.println("This theater's info. has been updated");
 	}
 
 	/**
@@ -965,7 +984,7 @@ public class TicketingAppUI {
 	 */
 	private void inputDiscount() {
 		System.out.println("\nType in the percent discount");
-		int discount = Integer.parseInt(scanner.nextLine());//TODO change to double
+		double discount = Double.parseDouble(scanner.nextLine());//change to double
 
 		//TODO User input
 		// TODO user.inputDiscount(discount);
@@ -981,10 +1000,10 @@ public class TicketingAppUI {
 		double adultTicketPrice = Double.parseDouble(scanner.nextLine());
 
 		System.out.println("Type in the price of a child ticket");
-		double childTicketPrice = Double.parseDouble(scanner.nextLine());
+		double childPriceMultiplier = Double.parseDouble(scanner.nextLine());
 
-		// TODO come 
-		// TODO user.inputTicketPrices(adultTicketPrice, childTicketPrice);
+		// TODO 
+		user.inputTicketPrices(adultTicketPrice, childPriceMultiplier);
 
 		System.out.println("Ticket prices have been set");
 	}
@@ -993,12 +1012,12 @@ public class TicketingAppUI {
 	 * Allows an employee to issue a refund to users who requested a refund.
 	 */
 	private void refundTickets() {
-		// TODO user.displayTicketsRefunded();
+		user.displayTicketsRefunded();
 		System.out.println("Type in the name of the customer to give a refund to");
 		String customerName = scanner.nextLine();
 
-		//TODO get arraylist of users in 
-		// TODO user.refundTickets(customer);
+		
+		user.refundTickets(customerName, main.getUsers());
 
 		System.out.println("Customer's refund has been processed");
 	}

@@ -85,4 +85,12 @@ public class MainSystem {
 	 public ArrayList<User> getUsers(){
 		 return users;
 	 }
+	 
+	 public void displayAvailableTheater() {
+			for(Venue v : venues) {
+				if(v.hasAvailableTheater()) {
+					v.getAvailableTheater().displaySeats();
+				}
+			}
+		}
 }
