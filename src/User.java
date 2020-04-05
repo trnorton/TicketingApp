@@ -314,6 +314,10 @@ public class User {
     public void requestRefund(String event, int numTix) {
 
     }
+    
+    public void receiveConcessions(String type, int quantity) {
+    	MainSystem.distributeConcessions(type, quantity);
+    }
 
     /**
      * Method which removes a concession from the list, assuming that it is given to the user

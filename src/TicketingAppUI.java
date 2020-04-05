@@ -1083,13 +1083,13 @@ public class TicketingAppUI {
 
 			switch (comm) {
 			case (0):
-				System.out.println("Type in the name of the venue you want to add to the list");
+				System.out.println("Type in the name of the venue you want to add to your list. Venue must be in the main system");
 				String venueAdded = scanner.nextLine();
-				adminUser.addVenue(venueAdded); //TODO add Venue takes string not venue
+				adminUser.addVenue(venueAdded, main.getVenues());
 			case (1):
-				System.out.println("Type in the name of the venue you want to remove from the list");
+				System.out.println("Type in the name of the venue you want to remove from your list");
 				String venueRemoved = scanner.nextLine();
-				adminUser.removeVenue(venueRemoved); //TODO add Venue takes string not venu
+				adminUser.removeVenue(venueRemoved);
 			}
 		}
 	}
