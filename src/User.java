@@ -316,8 +316,8 @@ public class User {
     }
 
     // TODO: Calculate price, maybe check if type exists
-    public void receiveConcession(String type, int quantity) {
-        addConcession(new Concession(type, 0, quantity));
+    public void receiveConcessions(String type, int quantity) {
+        concessions.add(new Concession(type, 0, quantity));
     }
 
     /**
