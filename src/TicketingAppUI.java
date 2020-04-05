@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * TicketingAppUI.java - Represents the driver class for this app.
  * 
- * @author Taylor Norton
+ * @author Taylor Norton, Lukacs Ablonczy
  *
  */
 public class TicketingAppUI {
