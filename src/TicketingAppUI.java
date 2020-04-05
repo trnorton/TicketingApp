@@ -913,16 +913,12 @@ public class TicketingAppUI {
 	 */
 	private void inputEvent() {
 		//determines whether user is admin or employee and temporarily treats them as such within this method
-		Admin adminUser = null;
 		Employee employeeUser = null;
-		if(user instanceof Employee){
-			employeeUser = (Employee)user;
-		} else if( user instanceof Admin)
-			adminUser = (Admin)user;
-		else {
+		if (!((user instanceof Employee)||(user instanceof Admin))){
 			System.out.println("You do not have the permissions to use this function");
 			return;
 		}
+		employeeUser = (Employee)user;
 
 
 		System.out.println("\nType in the type of the show to be inputted (Movie, Play, or Concert)");
@@ -986,16 +982,8 @@ public class TicketingAppUI {
 			show = new Concert(showName, ageRating, performers, producers);
 		}
 
-		//ensures that user and admin were set correctly and calls the correct function
-		if(adminUser != null && employeeUser == null)
-			adminUser.inputEvent(show, date, time);
-		else if(employeeUser != null && adminUser != null)
-			employeeUser .inputEvent(show, date, time);
-		else{
-			System.out.println("Uh oh...");
-			return;
-		}
-
+		employeeUser .inputEvent(show, date, time);
+		
 		System.out.println("This event has been added");
 	}
 
