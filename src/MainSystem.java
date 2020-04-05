@@ -6,7 +6,7 @@ public class MainSystem {
 	private ArrayList<User> users;
 	private FilterSystem filter;
 	private CustomerSupportSystem custSupport;
-	private ConcessionsSystem concess;
+	private static ConcessionsSystem concess;
 	private boolean online;
 	
 	public MainSystem() {
@@ -57,7 +57,7 @@ public class MainSystem {
 		System.out.println(custSupport);
 	}
 	
-	public Concession distributeConcessions(String name, int quantity) {
+	public static Concession distributeConcessions(String name, int quantity) {
 		Concession concession = new Concession(name, 0.0, quantity);;
 		for(Concession c : concess.getConcessions()) {
 			if(c.getName().equals(name)) {
@@ -103,5 +103,9 @@ public class MainSystem {
 	 
 	 public void addUserToDatabase(User u) {
 		 users.add(u);
+		 for(int i = 0; i<users.size(); i++) {
+				if(users.get(i).getAccountID() == 0)
+					users.get(i).setAccountID(i+1);
+			}
 	 }
 }

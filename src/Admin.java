@@ -33,16 +33,26 @@ public class Admin extends User {
      * Adds a venue to the venue list
      * @param venue venue to be added
      */
-    public void addVenue(Venue venue) {
-        venueList.add(venue);
+    public void addVenue(String venue, ArrayList<Venue> venues) {
+        for(Venue v : venues) {
+        	if(venue.equals(v.getName())) {
+        		venueList.add(v);
+        		return;
+        	}
+        }
     }
 
     /**
      * Removes a venue from the venue list
      * @param venue venue to be removed
      */
-    public void removeVenue(Venue venue) {
-        venueList.remove(venue);
+    public void removeVenue(String venue) {
+        for(Venue v : venueList) {
+        	if(venue.equals(v.getName())) {
+        		venueList.remove(v);
+        		return;
+        	}
+        }
     }
 
     public void inputEvent(String venueName, ArrayList<Venue> venuesToSearch, String date, String time, Show show){
