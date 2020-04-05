@@ -982,7 +982,7 @@ public class TicketingAppUI {
 			show = new Concert(showName, ageRating, performers, producers);
 		}
 
-		employeeUser .inputEvent(show, date, time);
+		employeeUser.inputEvent(show, date, time);
 		
 		System.out.println("This event has been added");
 	}
