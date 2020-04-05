@@ -1,10 +1,1 @@
-[{
-    "name": "",
-    "offRating": "",
-    "ageRating": "",
-    "reviews": [],
-    "ratings": [],
-    "producers": ["", "", ""],
-    "majorActors": ["", "", ""]
-  }
-]
+[{"majorActors":["","",""],"custRatings":[0,0,0],"reviews":["","",""],"offRating":0,"name":"","ageRating":0,"producers":["","",""]}]

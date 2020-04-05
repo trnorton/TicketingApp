@@ -1004,8 +1004,9 @@ public class TicketingAppUI {
 		System.out.println("\nType in the percent discount");
 		double discount = Double.parseDouble(scanner.nextLine());//change to double
 
-		//TODO User input
-		User receivingDiscount = null; //TODO make not null lol
+		System.out.println("");
+
+		User receivingDiscount = this.user;
 		employeeUser.inputDiscount(discount, receivingDiscount);
 		// TODO user.inputDiscount(discount);
 
