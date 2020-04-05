@@ -20,11 +20,11 @@ public class Ticket {
 
 	/**
 	 * Constrcutor for Ticket type
-	 * @param name
-	 * @param price
-	 * @param event
-	 * @param seat
-	 * @param venue
+	 * @param name Name of event
+	 * @param price Price of ticket
+	 * @param event Event ticket is for
+	 * @param seat Seat ticket is assigned to
+	 * @param venue Venue ticket is assigned to
 	 */
 	public Ticket(String name, double price, Event event, Seat seat, Venue venue){
 		this.setName(name);
@@ -34,14 +34,26 @@ public class Ticket {
 		this.setVenue(venue);
 	}
 
+	/**
+	 * Getter for this ticket's discount multiplier
+	 * @return discount multiplier aka percentage discount / 100
+	 */
 	public double getDiscountMultiplier() {
 		return discountMultiplier;
 	}
 
+	/**
+	 * Setter for this ticket's discount multiplier
+	 * @param discountMultiplier discount multiplier aka percentage discount / 100
+	 */
 	public void setDiscountMultiplier(double discountMultiplier) {
 		this.discountMultiplier = discountMultiplier;
 	}
 
+	/**
+	 * Gives the ticket's price once discounts are applied
+	 * @return (Ticket regular price) * (percent / 100)
+	 */
 	public double getPriceWithDiscount(){
 		return price * discountMultiplier;
 	}
