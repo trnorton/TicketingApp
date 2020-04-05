@@ -86,6 +86,10 @@ public class MainSystem {
 		 return users;
 	 }
 	 
+	 public ArrayList<Venue> getVenues(){
+		 return venues;
+	 }
+	 
 	 public void displayAvailableTheater() {
 			for(Venue v : venues) {
 				if(v.hasAvailableTheater()) {

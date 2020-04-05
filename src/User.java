@@ -116,6 +116,15 @@ public class User {
         }
     }
     
+    public void searchForVenue(String venue, ArrayList<Venue> venueList) {
+    	for(Venue v : venueList) {
+    		if(venue.equals(v.getName())) {
+    			System.out.println(v.getName());
+    			return;
+    		}
+    	}
+    }
+    
 
     public void lookAtBasicEventInfo(String event) {
 
