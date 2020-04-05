@@ -21,6 +21,7 @@ public class MainSystem {
 		
 		users.add(new Customer("Customer", "01/01/1980", "(803)123-4567", "123 Simple St", "customer@gmail.com"));
 		users.add(new Employee("Employee", "01/01/1980", "(803)123-7890", "123 Circle Dr", "employee@yahoo.com", venues.get(0)));
+		users.add(new Admin("Admin", "01/10/1980", "(803)456-7890", "456 Tree Rd", "admin@aol.com"));
 		for(int i = 0; i<users.size(); i++) {
 			users.get(i).setAccountID(i+1);
 		}

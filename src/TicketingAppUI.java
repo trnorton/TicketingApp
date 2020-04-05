@@ -330,7 +330,7 @@ public class TicketingAppUI {
 		System.out.println("Type in your name");
 		String name = scanner.nextLine();
 
-		System.out.println("Type in your birthday (MM/DD/YYYY");
+		System.out.println("Type in your birthday (MM/DD/YYYY)");
 		String birthday = scanner.nextLine();
 
 		System.out.println("Type in your phone number");
@@ -344,6 +344,9 @@ public class TicketingAppUI {
 
 		user = new Customer(name, birthday, phoneNum, address, email);
 		main.addUserToDatabase(user);
+		mainMenuOptions.clear();
+		fillBasicMainMenuOptions();
+		fillRemainingMenuOptions();
 		//user.createAccount(name, birthday, phoneNum, address, email, main.getUsers());// ----- (turns a guest into a Customer)
 
 		System.out.println("Your account has been created");
@@ -360,7 +363,7 @@ public class TicketingAppUI {
 		while(true) {
 			movie = scanner.nextLine();
 			try {
-				//user.searchForEvent(movie);
+				System.out.println("\nHere's what we found:");
 				user.searchForMovie(movie);
 				break;
 			} catch(Exception e) {
@@ -416,7 +419,7 @@ public class TicketingAppUI {
 	 * @param movie - The movie searched by the user.
 	 */
 	private void bookMovieTickets(String movie) {
-		System.out.println("Type in the date you want to see this movie (MM/DD/YYYY");
+		System.out.println("Type in the date you want to see this movie (MM/DD/YYYY)");
 		String date = scanner.nextLine();
 
 		System.out.println("Type in the time you want to see this movie");
@@ -428,6 +431,7 @@ public class TicketingAppUI {
 		System.out.println("Type in the number of child tickets you want to purchase");
 		int numChildTickets = Integer.parseInt(scanner.nextLine());
 		
+		if(numAdultTickets+numChildTickets == 1) {
 		main.displayAvailableTheater();
 		
 		System.out.println("Where would you like to sit?");
@@ -439,8 +443,12 @@ public class TicketingAppUI {
 		
 		//TODO use those input to update the status of the seat, possibly in bookTickets method
 		//TODO seat parameter
-		user.bookTickets(movie, date, time, numAdultTickets, numChildTickets);
-
+		user.bookTickets(movie, date, time, numAdultTickets, numChildTickets, row, col);
+		}
+		else {
+			user.bookTickets(movie, date, time, numAdultTickets, numChildTickets);
+		}
+		
 		System.out.println("Tickets have been booked!");
 
 		System.out.println("Would you like a receipt? (Y/N)");
@@ -503,8 +511,9 @@ public class TicketingAppUI {
 		
 		String play = "";
 		while(true) {
+			play = scanner.nextLine();
 			try {
-				play = scanner.nextLine();
+				System.out.println("\nHere's what we found:");
 				user.searchForPlay(play);
 				break;
 			} catch(Exception e) {
@@ -636,9 +645,9 @@ public class TicketingAppUI {
 		
 		String concert = "";
 		while(true) {
+			concert = scanner.nextLine();
 			try {
-				concert = scanner.nextLine();
-				//user.searchForEvent(concert);
+				System.out.println("\nHere's what we found:");
 				user.searchForConcert(concert);
 				break;
 			} catch(Exception e) {
@@ -795,10 +804,12 @@ public class TicketingAppUI {
 				System.out.println("Type in the name of the show you want to add to the watchlist");
 				String showAdded = scanner.nextLine();
 				user.addToWatchlist(showAdded);
+				break;
 			case (1):
 				System.out.println("Type in the name of the show you want to remove from the watchlist");
 				String showRemoved = scanner.nextLine();
 				user.removeFromWatchlist(showRemoved);
+				break;
 			}
 		}
 	}
@@ -812,8 +823,9 @@ public class TicketingAppUI {
 		
 		String venue = "";
 		while(true) {
+			venue = scanner.nextLine();
 			try {
-				venue = scanner.nextLine();
+				System.out.println("\nHere's what we found:");
 				user.searchForVenue(venue, main.getVenues());
 				break;
 			} catch(Exception e) {
@@ -837,7 +849,7 @@ public class TicketingAppUI {
 
 			switch (comm) {
 			case (0):
-				user.updateHomeVenue(venue);
+				user.updateHomeVenue(venue, main.getVenues());
 				System.out.println("Your home venue has been updated");
 			}
 		}
@@ -1113,7 +1125,7 @@ public class TicketingAppUI {
 	 * @param subMenuOptions - The menu options under a specific main menu option.
 	 */
 	private void displaySubMenuOptions(String[] subMenuOptions) {
-		System.out.println("What would you like to do?");
+		System.out.println("\nWhat would you like to do?");
 		for (int i = 0; i < subMenuOptions.length; i++) {
 			System.out.println((i + 1) + ". " + subMenuOptions[i]);
 		}
