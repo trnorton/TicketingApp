@@ -58,7 +58,7 @@ public class TicketingAppUI {
 			}
 
 			// switch case for different cases
-			if(user instanceof Customer) {//TODO
+			if(user instanceof Customer) {
 			takeActionCustomer();
 			} else if(user instanceof Employee) {
 			takeActionEmployee();
@@ -115,7 +115,7 @@ public class TicketingAppUI {
 	 * The rest of the main menu options are filled in depending on the type of User currently using this app.
 	 */
 	private void fillRemainingMenuOptions() {
-		if(user instanceof Customer) {//TODO
+		if(user instanceof Customer) {
 		mainMenuOptions.add("Logout");
 		}
 		else if(user instanceof Employee) {
@@ -342,7 +342,7 @@ public class TicketingAppUI {
 		System.out.println("Type in your email");
 		String email = scanner.nextLine();
 
-		user = new Customer(name, birthday, phoneNum, address, email);//TODO acctID assignment
+		user = new Customer(name, birthday, phoneNum, address, email);
 		main.addUserToDatabase(user);
 		//user.createAccount(name, birthday, phoneNum, address, email, main.getUsers());// ----- (turns a guest into a Customer)
 
@@ -505,7 +505,6 @@ public class TicketingAppUI {
 		while(true) {
 			try {
 				play = scanner.nextLine();
-				//TODO user.searchForEvent(play);
 				user.searchForPlay(play);
 				break;
 			} catch(Exception e) {
@@ -807,9 +806,9 @@ public class TicketingAppUI {
 	/**
 	 * Searches for a venue within the system.
 	 */
-	private void findVenue() {// TODO expand on this?
-		System.out.println("\n********** Search for Concert **********");
-		System.out.println("Type in the concert you want to search for");
+	private void findVenue() {
+		System.out.println("\n********** Search for Venue **********");
+		System.out.println("Type in the venue you want to search for");
 		
 		String venue = "";
 		while(true) {
