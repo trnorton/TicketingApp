@@ -983,7 +983,7 @@ public class TicketingAppUI {
 		}
 
 		//TODO fix constructor here
-		employeeUser .inputEvent(show, date, time);
+		employeeUser.inputEvent(show, date, time);
 
 		System.out.println("This event has been added");
 	}
