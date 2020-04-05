@@ -912,6 +912,18 @@ public class TicketingAppUI {
 	 * Allows an employee to input a new event into the system.
 	 */
 	private void inputEvent() {
+		Admin adminUser = null;
+		Employee employeeUser = null;
+		if(user instanceof Employee){
+			employeeUser = (Employee)user;
+		} else if( user instanceof Admin)
+			adminUser = (Admin)user;
+		else {
+			System.out.println("You do not have the permissions to use this function");
+			return;
+		}
+
+
 		System.out.println("\nType in the type of the show to be inputted (Movie, Play, or Concert)");
 		String showType = scanner.nextLine();
 
@@ -938,7 +950,7 @@ public class TicketingAppUI {
 			producers.add(producer);
 		}
 		
-		Show show;
+		Show show = null;
 		
 		if(showType.equals("Movie")) {
 			System.out.println("Type in the genre of this movie");
@@ -950,8 +962,7 @@ public class TicketingAppUI {
 				if(actor.equals("Done")) break;
 				actors.add(actor);
 			}
-			Movie movie = new Movie(showName, ageRating, genre, actors, producers);
-			show = movie;
+			show = new Movie(showName, ageRating, genre, actors, producers);
 		}
 		else if(showType.equals("Play")) {
 			System.out.println("Type in the major actors in this play. Type 'Done' when finished");
@@ -961,8 +972,7 @@ public class TicketingAppUI {
 				if(actor.equals("Done")) break;
 				actors.add(actor);
 			}
-			Play play = new Play(showName, ageRating, actors, producers);
-			show = play;
+			show = new Play(showName, ageRating, actors, producers);
 		}
 		else if(showType.equals("Concert")) {
 			System.out.println("Type in the major performers in this concert. Type 'Done' when finished");
@@ -972,11 +982,17 @@ public class TicketingAppUI {
 				if(performer.equals("Done")) break;
 				performers.add(performer);
 			}
-			Concert concert = new Concert(showName, ageRating, performers, producers);
-			show = concert;
+			show = new Concert(showName, ageRating, performers, producers);
 		}
 
-		user.inputEvent(show, date, time);
+		if(adminUser != null && employeeUser == null)
+			adminUser.inputEvent(show, date, time);
+		else if(employeeUser != null && adminUser != null)
+			employeeUser .inputEvent(show, date, time);
+		else{
+			System.out.println("Uh oh...");
+			return;
+		}
 
 		System.out.println("This event has been added");
 	}
