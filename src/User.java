@@ -319,12 +319,9 @@ public class User {
     	MainSystem.distributeConcessions(type, quantity);
     }
 
-    /**
-     * Method which removes a concession from the list, assuming that it is given to the user
-     * @param concession concession to be removed from the list
-     */
-    public void receiveConcession(Concession concession) {
-        concessions.remove(concession);
+    // TODO: Calculate price, maybe check if type exists
+    public void receiveConcessions(String type, int quantity) {
+        concessions.add(new Concession(type, 0, quantity));
     }
 
     /**
