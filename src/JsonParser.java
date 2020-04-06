@@ -109,8 +109,7 @@ public class JsonParser {
 	 * @return Returns A Show child type, with some attributes set, and others null.
 	 */
 	private static <T extends Show> T loadBasicsFromFile(JSONObject json, Class<T> newShow) {
-
-		T show = null;
+				T show = null;
 		try {
 			show = newShow.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
@@ -233,6 +232,10 @@ public class JsonParser {
 
 			for (Object jsonObject : showArray) {
 				JSONObject json = (JSONObject) jsonObject;
+				if(json == null){
+					continue;
+				}
+				
 				T newShow = (T) loadBasicsFromFile(json, show.getClass());
 
 				if(nameBlankOrNull(newShow.getName()))
