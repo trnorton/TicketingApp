@@ -43,6 +43,6 @@ public class Event {
 	}
 
 	public String toString() {
-		return show.getName() + date + time;
+		return show.getName() + " - " + date + " - " + time;
 	}
 }

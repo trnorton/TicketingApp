@@ -80,6 +80,16 @@ public class Theater {
 		return false;
 	}
 	
+	public Seat getAvailableSeat() {
+		for (int i = 0; i < seats.length; i++) {
+			for (int j = 0; j < seats[i].length; j++) {
+				if(seats[i][j].checkIfTaken() == false)
+					return seats[i][j];
+			}
+		}
+		return null;
+	}
+	
 	public Seat getSeat(char row, int col) {
 		for (int i = 0; i < seats.length; i++) {
 			for (int j = 0; j < seats[i].length; j++) {
@@ -89,5 +99,9 @@ public class Theater {
 			}
 		}
 		return null;
+	}
+	
+	public String toString() {
+		return "" + name;
 	}
 }

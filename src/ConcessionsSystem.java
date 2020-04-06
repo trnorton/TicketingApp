@@ -6,6 +6,8 @@ public class ConcessionsSystem {
 
 	public ConcessionsSystem() {
 		concessions = new ArrayList<Concession>();
+		
+		loadSampleData();
 	}
 
 	public void addConcessions(Concession c) {
@@ -24,5 +26,11 @@ public class ConcessionsSystem {
 	
 	public ArrayList<Concession> getConcessions(){
 		return concessions;
+	}
+	
+	private void loadSampleData() {
+		concessions.add(new Concession("Popcorn", 4.0, 50));
+		concessions.add(new Concession("Soda", 3.0, 50));
+		concessions.add(new Concession("Twizzlers", 1.5, 50));
 	}
 }
