@@ -379,7 +379,7 @@ public class TicketingAppUI {
 
 			Movie movieFound = user.searchForMovie(movie);
 			if(movieFound == null){
-				System.out.println("Concert not found");
+				System.out.println("Movie not found");
 				return;
 			} else {
 				System.out.println("\nHere's what we found:\n" + movieFound.getName());
@@ -544,7 +544,7 @@ public class TicketingAppUI {
 
 			Play playFound = user.searchForPlay(play);
 			if(playFound == null){
-				System.out.println("Concert not found");
+				System.out.println("Play not found");
 				return;
 			} else {
 				System.out.println("\nHere's what we found:\n" + playFound.getName());
