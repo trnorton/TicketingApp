@@ -379,6 +379,19 @@ public class User {
     		System.out.println(t);
     	}
     }
+    
+    public void requestRefund(String event, int numTicketsRefunded) {
+    	
+    	int ticketCount = 0;
+    	for(Ticket ticket: tickets) {
+    		if(ticket.getEvent().getShow().getName().equals(event)) {
+    			tickets.remove(ticket);
+    			ticketCount++;
+    			if(ticketCount == numTicketsRefunded)
+    				break;
+    		}
+    	}
+    }
 
     /**
      * Method which adds a show to the user's watchlist
@@ -415,29 +428,12 @@ public class User {
      * @param showName show to be removed
      */
     public void removeFromWatchlist(String showName) {
-        /*for(Show s : watchlist) {
-        	if(s.getName().equals(show))
-        		watchlist.remove(s);
-        }*/
-
 		watchlist.removeIf(show -> show.getName().equals(showName));
-    }
-
-    public void purchaseTickets(Event event, int NumTix) {
-
     }
 
     private void applyRewardsPoints() {
     	rewardsPoints++;
     }
-
-    public void purchaseTicketsDelayed(Event event, int numTix) {
-
-    }
-
-    /* public void displayTicket(Ticket lastPurchased) {
-
-    } */
 
     /**
      * Method which sets the user's purchase discount
@@ -455,11 +451,6 @@ public class User {
      */
     public double getUserDiscount() {
         return this.userDiscount;
-    }
-
-    // No idea what this does yet
-    public void requestRefund(String event, int numTix) {
-
     }
     
     public void receiveConcessions(String type, int quantity) {

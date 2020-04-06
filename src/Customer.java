@@ -10,7 +10,6 @@ public class Customer extends User {
 	}
 	
 	public String toString() {
-		return "";
-		//TODO return "\n\nName: " + name+"\nBirthday: " + birthday + "\nPhone Number: " + phoneNumber+"\nAddress: "+ address+ "\nEmail: "+this.email;
+		return "\n\nName: " + this.getName() +"\nBirthday: " + this.getBirthday() + "\nPhone Number: " + this.getPhoneNumber() +"\nAddress: "+ this.getAddress() + "\nEmail: "+this.getEmail();
 	}
 }
