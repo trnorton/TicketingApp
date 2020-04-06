@@ -898,7 +898,7 @@ public class TicketingAppUI {
 		while (true) {
 			System.out.println("Type 'Back' to go back to the main menu");
 			nextLine = scanner.nextLine();
-			if (nextLine.equals("Back")) {
+			if (nextLine.trim().toLowerCase().equals("back")) {
 				break;
 			} else {
 				System.out.println("Not a valid input");
