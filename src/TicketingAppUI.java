@@ -1368,11 +1368,6 @@ public class TicketingAppUI {
 	 * Allows an employee to issue a refund to users who requested a refund.
 	 */
 	private void refundTickets() {
-		Employee employeeUser = null;
-		if(!(user instanceof Employee)){
-			System.out.println("Only an employee level user can use this function");
-			return;
-		}
 
 		/*user.displayTicketsRefunded();
 		System.out.println("Type in the name of the customer to give a refund to");
@@ -1385,6 +1380,7 @@ public class TicketingAppUI {
 		System.out.println("Type in the name of the customer to give a refund to");
 		String customerName = scanner.nextLine();
 
+		Employee employeeUser = (Employee)user;
 		employeeUser.refundTickets(customerName);
 
 		System.out.println("Customer's refund has been processed");
