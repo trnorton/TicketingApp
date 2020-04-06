@@ -892,10 +892,21 @@ public class TicketingAppUI {
 	private void purchaseConcessions() {
 		System.out.println("\n********** Purchase Concessions **********");
 		main.displayConcessions();
+
 		System.out.println("Type in the concession you want");
-		String type = scanner.nextLine();
+		String type = "";
+		while(type.trim().equalsIgnoreCase("")){
+			System.out.println("Please enter a word");
+			type = scanner.nextLine();
+		}
+
 		System.out.println("Quantity of that concession you want");
-		int quantity = Integer.parseInt(scanner.nextLine());
+		int quantity = 0;
+		while(quantity == 0 || quantity < 0){
+			System.out.println("Please enter a number");
+			quantity = Integer.parseInt(scanner.nextLine());
+		}
+		
 		user.receiveConcessions(type, quantity);
 		System.out.println("A receipt has been made for you. Show this to an employee at the concession counter");
 	}
