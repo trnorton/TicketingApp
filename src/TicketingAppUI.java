@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 /**
  * TicketingAppUI.java - Represents the driver class for this app.
@@ -236,9 +235,6 @@ public class TicketingAppUI {
 			inputDiscount();
 			break;
 		case (11):
-			inputTicketPrices();
-			break;
-		case (12):
 			refundTickets();
 			break;
 		}
@@ -379,17 +375,6 @@ public class TicketingAppUI {
 		System.out.println("\n********** Search for Movie **********");
 
 		String movie = "";
-		/*while(true) {
-			movie = scanner.nextLine();
-			try {
-				System.out.println("\nHere's what we found:");
-				user.searchForMovie(movie);
-				break;
-			} catch(Exception e) {
-				System.out.println("Movie not found. Type in another movie");
-				continue;
-			}
-		}*/
 
 		while(true){
 			do {
@@ -1013,21 +998,6 @@ public class TicketingAppUI {
 		System.out.println("\n********** Search for Venue **********");
 
 		String venue = "";
-		/*while(true) {
-			System.out.println("Type in the venue you want to search for");
-			venue = scanner.nextLine();
-			if(venue.trim().equalsIgnoreCase(""))
-				continue;
-
-			try {
-				System.out.println("\nHere's what we found:");
-				user.searchForVenue(venue, main.getVenues());
-				break;
-			} catch(Exception e) {
-				System.out.println("Venue not found. Type in another venue");
-				continue;
-			}
-		}*/
 
 		while(true){
 			do {
@@ -1247,7 +1217,7 @@ public class TicketingAppUI {
 		employeeUser = (Employee)user;
 
 		System.out.println("\nType in the percent discount");
-		double discount = Double.parseDouble(scanner.nextLine());//change to double
+		double discount = Double.parseDouble(scanner.nextLine());
 
 		System.out.println("What is the name of the user you wish give this discount?");
 		String name = scanner.nextLine();
@@ -1268,23 +1238,6 @@ public class TicketingAppUI {
 
 
 		System.out.println("Discount has been applied");
-	}
-
-	/**
-	 * Allows an employee to change the actual price of a ticket.
-	 */
-	private void inputTicketPrices() {
-
-		/*System.out.println("\nType in the price of an adult ticket");
-		double adultTicketPrice = Double.parseDouble(scanner.nextLine());
-
-		System.out.println("Type in the price of a child ticket");
-		double childPriceMultiplier = Double.parseDouble(scanner.nextLine());
-
-		// TODO 
-		user.inputTicketPrices(adultTicketPrice, childPriceMultiplier);
-
-		System.out.println("Ticket prices have been set");*/
 	}
 
 	/**
