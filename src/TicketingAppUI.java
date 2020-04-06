@@ -410,7 +410,7 @@ public class TicketingAppUI {
 				displayMovieInfo(movie);
 				break;
 			case (1):
-				bookMovieTickets(movie);
+				bookShowTickets(movie);
 				break;
 			case (2):
 				rateShow(movie);
@@ -432,6 +432,95 @@ public class TicketingAppUI {
 	private void displayMovieInfo(String movie) {
 		System.out.println("Movie Info:");
 		user.lookAtBasicEventInfo(movie);
+	}
+
+	private void bookShowTickets(String showName){
+		//this block finds the name of the method that called bookshowtickets to find out whether the show is a movie, which is treated differently below than a play or concert
+		final int METHOD_THAT_CALLED_BOOKSHOWTICKETS = 2;
+		boolean isMovie = false;
+		StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+		if(stackTraceElements[METHOD_THAT_CALLED_BOOKSHOWTICKETS].getMethodName().equals("findMovie"))
+			isMovie = true;
+
+		System.out.println("Type in the date you want to see this show (MM/DD/YYYY)");
+		String date = scanner.nextLine();
+		if(date.trim().equalsIgnoreCase("")){
+			System.out.println("Invalid date given");
+			return;
+		}
+
+		System.out.println("Type in the time you want to see this show (HH:MM[am/pm])");
+		String time = scanner.nextLine();
+		if(time.trim().equalsIgnoreCase("")) {
+			System.out.println("Invalid time given");
+			return;
+		}
+
+		System.out.println("Type in the number of adult tickets you want to purchase");
+		int numAdultTickets = 0;
+		try {
+			numAdultTickets = Integer.parseInt(scanner.nextLine());
+		} catch (Exception e) {
+			System.out.println("Invalid number of adult tickets");
+			return;
+		}
+		if(numAdultTickets < 0) return;
+
+		System.out.println("Type in the number of child tickets you want to purchase");
+		int numChildTickets = 0;
+		try {
+			numChildTickets = Integer.parseInt(scanner.nextLine());
+		} catch (Exception e){
+			System.out.println("Invalid number of child tickets");
+			return;
+		}
+		if(numChildTickets < 0) return;
+
+		if(isMovie) {
+			if (numAdultTickets + numChildTickets == 1) {
+				main.displayAvailableTheater(showName, date, time);
+
+				System.out.println("Where would you like to sit?");
+				System.out.println("Type in character corresponding to the row you want to sit on");
+				char row = scanner.nextLine().charAt(0);
+				if (row == ' ') {
+					System.out.println("Invalid row given");
+					return;
+				}
+
+				int col = 0;
+				System.out.println("Type in number corresponding to the seat you want to sit on at that row");
+				try {
+					col = Integer.parseInt(scanner.nextLine());
+				} catch (Exception e) {
+					System.out.println("Invalid number for seat number");
+					return;
+				}
+
+				user.bookTickets(showName, date, time, numAdultTickets, numChildTickets, row, col);
+			} else {
+				user.bookTickets(showName, date, time, numAdultTickets, numChildTickets);
+			}
+		} else {
+			user.bookTickets(showName, date, time, numAdultTickets, numChildTickets);
+		}
+
+		System.out.println("Tickets have been booked!");
+
+		System.out.println("Would you like a receipt? (Y/N)");
+		while (true) {
+			nextLine = scanner.nextLine();
+			if (nextLine.trim().equalsIgnoreCase("Y")) {
+				user.createReceipt();
+				System.out.println("Your receipt has been created");
+				break;
+			} else if (nextLine.trim().equalsIgnoreCase("N")) {
+				break;
+			} else {
+				System.out.println("Invalid input, only Y/N");
+			}
+		}
+
 	}
 
 	/**
@@ -476,7 +565,7 @@ public class TicketingAppUI {
 
 		if(numAdultTickets+numChildTickets == 1) {
 		main.displayAvailableTheater(movie, date, time);
-		
+
 		System.out.println("Where would you like to sit?");
 		System.out.println("Type in character corresponding to the row you want to sit on");
 		char row = scanner.nextLine().charAt(0);
@@ -493,7 +582,7 @@ public class TicketingAppUI {
 			System.out.println("Invalid number of seat number");
 			return;
 		}
-		
+
 		user.bookTickets(movie, date, time, numAdultTickets, numChildTickets, row, col);
 		}
 		else {
@@ -641,7 +730,7 @@ public class TicketingAppUI {
 				displayPlayInfo(play);
 				break;
 			case (1):
-				bookPlayOrConcertTickets(play);
+				bookShowTickets(play);
 				break;
 			case (2):
 				rateShow(play);
@@ -791,7 +880,7 @@ public class TicketingAppUI {
 				displayConcertInfo(concert);
 				break;
 			case (1):
-				bookPlayOrConcertTickets(concert);
+				bookShowTickets(concert);
 				break;
 			case (2):
 				rateShow(concert);
