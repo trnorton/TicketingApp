@@ -86,37 +86,67 @@ public class User {
 
     }*/
     
-    public void searchForMovie(String movie) {
+    public Movie searchForMovie(String movieName) {
+		if(movieName == null){
+			System.out.println("Null movie name given");
+			return null;
+		}
+
     	ArrayList<Movie> movies = JsonParser.loadMovies();
-        for(Movie m : movies) {
-        	if(movie.equals(m.getName())) {
-        		System.out.println(m.getName());
-        		return;
+		if(movies == null || movies.isEmpty()){
+			System.out.println("List of movies is empty or doesn't exist");
+			return null;
+		}
+
+        for(Movie movie : movies) {
+        	if(movieName.equals(movie.getName())) {
+        		return movie;
         	}
         }
-        throw new NullPointerException();
+
+        return null;
     }
     
-    public void searchForPlay(String play) {
+    public Play searchForPlay(String playName) {
+		if(playName == null){
+			System.out.println("Null play name given");
+			return null;
+		}
+
     	ArrayList<Play> plays = JsonParser.loadPlays();
-        for(Play p : plays) {
-        	if(play.equals(p.getName())) {
-        		System.out.println(p.getName());
-        		return;
+		if(plays == null || plays.isEmpty()){
+			System.out.println("List of plays is empty or doesn't exist");
+			return null;
+		}
+
+        for(Play play : plays) {
+        	if(playName.equals(play.getName())) {
+        		return play;
         	}
         }
-        throw new NullPointerException();
+
+        return null;
     }
     
-    public void searchForConcert(String concert) {
+    public Concert searchForConcert(String concertName) {
+    	if(concertName == null){
+			System.out.println("Null concert name given");
+			return null;
+		}
+
     	ArrayList<Concert> concerts = JsonParser.loadConcerts();
-        for(Concert c : concerts) {
-        	if(concert.equals(c.getName())) {
-        		System.out.println(c.getName());
-        		return;
+    	if(concerts == null || concerts.isEmpty()){
+			System.out.println("List of concerts is empty or doesn't exist");
+			return null;
+		}
+
+        for(Concert concert : concerts) {
+        	if(concertName.equals(concert.getName())) {
+        		return concert;
         	}
         }
-        throw new NullPointerException();
+
+        return null;
     }
     
     public Venue searchForVenue(String venue, ArrayList<Venue> venueList) {

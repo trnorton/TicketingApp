@@ -357,10 +357,9 @@ public class TicketingAppUI {
 	 */
 	private void findMovie() {
 		System.out.println("\n********** Search for Movie **********");
-		System.out.println("Type in the movie you want to search for");
-		
+
 		String movie = "";
-		while(true) {
+		/*while(true) {
 			movie = scanner.nextLine();
 			try {
 				System.out.println("\nHere's what we found:");
@@ -369,6 +368,22 @@ public class TicketingAppUI {
 			} catch(Exception e) {
 				System.out.println("Movie not found. Type in another movie");
 				continue;
+			}
+		}*/
+
+		while(true){
+			do {
+				System.out.println("Type in the movie you want to search for");
+				movie = scanner.nextLine();
+			} while(movie.trim().equalsIgnoreCase(""));
+
+			Movie movieFound = user.searchForMovie(movie);
+			if(movieFound == null){
+				System.out.println("Concert not found");
+				return;
+			} else {
+				System.out.println("\nHere's what we found:\n" + movieFound.getName());
+				break;
 			}
 		}
 
@@ -507,10 +522,9 @@ public class TicketingAppUI {
 	 */
 	private void findPlay() {
 		System.out.println("\n********** Search for Play **********");
-		System.out.println("Type in the play you want to search for");
-		
+
 		String play = "";
-		while(true) {
+		/*while(true) {
 			play = scanner.nextLine();
 			try {
 				System.out.println("\nHere's what we found:");
@@ -519,6 +533,22 @@ public class TicketingAppUI {
 			} catch(Exception e) {
 				System.out.println("Play not found. Type in another play");
 				continue;
+			}
+		}*/
+
+		while(true){
+			do {
+				System.out.println("Type in the play you want to search for");
+				play = scanner.nextLine();
+			} while(play.trim().equalsIgnoreCase(""));
+
+			Play playFound = user.searchForPlay(play);
+			if(playFound == null){
+				System.out.println("Concert not found");
+				return;
+			} else {
+				System.out.println("\nHere's what we found:\n" + playFound.getName());
+				break;
 			}
 		}
 
@@ -641,10 +671,9 @@ public class TicketingAppUI {
 	 */
 	private void findConcert() {
 		System.out.println("\n********** Search for Concert **********");
-		System.out.println("Type in the concert you want to search for");
-		
+
 		String concert = "";
-		while(true) {
+		/*while(true) {
 			concert = scanner.nextLine();
 			try {
 				System.out.println("\nHere's what we found:");
@@ -653,6 +682,22 @@ public class TicketingAppUI {
 			} catch(Exception e) {
 				System.out.println("Concert not found. Type in another concert");
 				continue;
+			}
+		}*/
+
+		while(true){
+			do {
+				System.out.println("Type in the concert you want to search for");
+				concert = scanner.nextLine();
+			} while(concert.trim().equalsIgnoreCase(""));
+
+			Concert concertFound = user.searchForConcert(concert);
+			if(concertFound == null){
+				System.out.println("Concert not found");
+				return;
+			} else {
+				System.out.println("\nHere's what we found:\n" + concertFound.getName());
+				break;
 			}
 		}
 
