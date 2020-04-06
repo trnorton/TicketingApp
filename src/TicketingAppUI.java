@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 /**
  * TicketingAppUI.java - Represents the driver class for this app.
@@ -436,25 +437,57 @@ public class TicketingAppUI {
 	private void bookMovieTickets(String movie) {
 		System.out.println("Type in the date you want to see this movie (MM/DD/YYYY)");
 		String date = scanner.nextLine();
+		if(date.equalsIgnoreCase("")){
+			System.out.println("Invalid date given");
+			return;
+		}
 
 		System.out.println("Type in the time you want to see this movie");
 		String time = scanner.nextLine();
+		if(time.equalsIgnoreCase("")) {
+			System.out.println("Invalid time given");
+			return;
+		}
 
 		System.out.println("Type in the number of adult tickets you want to purchase");
-		int numAdultTickets = Integer.parseInt(scanner.nextLine());
+		int numAdultTickets = 0;
+		try {
+			 numAdultTickets = Integer.parseInt(scanner.nextLine());
+		} catch (Exception e) {
+			System.out.println("Invalid number of adult tickets");
+			return;
+		}
+		if(numAdultTickets < 0) return;
 
 		System.out.println("Type in the number of child tickets you want to purchase");
-		int numChildTickets = Integer.parseInt(scanner.nextLine());
-		
+		int numChildTickets = 0;
+		try {
+			numChildTickets = Integer.parseInt(scanner.nextLine());
+		} catch (Exception e){
+			System.out.println("Invalid number of child tickets");
+			return;
+		}
+		if(numChildTickets < 0) return;
+
 		if(numAdultTickets+numChildTickets == 1) {
 		main.displayAvailableTheater();
 		
 		System.out.println("Where would you like to sit?");
 		System.out.println("Type in character corresponding to the row you want to sit on");
 		char row = scanner.nextLine().charAt(0);
-		
+		if(row == ' ') {
+			System.out.println("Invalid row given");
+			return;
+		}
+
+		int col = 0;
 		System.out.println("Type in number corresponding to the seat you want to sit on at that row");
-		int col = Integer.parseInt(scanner.nextLine());
+		try {
+			col = Integer.parseInt(scanner.nextLine());
+		} catch (Exception e) {
+			System.out.println("Invalid number of seat number");
+			return;
+		}
 		
 		//TODO use those input to update the status of the seat, possibly in bookTickets method
 		//TODO seat parameter
@@ -469,10 +502,10 @@ public class TicketingAppUI {
 		System.out.println("Would you like a receipt? (Y/N)");
 		while (true) {
 			nextLine = scanner.nextLine();
-			if (nextLine.equals("Y")) {
+			if (nextLine.trim().equalsIgnoreCase("Y")) {
 				user.createReceipt();
 				System.out.println("Your receipt has been created");
-			} else if (nextLine.equals("N")) {
+			} else if (nextLine.trim().equalsIgnoreCase("N")) {
 				break;
 			} else {
 				System.out.println("Invalid input, only Y/N");
@@ -817,10 +850,14 @@ public class TicketingAppUI {
 
 	/**
 	 * Adds an event to the user's watchlist
-	 * @param event - The event (movie, play, or concert) inputted by the user.
+	 * @param eventName - The event (movie, play, or concert) inputted by the user.
 	 */
-	private void addToWatchlist(String event) {
-		user.addToWatchlist(event);
+	private void addToWatchlist(String eventName) {
+		if(eventName == null || eventName.trim().equalsIgnoreCase("")){
+			System.out.println("Event name is blank or null");
+		}
+
+		user.addToWatchlist(eventName);
 		System.out.println("Added to watchlist");
 	}
 
