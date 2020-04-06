@@ -330,18 +330,38 @@ public class TicketingAppUI {
 		System.out.println("\n********** Create New Account **********");
 		System.out.println("Type in your name");
 		String name = scanner.nextLine();
+		if(name.trim().equalsIgnoreCase("")){
+			System.out.println("Bad name given");
+			return;
+		}
 
 		System.out.println("Type in your birthday (MM/DD/YYYY)");
 		String birthday = scanner.nextLine();
+		if(name.trim().equalsIgnoreCase("")){
+			System.out.println("Bad BDAY given");
+			return;
+		}
 
 		System.out.println("Type in your phone number");
 		String phoneNum = scanner.nextLine();
+		if(phoneNum.trim().equalsIgnoreCase("")){
+			System.out.println("Bad number given");
+			return;
+		}
 
 		System.out.println("Type in your home address");
 		String address = scanner.nextLine();
+		if(address.trim().equalsIgnoreCase("")){
+			System.out.println("Bad address given");
+			return;
+		}
 
 		System.out.println("Type in your email");
 		String email = scanner.nextLine();
+		if(email.trim().equalsIgnoreCase("")){
+			System.out.println("Bad email given");
+			return;
+		}
 
 		user = new Customer(name, birthday, phoneNum, address, email);
 		main.addUserToDatabase(user);
@@ -667,7 +687,7 @@ public class TicketingAppUI {
 	 * @param play - The play searched by the user.
 	 */
 	private void bookPlayTickets(String play) {
-		System.out.println("Type in the date you want to see this play (MM/DD/YYYY");
+		System.out.println("Type in the date you want to see this play (MM/DD/YYYY)");
 		String date = scanner.nextLine();
 
 		System.out.println("Type in the time you want to see this play (HH:MM[am/pm])");
