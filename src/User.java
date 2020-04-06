@@ -64,9 +64,6 @@ public class User {
         int year = Integer.parseInt(split[2]);
         int month = Integer.parseInt(split[0]);
         int day = Integer.parseInt(split[1]);
-        /*int year = birthday % DIGIT4_MOD;
-        int month = (birthday / DIGIT4_MOD) % DIGIT2_MOD;
-        int day = ((birthday / DIGIT4_MOD) / DIGIT2_MOD) % DIGIT2_MOD;*/
 
         int age = date.getYear() - year;
 
@@ -76,15 +73,6 @@ public class User {
 
         return age;
     }
-    
-    /*public void createAccount(String name, String birthday, String phoneNum, String address, String email, ArrayList<User> usersList) {
-    	
-    }*/
-
-
-   /* public void searchForEvent(String event) {
-
-    }*/
     
     public Movie searchForMovie(String movieName) {
 		if(movieName == null){

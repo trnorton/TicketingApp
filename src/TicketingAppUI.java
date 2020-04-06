@@ -348,7 +348,6 @@ public class TicketingAppUI {
 		mainMenuOptions.clear();
 		fillBasicMainMenuOptions();
 		fillRemainingMenuOptions();
-		//user.createAccount(name, birthday, phoneNum, address, email, main.getUsers());// ----- (turns a guest into a Customer)
 
 		System.out.println("Your account has been created");
 	}
