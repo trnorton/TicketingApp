@@ -30,7 +30,7 @@ public class Employee extends User {
 	 * @param time The time of the event in 12hr h:m format
 	 * @param show The show type to add
 	 */
-	public void inputEvent(String venueName, ArrayList<Venue> venuesToSearch, String date, String time, Show show){
+	public <T extends Show> void inputEvent(String venueName, ArrayList<Venue> venuesToSearch, String date, String time, T show){
 		//find venue mainsystem
 		Venue venueToAddEventTo = null;
 		for(Venue venue : venuesToSearch)
@@ -41,6 +41,23 @@ public class Employee extends User {
 
 		if(venueToAddEventTo == null){
 			System.out.println("No Venue matching that name...Event not added");
+		}
+
+		ArrayList<T> shows = null;
+		if(show instanceof Movie)
+			shows = (ArrayList<T>)JsonParser.loadMovies();
+		else if(show instanceof Play)
+			shows = (ArrayList<T>)JsonParser.loadPlays();
+		else if(show instanceof Concert)
+			shows = (ArrayList<T>)JsonParser.loadConcerts();
+		else {
+			System.out.println("Uh oh");
+			return;
+		}
+
+		if(shows != null){
+			shows.add(show);
+			JsonParser.saveData(shows);
 		}
 
 		//add new show to new event in found venue
