@@ -435,17 +435,16 @@ public class TicketingAppUI {
 	 */
 	private void bookMovieTickets(String movie) {
 
-
 		System.out.println("Type in the date you want to see this movie (MM/DD/YYYY)");
 		String date = scanner.nextLine();
-		if(date.equalsIgnoreCase("")){
+		if(date.trim().equalsIgnoreCase("")){
 			System.out.println("Invalid date given");
 			return;
 		}
 
 		System.out.println("Type in the time you want to see this movie (HH:MM[am/pm])");
 		String time = scanner.nextLine();
-		if(time.equalsIgnoreCase("")) {
+		if(time.trim().equalsIgnoreCase("")) {
 			System.out.println("Invalid time given");
 			return;
 		}
@@ -506,6 +505,7 @@ public class TicketingAppUI {
 			if (nextLine.trim().equalsIgnoreCase("Y")) {
 				user.createReceipt();
 				System.out.println("Your receipt has been created");
+				break;
 			} else if (nextLine.trim().equalsIgnoreCase("N")) {
 				break;
 			} else {
@@ -813,16 +813,16 @@ public class TicketingAppUI {
 	}
 
 	private void bookPlayConcertTickets(String showName){
-		System.out.println("Type in the date you want to see this show (MM/DD/YYYY");
+		System.out.println("Type in the date you want to see this show (MM/DD/YYYY)");
 		String date = scanner.nextLine();
-		if(date.equalsIgnoreCase("")){
+		if(date.trim().equalsIgnoreCase("")){
 			System.out.println("Invalid date given");
 			return;
 		}
 
 		System.out.println("Type in the time you want to see this show");
 		String time = scanner.nextLine();
-		if(time.equalsIgnoreCase("")) {
+		if(time.trim().equalsIgnoreCase("")) {
 			System.out.println("Invalid time given");
 			return;
 		}
@@ -857,8 +857,9 @@ public class TicketingAppUI {
 			if (nextLine.equals("Y")) {
 				user.createReceipt();
 				System.out.println("Your receipt has been created");
+				break;
 			} else if (nextLine.equals("N")) {
-				continue;
+				break;
 			} else {
 				System.out.println("Invalid input, only Y/N");
 			}
