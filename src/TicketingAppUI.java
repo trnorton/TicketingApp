@@ -819,11 +819,14 @@ public class TicketingAppUI {
 	 */
 	private void findVenue() {
 		System.out.println("\n********** Search for Venue **********");
-		System.out.println("Type in the venue you want to search for");
-		
+
 		String venue = "";
-		while(true) {
+		/*while(true) {
+			System.out.println("Type in the venue you want to search for");
 			venue = scanner.nextLine();
+			if(venue.trim().equalsIgnoreCase(""))
+				continue;
+
 			try {
 				System.out.println("\nHere's what we found:");
 				user.searchForVenue(venue, main.getVenues());
@@ -832,7 +835,24 @@ public class TicketingAppUI {
 				System.out.println("Venue not found. Type in another venue");
 				continue;
 			}
+		}*/
+
+		while(true){
+			do {
+				System.out.println("Type in the venue you want to search for");
+				venue = scanner.nextLine();
+			} while(venue.trim().equalsIgnoreCase(""));
+
+			Venue venueFound = user.searchForVenue(venue, main.getVenues());
+			if(venueFound == null){
+				System.out.println("Venue not found");
+				return;
+			} else {
+				System.out.println("\nHere's what we found:\n" + venueFound.getName());
+				break;
+			}
 		}
+
 
 		while (true) {
 			displaySubMenuOptions(venueSearchMenuOptions);
@@ -861,6 +881,7 @@ public class TicketingAppUI {
 	private void viewPurchasedTickets() {
 		System.out.println("\n********** Your Tickets **********");
 		user.displayTickets();
+
 		while (true) {
 			System.out.println("Type 'Back' to go back to the main menu");
 			nextLine = scanner.nextLine();

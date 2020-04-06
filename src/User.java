@@ -119,13 +119,24 @@ public class User {
         throw new NullPointerException();
     }
     
-    public void searchForVenue(String venue, ArrayList<Venue> venueList) {
+    public Venue searchForVenue(String venue, ArrayList<Venue> venueList) {
+    	if(venue == null){
+    		System.out.println("Null venue name given");
+    		return null;
+		}
+
+		if(venueList == null || venueList.isEmpty()){
+			System.out.println("List of venues is empty or doesn't exist");
+			return null;
+		}
+
     	for(Venue v : venueList) {
     		if(venue.equals(v.getName())) {
-    			System.out.println(v.getName());
-    			return;
+    			return v;
     		}
     	}
+
+    	return null;
     }
     
 
@@ -288,6 +299,12 @@ public class User {
     }
     
     public void displayTickets() {
+
+    	if(tickets == null || tickets.isEmpty()){
+    		System.out.println("\nNo tickets to display\n");
+    		return;
+		}
+
     	for (Ticket t : tickets) {
     		System.out.println(t);
     	}
