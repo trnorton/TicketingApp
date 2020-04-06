@@ -1223,6 +1223,8 @@ public class TicketingAppUI {
 
 		ArrayList<Venue> allVenues = main.getVenues();
 		System.out.println("And at which venue is this event taking place?");
+		allVenues.forEach(System.out::println);
+		System.out.println("Or write below name of new venue");
 
 		String venueName = scanner.nextLine();
 		Venue toAdd = null;
