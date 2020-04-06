@@ -26,7 +26,7 @@ public class Employee extends User {
 	 * Allows an employee to create an event for a venue
 	 * @param venueName The name of the venue in which to place the event
 	 * @param venuesToSearch  The list of venues from which to find the matching venue
-	 * @param date The date of the event in ddmmyy?
+	 * @param date The date of the event in MM/DD/YYYY?
 	 * @param time The time of the event in 12hr h:m format
 	 * @param show The show type to add
 	 */
