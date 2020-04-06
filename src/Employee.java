@@ -71,10 +71,6 @@ public class Employee extends User {
 	}
 
 
-	/*public void inputTheaterInfo(String theater, String type, String show, String date, String time){
-
-	}*/
-
 	/**
 	 * Sets the discount of each of a user's tickets to a certain multiplier. End result price will be (price * multiplier) aka (price * (discount/100))
 	 * @param discount The percentage discount to give as a double
@@ -83,10 +79,6 @@ public class Employee extends User {
 	public void inputDiscount(double discount, User user){
 		user.getTickets().forEach((ticket) -> ticket.setDiscountMultiplier(discount/100));
 	}
-
-	/*public void inputTicketPrices(double adultPrice, double childPriceMultiplier, ){
-
-	}*/
 
 	/**
 	 * Allows employee to add a ticket into the list of tickets to refund

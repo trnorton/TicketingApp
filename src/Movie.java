@@ -80,11 +80,6 @@ public class Movie extends Show {
 	 * @param actor String name of actors
 	 */
 	public void addMajorActor(String actor) {
-		/*if (actor == null) {
-			System.out.println("Cannot add null actor...");
-			return;
-		}*/
-
 		if (majorActors.contains(actor)) {
 			System.out.println("Actor " + actor + " is already in list...will not add again");
 			return;
@@ -98,11 +93,6 @@ public class Movie extends Show {
 	 * @param actor String name of actor to remove
 	 */
 	public void removeMajorActor(String actor) {
-		/*if (actor == null) {
-			System.out.println("Can't remove null actor...");
-			return;
-		}*/
-
 		if (!actor.contains(actor)) {
 			System.out.println("Actor " + actor + " not in list...not removed");
 			return;
@@ -125,11 +115,6 @@ public class Movie extends Show {
 	 * @param majorActors String arraylist of actor's names
 	 */
 	public void setMajorActors(ArrayList<String> majorActors) {
-		/*if (majorActors == null) {
-			System.out.println(this + " can't set majorActors bc it is null");
-			return;
-		}*/
-
 		this.majorActors = majorActors;
 	}
 
