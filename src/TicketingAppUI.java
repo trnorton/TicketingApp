@@ -1194,7 +1194,7 @@ public class TicketingAppUI {
 			ArrayList<String> actors = new ArrayList<String>();
 			while(true) {
 				String actor = scanner.nextLine();
-				if(actor.equals("Done")) break;
+				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
 			show = new Movie(showName, ageRating, genre, actors, producers);
@@ -1219,11 +1219,41 @@ public class TicketingAppUI {
 			}
 			show = new Concert(showName, ageRating, performers, producers);
 		}
-		
-		System.out.println("And at which venue is this event taking place?");
-		String venueName = scanner.nextLine();
+
+
 		ArrayList<Venue> allVenues = main.getVenues();
-		allVenues.add(new Venue("test", "test", 5));
+		System.out.println("And at which venue is this event taking place?");
+
+		String venueName = scanner.nextLine();
+		Venue toAdd = null;
+		for(Venue venue : allVenues)
+			if(venueName.trim().equalsIgnoreCase(venue.getName()))
+				toAdd = venue;
+
+		if(toAdd == null){
+			System.out.println("Adding new venue " + venueName);
+
+			System.out.println("What is the address?");
+			String address = scanner.nextLine();
+			if(address.trim().equalsIgnoreCase("")){
+				System.out.println("Bad address given");
+				return;
+			}
+
+			System.out.println("How many theaters does it have");
+			int theaters = Integer.parseInt(scanner.nextLine());
+			if(theaters <= 0){
+				System.out.println("Bad theater num given");
+				return;
+			}
+
+			toAdd = new Venue(venueName, address, theaters);
+			main.getVenues().add(toAdd);
+
+		}
+
+
+		//allVenues.add(new Venue(venueName, "test", 5));
 
 		employeeUser.inputEvent(venueName, allVenues, date, time, show);
 
