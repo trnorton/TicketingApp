@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.File;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -237,7 +238,9 @@ public class User {
     // FileWriter stuff
     public void createReceipt() {
         try {
-            PrintWriter receiptWriter = new PrintWriter(new FileOutputStream("receipt.txt"));
+            //PrintWriter receiptWriter = new PrintWriter(new FileOutputStream("receipt.txt"));
+        	PrintWriter receiptWriter = new PrintWriter(new File("receipt.txt"));
+        	//PrintWriter receiptWriter = new PrintWriter("receipt.txt");
             receiptWriter.println("Receipt:");
             double totalPrice = 0;
             for (Ticket t : tickets) {

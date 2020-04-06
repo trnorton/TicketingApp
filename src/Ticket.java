@@ -154,7 +154,7 @@ public class Ticket {
 	 * @return Ticket for "Harry Potter" at the Ford Theater\nSeat: 54A\nPaid: $12.00
 	 */
 	public String toString(){
-		return "Ticket for \'" + name + "\"" + " at the " + venue + " Theater" + "\n" + event + "\nSeat: " + seat  + "\nPaid: $" + price;
+		return "Ticket for \"" + name + "\"" + " at the " + venue + " Theater" + "\n" + event + "\nSeat: " + seat  + "\nPaid: $" + price;
 	}
 
 }
