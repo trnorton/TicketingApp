@@ -345,10 +345,12 @@ public class User {
      * @param show show to be removed
      */
     public void removeFromWatchlist(String show) {
-        for(Show s : watchlist) {
+        /*for(Show s : watchlist) {
         	if(s.getName().equals(show))
         		watchlist.remove(s);
-        }
+        }*/
+
+		watchlist.removeIf(s -> s.getName().equals(show));
     }
 
     public void purchaseTickets(Event event, int NumTix) {
