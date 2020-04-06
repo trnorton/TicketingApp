@@ -79,17 +79,21 @@ public class Venue {
 		return theaters;
 	}
 	
-	public boolean hasAvailableTheater() {
+	public boolean hasAvailableTheater(Event e) {
 		for(int i = 0; i<theaters.length;i++) {
-			if(theaters[i].hasAvailableSeat())
+			if(theaters[i].getEvent(e) == null)
+				continue;
+			if(theaters[i].hasAvailableSeat() && e.toString().equals(theaters[i].getEvent(e).toString()))
 				return true;
 		}
 		return false;
 	}
 	
-	public Theater getAvailableTheater() {
+	public Theater getAvailableTheater(Event e) {
 		for(int i = 0; i<theaters.length;i++) {
-			if(theaters[i].hasAvailableSeat())
+			if(theaters[i].getEvent(e) == null)
+				continue;
+			if(theaters[i].hasAvailableSeat() && e.toString().equals(theaters[i].getEvent(e).toString()))
 				return theaters[i];
 		}
 		return null;

@@ -126,7 +126,7 @@ public class Employee extends User {
 	 * @param workVenue A venue object to assign to the employee
 	 */
 	public void setWorkVenue(Venue workVenue) {
-		this.workVenue = workVenue;
+		this.workVenue = this.getVenue();
 	}
 
 	/**

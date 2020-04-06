@@ -441,7 +441,7 @@ public class TicketingAppUI {
 			return;
 		}
 
-		System.out.println("Type in the time you want to see this movie");
+		System.out.println("Type in the time you want to see this movie (HH:MM[am/pm])");
 		String time = scanner.nextLine();
 		if(time.equalsIgnoreCase("")) {
 			System.out.println("Invalid time given");
@@ -469,7 +469,7 @@ public class TicketingAppUI {
 		if(numChildTickets < 0) return;
 
 		if(numAdultTickets+numChildTickets == 1) {
-		main.displayAvailableTheater();
+		main.displayAvailableTheater(movie, date, time);
 		
 		System.out.println("Where would you like to sit?");
 		System.out.println("Type in character corresponding to the row you want to sit on");
@@ -634,7 +634,7 @@ public class TicketingAppUI {
 		System.out.println("Type in the date you want to see this play (MM/DD/YYYY");
 		String date = scanner.nextLine();
 
-		System.out.println("Type in the time you want to see this play");
+		System.out.println("Type in the time you want to see this play (HH:MM[am/pm])");
 		String time = scanner.nextLine();
 
 		System.out.println("Type in the number of adult tickets you want to purchase");
@@ -783,7 +783,7 @@ public class TicketingAppUI {
 		System.out.println("Type in the date you want to see this concert (MM/DD/YYYY");
 		String date = scanner.nextLine();
 
-		System.out.println("Type in the time you want to see this concert");
+		System.out.println("Type in the time you want to see this concert (HH:MM[am/pm])");
 		String time = scanner.nextLine();
 
 		System.out.println("Type in the number of adult tickets you want to purchase");
@@ -1060,10 +1060,10 @@ public class TicketingAppUI {
 		System.out.println("Type in the name of the show");
 		String showName = scanner.nextLine();
 
-		System.out.println("Type in the date this show is occurring");
+		System.out.println("Type in the date this show is occurring (MM/DD/YYYY)");
 		String date = scanner.nextLine();
 
-		System.out.println("Type in the time this show is occurring on this date");
+		System.out.println("Type in the time this show is occurring on this date (HH:MM[am/pm])");
 		String time = scanner.nextLine();
 
 		System.out.println("Type in the official rating of this show");
