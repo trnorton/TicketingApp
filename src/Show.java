@@ -71,6 +71,10 @@ public abstract class Show {
 		for (int r : custRatings) {
 			sum += r;
 		}
+
+		if(custRatings.size() == 0)
+			return 0;
+
 		return sum / custRatings.size();
 	}
 

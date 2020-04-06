@@ -235,7 +235,7 @@ public class JsonParser {
 				if(json == null){
 					continue;
 				}
-				
+
 				T newShow = (T) loadBasicsFromFile(json, show.getClass());
 
 				if(nameBlankOrNull(newShow.getName()))
@@ -328,6 +328,21 @@ public class JsonParser {
 		ArrayList<String> reviews = show.getReviews();
 		ArrayList<Integer> custRatings = show.getCustRatings();
 		ArrayList<String> producers = show.getProducers();
+
+		if(reviews == null){
+			reviews = new ArrayList<>();
+//			reviews.add("");
+		}
+
+		if(custRatings == null){
+			custRatings = new ArrayList<>();
+//			custRatings.add(0);
+		}
+
+		if(producers == null){
+			producers = new ArrayList<>();
+//			producers.add("");
+		}
 
 		try {
 			JSONArray reviewsArray = new JSONArray();
