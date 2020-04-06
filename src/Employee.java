@@ -41,6 +41,7 @@ public class Employee extends User {
 
 		if(venueToAddEventTo == null){
 			System.out.println("No Venue matching that name...Event not added");
+			return;
 		}
 
 		ArrayList<T> shows = null;

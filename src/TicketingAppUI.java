@@ -1229,6 +1229,7 @@ public class TicketingAppUI {
 		System.out.println("And at which venue is this event taking place?");
 		String venueName = scanner.nextLine();
 		ArrayList<Venue> allVenues = main.getVenues();
+		allVenues.add(new Venue("test", "test", 5));
 
 		employeeUser.inputEvent(venueName, allVenues, date, time, show);
 
