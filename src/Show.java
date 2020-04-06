@@ -13,6 +13,7 @@ public abstract class Show {
 
 	private ArrayList<Integer> custRatings;
 	private ArrayList<String> producers;
+	
 	public String getName() {
 		return name;
 	}

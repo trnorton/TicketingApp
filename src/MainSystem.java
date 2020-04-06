@@ -17,18 +17,7 @@ public class MainSystem {
 		concess = new ConcessionsSystem();
 		online = true;
 		
-		venues.add(new Venue("Venue", "123 Movie St", 12));
-		
-		users.add(new Customer("Customer", "01/01/1980", "(803)123-4567", "123 Simple St", "customer@gmail.com"));
-		users.add(new Employee("Employee", "01/01/1980", "(803)123-7890", "123 Circle Dr", "employee@yahoo.com", venues.get(0)));
-		users.add(new Admin("Admin", "01/10/1980", "(803)456-7890", "456 Tree Rd", "admin@aol.com"));
-		for(int i = 0; i<users.size(); i++) {
-			users.get(i).setAccountID(i+1);
-		}
-	}
-	
-	// TODO, but might not need this
-	public void searchForEvent(String event) {
+		loadSampleData();
 		
 	}
 	
@@ -94,10 +83,10 @@ public class MainSystem {
 		 return venues;
 	 }
 	 
-	 public void displayAvailableTheater() {
+	 public void displayAvailableTheater(Event e) {
 			for(Venue v : venues) {
-				if(v.hasAvailableTheater()) {
-					v.getAvailableTheater().displaySeats();
+				if(v.hasAvailableTheater(e)) {
+					v.getAvailableTheater(e).displaySeats();
 				}
 			}
 		}
@@ -109,4 +98,75 @@ public class MainSystem {
 					users.get(i).setAccountID(i+1);
 			}
 	 }
+
+	public void displayAvailableTheater(String event, String date, String time) {
+		Show s = null;
+		ArrayList<Movie> movies = JsonParser.loadMovies();
+        for(Movie m : movies) {
+        	if(event.equals(m.getName())) {
+        		s = m;
+        		break;
+        	}
+        }
+        
+        ArrayList<Play> plays = JsonParser.loadPlays();
+        for(Play p : plays) {
+        	if(event.equals(p.getName())) {
+        		s = p;
+        		break;
+        	}
+        }
+        
+        ArrayList<Concert> concerts = JsonParser.loadConcerts();
+        for(Concert c : concerts) {
+        	if(event.equals(c.getName())) {
+        		s = c;
+        		break;
+        	}
+        }
+        Event e = new Event(s, date, time);
+		
+		for(Venue v : venues) {
+			if(v.getAvailableTheater(e).getEvent(e).getShow().getName().equals(event)) {
+				v.getAvailableTheater(e).displaySeats();
+				break;
+			}
+		}
+		
+	}
+	
+	private void loadSampleData() {
+		venues.add(new Venue("Venue", "123 Movie St", 12));
+		venues.add(new Venue("PlaysRUs", "123 Play St", 12));
+		for(int i = 0; i<venues.get(0).getTheaters().length;i++) {
+			if(i<5) {
+				ArrayList<Movie> movies = JsonParser.loadMovies();
+				Movie movie = null;
+				for(Movie m : movies) {
+					if(m.getName().equals("Frozen 2"))
+						movie = m;
+				}
+				Event e = new Event(movie, "04/10/2020", "12:00pm");
+				venues.get(0).getTheaters()[i].addEvent(e);
+			}
+			else {
+				ArrayList<Movie> movies = JsonParser.loadMovies();
+				Movie movie = null;
+				for(Movie m : movies) {
+					if(m.getName().equals("The Jungle Book"))
+						movie = m;
+				}
+				Event e = new Event(movie, "04/10/2020", "12:00pm");
+				venues.get(0).getTheaters()[i].addEvent(e);
+			}
+		}
+		
+		users.add(new Customer("Customer", "01/01/1980", "(803)123-4567", "123 Simple St", "customer@gmail.com"));
+		users.add(new Employee("Employee", "01/01/1980", "(803)123-7890", "123 Circle Dr", "employee@yahoo.com", venues.get(0)));
+		users.add(new Admin("Admin", "01/10/1980", "(803)456-7890", "456 Tree Rd", "admin@aol.com"));
+		for(int i = 0; i<users.size(); i++) {
+			users.get(i).setAccountID(i+1);
+		}
+		users.get(1).setVenue(venues.get(1));
+	}
 }

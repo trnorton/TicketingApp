@@ -3,14 +3,12 @@ public class Seat {
 
 	private char row;
 	private int column;
-	private String type;
 	private boolean isTaken;
 	private String seatStatus;
 
-	public Seat(char row, int column, String type) {
+	public Seat(char row, int column) {
 		this.row = row;
 		this.column = column;
-		this.type = type;
 		isTaken = false;
 		seatStatus = " ";
 	}
@@ -31,14 +29,6 @@ public class Seat {
 		this.column = column;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public boolean checkIfTaken() {
 		return isTaken;
 	}
@@ -56,6 +46,10 @@ public class Seat {
 	}
 
 	public String toString() {
+		return "" + row + column;
+	}
+	
+	public String displaySeat() {
 		return "[" + seatStatus + "]";
 	}
 }

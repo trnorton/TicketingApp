@@ -42,7 +42,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
-        // this.tickets = new ArrayList<Tickets>();
+        this.tickets = new ArrayList<Ticket>();
         this.watchlist = new ArrayList<Show>();
         this.concessions = new ArrayList<Concession>();
         this.userDiscount = MIN;
@@ -194,7 +194,7 @@ public class User {
     // Creating new tickets
     public void bookTickets(String event, String date, String time, int adultTickets, int childTickets, char seatRow, int seatCol) {
     	for(int i = 0; i<adultTickets+childTickets; i++) {
-    		Show s;
+    		Show s = null;
     		ArrayList<Movie> movies = JsonParser.loadMovies();
             for(Movie m : movies) {
             	if(event.equals(m.getName())) {
@@ -218,12 +218,20 @@ public class User {
             		break;
             	}
             }
-            //TODO Ticket t = new Ticket(this.name, 5.0, new Event(s, date, time), )
+            Event e = new Event(s, date, time);
+            Seat seat = new Seat('a', 1);
+            if(e.toString().equals(nearestVenue.getAvailableTheater(e).getEvent(e).toString())) {
+            	e = nearestVenue.getAvailableTheater(e).getEvent(e);
+            	seat = nearestVenue.getAvailableTheater(e).getSeat(seatRow, seatCol);
+            	seat.changeSeatAvailability();
+            }
+            Ticket t = new Ticket(this.name, 5.0, e, seat, nearestVenue);
+            tickets.add(t);
     	}
     }
     
     public void bookTickets(String event, String date, String time, int adultTickets, int childTickets) {
-
+    	
     }
 
     // FileWriter stuff
@@ -237,7 +245,9 @@ public class User {
                 totalPrice += t.getPrice();
             }
             for (Concession c : concessions) {
-                receiptWriter.println(c);
+                if(concessions.size() == 0)
+                	break;
+            	receiptWriter.println(c);
                 totalPrice += c.getPrice();
             }
             receiptWriter.println("Total price: $" + totalPrice);
@@ -245,7 +255,7 @@ public class User {
         }
         catch(Exception e) {
             System.out.println("Error: Receipt unable to print");
-        };
+        }
     }
 
     public void rateEvent(String event, int rating) {

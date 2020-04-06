@@ -12,10 +12,10 @@ public class Theater {
 		seats = new Seat[numRows][numColumns];
 		for (int i = 0; i < seats.length; i++) {
 			for (int j = 0; j < seats[i].length; j++) {
-				seats[i][j] = new Seat(alphabet[i], j + 1, "Regular");
-				// TODO handicap seats?
+				seats[i][j] = new Seat(alphabet[i], j + 1);
 			}
 		}
+		events = new ArrayList<Event>();
 	}
 
 	public char getName() {
@@ -27,16 +27,22 @@ public class Theater {
 	}
 
 	public void displaySeats() {
-		System.out.println("  ");
+		System.out.print("   ");
 		for(int i = 0; i<seats[0].length;i++)
-			System.out.print(" " + (i+1) + " ");
-		
+			if(i<8) {
+				System.out.print((i+1) + "  ");
+			}
+			else {
+				System.out.print((i+1) + " ");
+			}
+		System.out.println();
 		for (int i = 0; i < seats.length; i++) {
 			System.out.print(alphabet[i] + " ");
+			
 			for (int j = 0; j < seats[i].length; j++) {
 				if (seats[i][j].checkIfTaken() == true)
 					seats[i][j].setSeatStatus("X");
-				System.out.print(seats[i][j] + "");
+				System.out.print(seats[i][j].displaySeat() + "");
 			}
 			System.out.println();
 		}
@@ -56,6 +62,14 @@ public class Theater {
 		}
 	}
 	
+	public Event getEvent(Event event) {
+		for(Event e : events) {
+			if(e.toString().equals(event.toString()))
+				return e;
+		}
+		return null;
+	}
+	
 	public boolean hasAvailableSeat() {
 		for (int i = 0; i < seats.length; i++) {
 			for (int j = 0; j < seats[i].length; j++) {
@@ -64,5 +78,16 @@ public class Theater {
 			}
 		}
 		return false;
+	}
+	
+	public Seat getSeat(char row, int col) {
+		for (int i = 0; i < seats.length; i++) {
+			for (int j = 0; j < seats[i].length; j++) {
+				if(seats[i][j].getRow() == row && seats[i][j].getColumn() == col) {
+					return seats[i][j];
+				}
+			}
+		}
+		return null;
 	}
 }
