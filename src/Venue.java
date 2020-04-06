@@ -71,7 +71,12 @@ public class Venue {
 		for (int r : custRatings) {
 			sum += r;
 		}
+		try {
 		return sum / custRatings.size();
+		}
+		catch(Exception e) {
+			return 0;
+		}
 	}
 	
 	//TODO

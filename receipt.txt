@@ -1,0 +1,34 @@
+********** Receipt **********
+Ticket for "Guest" at the Name: Venue
+Address: 123 Movie St
+Overall Customer Rating: 0
+TheaterA
+Frozen 2 - 04/10/2020 - 12:00pm
+Seat: A1
+Paid: $5.00
+
+Ticket for "Guest" at the Name: Venue
+Address: 123 Movie St
+Overall Customer Rating: 0
+TheaterA
+Frozen 2 - 04/10/2020 - 12:00pm
+Seat: A2
+Paid: $5.00
+
+Ticket for "Guest" at the Name: Venue
+Address: 123 Movie St
+Overall Customer Rating: 0
+TheaterA
+Frozen 2 - 04/10/2020 - 12:00pm
+Seat: A3
+Paid: $5.00
+
+Ticket for "Guest" at the Name: Venue
+Address: 123 Movie St
+Overall Customer Rating: 0
+TheaterA
+Frozen 2 - 04/10/2020 - 12:00pm
+Seat: A4
+Paid: $5.00
+
+Total price: $20.0

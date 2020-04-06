@@ -509,8 +509,6 @@ public class TicketingAppUI {
 			return;
 		}
 		
-		//TODO use those input to update the status of the seat, possibly in bookTickets method
-		//TODO seat parameter
 		user.bookTickets(movie, date, time, numAdultTickets, numChildTickets, row, col);
 		}
 		else {
@@ -1132,7 +1130,7 @@ public class TicketingAppUI {
 		}
 
 		user.receiveConcessions(type, quantity);
-		System.out.println("A receipt has been made for you. Show this to an employee at the concession counter");
+		System.out.println("Your concessions have been added to your receipt. \nPrint your receipt and show this to an employee at the concession counter");
 	}
 
 	/**

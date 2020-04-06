@@ -220,28 +220,67 @@ public class User {
             	}
             }
             Event event = new Event(show, date, time);
+            Theater theater = new Theater('A', 25, 30);
             Seat seat = new Seat('a', 1);
             if(event.toString().equals(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
-            	event = nearestVenue.getAvailableTheater(event).getEvent(event);
-            	seat = nearestVenue.getAvailableTheater(event).getSeat(seatRow, seatCol);
+            	theater = nearestVenue.getAvailableTheater(event);
+            	event = theater.getEvent(event);
+            	seat = theater.getSeat(seatRow, seatCol);
             	seat.changeSeatAvailability();
             }
-            Ticket ticket = new Ticket(this.name, 5.0, event, seat, nearestVenue);
+            Ticket ticket = new Ticket(this.name, 5.00, event, seat, theater, nearestVenue);
             tickets.add(ticket);
+            applyRewardsPoints();
     	}
     }
     
-    public void bookTickets(String event, String date, String time, int adultTickets, int childTickets) {
-    	
+    public void bookTickets(String eventName, String date, String time, int adultTickets, int childTickets) {
+    	for(int i = 0; i<adultTickets+childTickets; i++) {
+    		Show show = null;
+    		ArrayList<Movie> movies = JsonParser.loadMovies();
+            for(Movie m : movies) {
+            	if(eventName.equals(m.getName())) {
+            		show = m;
+            		break;
+            	}
+            }
+            
+            ArrayList<Play> plays = JsonParser.loadPlays();
+            for(Play play : plays) {
+            	if(eventName.equals(play.getName())) {
+            		show = play;
+            		break;
+            	}
+            }
+            
+            ArrayList<Concert> concerts = JsonParser.loadConcerts();
+            for(Concert concert : concerts) {
+            	if(eventName.equals(concert.getName())) {
+            		show = concert;
+            		break;
+            	}
+            }
+            Event event = new Event(show, date, time);
+            Theater theater = new Theater('A', 25, 30);
+            Seat seat = new Seat('a', 1);
+            if(event.toString().equals(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
+            	theater = nearestVenue.getAvailableTheater(event);
+            	event = theater.getEvent(event);
+            	seat = theater.getAvailableSeat();
+            	seat.changeSeatAvailability();
+            }
+            Ticket ticket = new Ticket(this.name, 5.00, event, seat, theater, nearestVenue);
+            tickets.add(ticket);
+            applyRewardsPoints();
+    	}
     }
 
     // FileWriter stuff
+    //TODO .txt file doesn't always appear
     public void createReceipt() {
         try {
-            //PrintWriter receiptWriter = new PrintWriter(new FileOutputStream("receipt.txt"));
         	PrintWriter receiptWriter = new PrintWriter(new File("receipt.txt"));
-        	//PrintWriter receiptWriter = new PrintWriter("receipt.txt");
-            receiptWriter.println("Receipt:");
+            receiptWriter.println("********** Receipt **********");
             double totalPrice = 0;
             for (Ticket t : tickets) {
                 receiptWriter.println(t);
@@ -257,7 +296,7 @@ public class User {
             receiptWriter.close();
         }
         catch(Exception e) {
-            System.out.println("Error: Receipt unable to print");
+           System.out.println("Error: Receipt unable to print");
         }
     }
 
@@ -389,7 +428,7 @@ public class User {
     }
 
     private void applyRewardsPoints() {
-
+    	rewardsPoints++;
     }
 
     public void purchaseTicketsDelayed(Event event, int numTix) {

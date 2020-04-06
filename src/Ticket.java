@@ -8,6 +8,7 @@ public class Ticket {
 	private double price;
 	private Event event;
 	private Seat seat;
+	private Theater theater;
 	private Venue venue;
 	private double discountMultiplier;
 
@@ -26,11 +27,12 @@ public class Ticket {
 	 * @param seat Seat ticket is assigned to
 	 * @param venue Venue ticket is assigned to
 	 */
-	public Ticket(String name, double price, Event event, Seat seat, Venue venue){
+	public Ticket(String name, double price, Event event, Seat seat, Theater theater, Venue venue){
 		this.setName(name);
 		this.setPrice(price);
 		this.setEvent(event);
 		this.setSeat(seat);
+		this.setTheater(theater);
 		this.setVenue(venue);
 	}
 
@@ -132,6 +134,14 @@ public class Ticket {
 	public void setSeat(Seat seat) {
 		this.seat = seat;
 	}
+	
+	public Theater getTheater() {
+		return theater;
+	}
+	
+	public void setTheater(Theater theater) {
+		this.theater = theater;
+	}
 
 	/**
 	 * Returns the venue the ticket is for
@@ -154,7 +164,7 @@ public class Ticket {
 	 * @return Ticket for "Harry Potter" at the Ford Theater\nSeat: 54A\nPaid: $12.00
 	 */
 	public String toString(){
-		return "Ticket for \"" + name + "\"" + " at the " + venue + " Theater" + "\n" + event + "\nSeat: " + seat  + "\nPaid: $" + price;
+		return "Ticket for \"" + name + "\"" + " at the " + venue + "\nTheater " + theater + "\n" + event + "\nSeat: " + seat  + "\nPaid: $" + price + "0\n";
 	}
 
 }
