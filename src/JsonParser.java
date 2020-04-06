@@ -218,7 +218,8 @@ public class JsonParser {
 
 		ArrayList<T> shows = new ArrayList<>();
 		try {
-			JSONParser parser = new JSONParser();
+			
+			//JSONParser parser = new JSONParser();
 
 			String filepath = getFilePath(show);
 			File jsonFile = new File("src/" + filepath + FILENAME_EXTENSION);

@@ -94,6 +94,7 @@ public class User {
         		return;
         	}
         }
+        throw new NullPointerException();
     }
     
     public void searchForPlay(String play) {
@@ -104,6 +105,7 @@ public class User {
         		return;
         	}
         }
+        throw new NullPointerException();
     }
     
     public void searchForConcert(String concert) {
@@ -114,6 +116,7 @@ public class User {
         		return;
         	}
         }
+        throw new NullPointerException();
     }
     
     public void searchForVenue(String venue, ArrayList<Venue> venueList) {
@@ -127,14 +130,69 @@ public class User {
     
 
     public void lookAtBasicEventInfo(String event) {
-
+    	ArrayList<Movie> movies = JsonParser.loadMovies();
+        for(Movie m : movies) {
+        	if(event.equals(m.getName())) {
+        		System.out.println(m);
+        		return;
+        	}
+        }
+        
+        ArrayList<Play> plays = JsonParser.loadPlays();
+        for(Play p : plays) {
+        	if(event.equals(p.getName())) {
+        		System.out.println(p);
+        		return;
+        	}
+        }
+        
+        ArrayList<Concert> concerts = JsonParser.loadConcerts();
+        for(Concert c : concerts) {
+        	if(event.equals(c.getName())) {
+        		System.out.println(c);
+        		return;
+        	}
+        }
     }
 
-    public void updateHomeVenue(String venue) {
-
+    public void updateHomeVenue(String venue, ArrayList<Venue> venues) {
+    	for(Venue v : venues) {
+    		if(venue.equals(v.getName()))
+    			nearestVenue = v;
+    	}
     }
 
     // Creating new tickets
+    public void bookTickets(String event, String date, String time, int adultTickets, int childTickets, char seatRow, int seatCol) {
+    	for(int i = 0; i<adultTickets+childTickets; i++) {
+    		Show s;
+    		ArrayList<Movie> movies = JsonParser.loadMovies();
+            for(Movie m : movies) {
+            	if(event.equals(m.getName())) {
+            		s = m;
+            		break;
+            	}
+            }
+            
+            ArrayList<Play> plays = JsonParser.loadPlays();
+            for(Play p : plays) {
+            	if(event.equals(p.getName())) {
+            		s = p;
+            		break;
+            	}
+            }
+            
+            ArrayList<Concert> concerts = JsonParser.loadConcerts();
+            for(Concert c : concerts) {
+            	if(event.equals(c.getName())) {
+            		s = c;
+            		break;
+            	}
+            }
+            //TODO Ticket t = new Ticket(this.name, 5.0, new Event(s, date, time), )
+    	}
+    }
+    
     public void bookTickets(String event, String date, String time, int adultTickets, int childTickets) {
 
     }
