@@ -55,8 +55,10 @@ public class Employee extends User {
 			return;
 		}
 
-		shows.add(show);
-		JsonParser.saveData(shows);
+		if(shows != null){
+			shows.add(show);
+			JsonParser.saveData(shows);
+		}
 
 		//add new show to new event in found venue
 		Theater[] venueTheaters = venueToAddEventTo.getTheaters();
