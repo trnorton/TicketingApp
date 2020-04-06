@@ -1137,33 +1137,57 @@ public class TicketingAppUI {
 
 		System.out.println("\nType in the type of the show to be inputted (Movie, Play, or Concert)");
 		String showType = scanner.nextLine();
+		if(showType.trim().equalsIgnoreCase("")){
+			System.out.println("invalid type");
+			return;
+		}
 
 		System.out.println("Type in the name of the show");
 		String showName = scanner.nextLine();
+		if(showName.trim().equalsIgnoreCase("")){
+			System.out.println("invalid name");
+			return;
+		}
 
 		System.out.println("Type in the date this show is occurring (MM/DD/YYYY)");
 		String date = scanner.nextLine();
+		if(date.trim().equalsIgnoreCase("")){
+			System.out.println("invalid date");
+			return;
+		}
 
 		System.out.println("Type in the time this show is occurring on this date (HH:MM[am/pm])");
 		String time = scanner.nextLine();
+		if(time.trim().equalsIgnoreCase("")){
+			System.out.println("invalid time");
+			return;
+		}
 
 		System.out.println("Type in the official rating of this show");
 		int rating = Integer.parseInt(scanner.nextLine());
+		if(rating <= 0){
+			System.out.println("invalid rating");
+			return;
+		}
 
 		System.out.println("Type in the age rating of this show");
 		int ageRating = Integer.parseInt(scanner.nextLine());
+		if(ageRating <= 0){
+			System.out.println("invalid age rating");
+			return;
+		}
 		
 		System.out.println("Type in the major producers of this show. Type 'Done' when finished");
 		ArrayList<String> producers = new ArrayList<String>();
 		while(true) {
 			String producer = scanner.nextLine();
-			if(producer.equals("Done")) break;
+			if(producer.trim().equalsIgnoreCase("Done")) break;
 			producers.add(producer);
 		}
 		
 		Show show = null;
 		
-		if(showType.equals("Movie")) {
+		if(showType.trim().equalsIgnoreCase("Movie")) {
 			System.out.println("Type in the genre of this movie");
 			String genre = scanner.nextLine();
 			System.out.println("Type in the major actors in this movie. Type 'Done' when finished");
@@ -1175,22 +1199,22 @@ public class TicketingAppUI {
 			}
 			show = new Movie(showName, ageRating, genre, actors, producers);
 		}
-		else if(showType.equals("Play")) {
+		else if(showType.trim().equalsIgnoreCase("Play")) {
 			System.out.println("Type in the major actors in this play. Type 'Done' when finished");
 			ArrayList<String> actors = new ArrayList<String>();
 			while(true) {
 				String actor = scanner.nextLine();
-				if(actor.equals("Done")) break;
+				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
 			show = new Play(showName, ageRating, actors, producers);
 		}
-		else if(showType.equals("Concert")) {
+		else if(showType.trim().equalsIgnoreCase("Concert")) {
 			System.out.println("Type in the major performers in this concert. Type 'Done' when finished");
 			ArrayList<String> performers = new ArrayList<String>();
 			while(true) {
 				String performer = scanner.nextLine();
-				if(performer.equals("Done")) break;
+				if(performer.trim().equalsIgnoreCase("Done")) break;
 				performers.add(performer);
 			}
 			show = new Concert(showName, ageRating, performers, producers);
