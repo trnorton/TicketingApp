@@ -1224,34 +1224,12 @@ public class TicketingAppUI {
 		ArrayList<Venue> allVenues = main.getVenues();
 		System.out.println("And at which venue is this event taking place?");
 		allVenues.forEach(System.out::println);
-		System.out.println("Or write below name of new venue");
+
 
 		String venueName = scanner.nextLine();
-		Venue toAdd = null;
-		for(Venue venue : allVenues)
-			if(venueName.trim().equalsIgnoreCase(venue.getName()))
-				toAdd = venue;
-
-		if(toAdd == null){
-			System.out.println("Adding new venue " + venueName);
-
-			System.out.println("What is the address?");
-			String address = scanner.nextLine();
-			if(address.trim().equalsIgnoreCase("")){
-				System.out.println("Bad address given");
-				return;
-			}
-
-			System.out.println("How many theaters does it have");
-			int theaters = Integer.parseInt(scanner.nextLine());
-			if(theaters <= 0){
-				System.out.println("Bad theater num given");
-				return;
-			}
-
-			toAdd = new Venue(venueName, address, theaters);
-			main.getVenues().add(toAdd);
-
+		if(venueName.trim().equalsIgnoreCase("")){
+			System.out.println("No event given");
+			return;
 		}
 
 
