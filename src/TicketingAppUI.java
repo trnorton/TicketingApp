@@ -59,13 +59,13 @@ public class TicketingAppUI {
 
 			// switch case for different cases
 			if(user instanceof Customer) {
-			takeActionCustomer();
+				takeActionCustomer();
 			} else if(user instanceof Employee) {
-			takeActionEmployee();
+				takeActionEmployee();
 			} else if(user instanceof Admin) {
-			takeActionAdmin();
+				takeActionAdmin();
 			} else {
-			takeActionGuest();
+				takeActionGuest();
 			}
 		}
 
@@ -864,7 +864,7 @@ public class TicketingAppUI {
 		while (true) {
 			System.out.println("Type 'Back' to go back to the main menu");
 			nextLine = scanner.nextLine();
-			if (nextLine.equals("Back")) {
+			if (nextLine.trim().equalsIgnoreCase("Back")) {
 				break;
 			} else {
 				System.out.println("Not a valid input");
@@ -878,10 +878,20 @@ public class TicketingAppUI {
 	 */
 	private void requestRefund() {
 		System.out.println("\n********** Request Refund **********");
-		System.out.println("Type in the name of the event you want a refund from");
-		String eventRefunded = scanner.nextLine();
-		System.out.println("Type in the number of tickets you want to refund");
-		int numTicketsRefunded = Integer.parseInt(scanner.nextLine());
+
+		String eventRefunded = "";
+		do{
+			System.out.println("Type in the name of the event you want a refund from");
+			eventRefunded = scanner.nextLine();
+		} while(eventRefunded.trim().equalsIgnoreCase(""));
+
+
+		int numTicketsRefunded = 0;
+		do {
+			System.out.println("Type in the number of tickets you want to refund");
+			numTicketsRefunded = Integer.parseInt(scanner.nextLine());
+		} while(numTicketsRefunded <= 0);
+
 		user.requestRefund(eventRefunded, numTicketsRefunded);
 		System.out.println("Your refund request has been sent to be processed");
 	}
@@ -893,20 +903,19 @@ public class TicketingAppUI {
 		System.out.println("\n********** Purchase Concessions **********");
 		main.displayConcessions();
 
-		System.out.println("Type in the concession you want");
 		String type = "";
-		while(type.trim().equalsIgnoreCase("")){
-			System.out.println("Please enter a word");
+		do{
+			System.out.println("Type in the concession you want");
 			type = scanner.nextLine();
-		}
+		} while(type.trim().equalsIgnoreCase(""));
 
 		System.out.println("Quantity of that concession you want");
 		int quantity = 0;
-		while(quantity == 0 || quantity < 0){
+		while(quantity <= 0){
 			System.out.println("Please enter a number");
 			quantity = Integer.parseInt(scanner.nextLine());
 		}
-		
+
 		user.receiveConcessions(type, quantity);
 		System.out.println("A receipt has been made for you. Show this to an employee at the concession counter");
 	}
