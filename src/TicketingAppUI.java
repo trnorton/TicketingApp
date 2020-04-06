@@ -79,7 +79,7 @@ public class TicketingAppUI {
 			System.out.println("If you are a returning user, type in your account ID. Otherwise, type 0");
 			nextLine = scanner.nextLine();
 			try {
-				if (nextLine.equals("0")) {
+				if (nextLine.trim().equalsIgnoreCase("0")) {
 					user = new User("Guest", "01/01/2020", "0", "", "");// ------> basic guest user
 					fillRemainingMenuOptions();
 					break;
@@ -410,7 +410,7 @@ public class TicketingAppUI {
 				displayMovieInfo(movie);
 				break;
 			case (1):
-				bookMovieTickets(movie);
+				bookTickets(movie);
 				break;
 			case (2):
 				rateShow(movie);
@@ -438,7 +438,7 @@ public class TicketingAppUI {
 	 * Books tickets for the desired movie.
 	 * @param movie - The movie searched by the user.
 	 */
-	private void bookMovieTickets(String movie) {
+	/*private void bookMovieTickets(String movie) {
 
 		System.out.println("Type in the date you want to see this movie (MM/DD/YYYY)");
 		String date = scanner.nextLine();
@@ -515,7 +515,7 @@ public class TicketingAppUI {
 				System.out.println("Invalid input, only Y/N");
 			}
 		}
-	}
+	}*/
 
 	private void rateShow(String showName){
 		System.out.println("Type in your rating for this event on a scale of 1 to 5");
@@ -543,7 +543,7 @@ public class TicketingAppUI {
 	 * Rates the movie on a scale of 1 to 5.
 	 * @param movie - The movie searched by the user.
 	 */
-	private void rateMovie(String movie) {
+	/*private void rateMovie(String movie) {
 		System.out.println("Type in your rating for this movie on a scale of 1 to 5");
 		
 		int rating = 0;
@@ -563,18 +563,18 @@ public class TicketingAppUI {
 		
 		user.rateEvent(movie, rating);
 		System.out.println("Rating has been recorded");
-	}
+	}*/
 
 	/**
 	 * Writes a movie review for the desired movie.
 	 * @param movie - The movie searched by the user.
 	 */
-	private void writeMovieReview(String movie) {
+	/*private void writeMovieReview(String movie) {
 		System.out.println("Type in your review for this movie");
 		String review = scanner.nextLine();
 		user.writeEventReview(movie, review);
 		System.out.println("Review has been recorded");
-	}
+	}*/
 
 	private void writeShowReview(String showName){
 		System.out.println("Type in your review for this movie");
@@ -595,17 +595,6 @@ public class TicketingAppUI {
 		System.out.println("\n********** Search for Play **********");
 
 		String play = "";
-		/*while(true) {
-			play = scanner.nextLine();
-			try {
-				System.out.println("\nHere's what we found:");
-				user.searchForPlay(play);
-				break;
-			} catch(Exception e) {
-				System.out.println("Play not found. Type in another play");
-				continue;
-			}
-		}*/
 
 		while(true){
 			do {
@@ -641,7 +630,7 @@ public class TicketingAppUI {
 				displayPlayInfo(play);
 				break;
 			case (1):
-				bookPlayConcertTickets(play);
+				bookTickets(play);
 				break;
 			case (2):
 				rateShow(play);
@@ -669,7 +658,7 @@ public class TicketingAppUI {
 	 * Books tickets for the desired play.
 	 * @param play - The play searched by the user.
 	 */
-	private void bookPlayTickets(String play) {
+	/*private void bookPlayTickets(String play) {
 		System.out.println("Type in the date you want to see this play (MM/DD/YYYY)");
 		String date = scanner.nextLine();
 
@@ -689,22 +678,22 @@ public class TicketingAppUI {
 		System.out.println("Would you like a receipt? (Y/N)");
 		while (true) {
 			nextLine = scanner.nextLine();
-			if (nextLine.equals("Y")) {
+			if (nextLine.trim().equalsIgnoreCase("Y")) {
 				user.createReceipt();
 				System.out.println("Your receipt has been created");
-			} else if (nextLine.equals("N")) {
+			} else if (nextLine.trim().equalsIgnoreCase("N")) {
 				continue;
 			} else {
 				System.out.println("Invalid input, only Y/N");
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * Rates the play on a scale of 1 to 5.
 	 * @param play - The play searched by the user.
 	 */
-	private void ratePlay(String play) {
+	/*private void ratePlay(String play) {
 		System.out.println("Type in your rating for this play on a scale of 1 to 5");
 		
 		int rating = 0;
@@ -725,18 +714,18 @@ public class TicketingAppUI {
 		user.rateEvent(play, rating);
 		System.out.println("Rating has been recorded");
 		System.out.println("Rating has been recorded");
-	}
+	}*/
 
 	/**
 	 * Writes a play review for the desired play.
 	 * @param play - The play searched by the user.
 	 */
-	private void writePlayReview(String play) {
+	/*private void writePlayReview(String play) {
 		System.out.println("Type in your review for this play");
 		String review = scanner.nextLine();
 		user.writeEventReview(play, review);
 		System.out.println("Review has been recorded");
-	}
+	}*/
 
 	/**
 	 * Searches for a concert within the system.
@@ -745,17 +734,6 @@ public class TicketingAppUI {
 		System.out.println("\n********** Search for Concert **********");
 
 		String concert = "";
-		/*while(true) {
-			concert = scanner.nextLine();
-			try {
-				System.out.println("\nHere's what we found:");
-				user.searchForConcert(concert);
-				break;
-			} catch(Exception e) {
-				System.out.println("Concert not found. Type in another concert");
-				continue;
-			}
-		}*/
 
 		while(true){
 			do {
@@ -791,7 +769,7 @@ public class TicketingAppUI {
 				displayConcertInfo(concert);
 				break;
 			case (1):
-				bookPlayConcertTickets(concert);
+				bookTickets(concert);
 				break;
 			case (2):
 				rateShow(concert);
@@ -815,7 +793,7 @@ public class TicketingAppUI {
 		user.lookAtBasicEventInfo(concert);
 	}
 
-	private void bookPlayConcertTickets(String showName){
+	private void bookTickets(String showName){
 		System.out.println("Type in the date you want to see this show (MM/DD/YYYY)");
 		String date = scanner.nextLine();
 		if(date.trim().equalsIgnoreCase("")){
@@ -823,7 +801,7 @@ public class TicketingAppUI {
 			return;
 		}
 
-		System.out.println("Type in the time you want to see this show");
+		System.out.println("Type in the time you want to see this show (HH:MM[am/pm])");
 		String time = scanner.nextLine();
 		if(time.trim().equalsIgnoreCase("")) {
 			System.out.println("Invalid time given");
@@ -850,18 +828,42 @@ public class TicketingAppUI {
 		}
 		if(numChildTickets < 0) return;
 
-		user.bookTickets(showName, date, time, numAdultTickets, numChildTickets);
+		if(numAdultTickets+numChildTickets == 1) {
+			main.displayAvailableTheater(showName, date, time);
+			
+			System.out.println("Where would you like to sit?");
+			System.out.println("Type in character corresponding to the row you want to sit on");
+			char row = scanner.nextLine().charAt(0);
+			if(row == ' ') {
+				System.out.println("Invalid row given");
+				return;
+			}
+
+			int col = 0;
+			System.out.println("Type in number corresponding to the seat you want to sit on at that row");
+			try {
+				col = Integer.parseInt(scanner.nextLine());
+			} catch (Exception e) {
+				System.out.println("Invalid number of seat number");
+				return;
+			}
+			
+			user.bookTickets(showName, date, time, numAdultTickets, numChildTickets, row, col);
+			}
+			else {
+				user.bookTickets(showName, date, time, numAdultTickets, numChildTickets);
+			}
 
 		System.out.println("Tickets have been booked!");
 
 		System.out.println("Would you like a receipt? (Y/N)");
 		while (true) {
 			nextLine = scanner.nextLine();
-			if (nextLine.equals("Y")) {
+			if (nextLine.trim().equalsIgnoreCase("Y")) {
 				user.createReceipt();
 				System.out.println("Your receipt has been created");
 				break;
-			} else if (nextLine.equals("N")) {
+			} else if (nextLine.trim().equalsIgnoreCase("N")) {
 				break;
 			} else {
 				System.out.println("Invalid input, only Y/N");
@@ -873,7 +875,7 @@ public class TicketingAppUI {
 	 * Books tickets for the desired concert.
 	 * @param concert - The concert searched by the user.
 	 */
-	private void bookConcertTickets(String concert) {
+	/*private void bookConcertTickets(String concert) {
 
 
 		System.out.println("Type in the date you want to see this concert (MM/DD/YYYY");
@@ -895,22 +897,22 @@ public class TicketingAppUI {
 		System.out.println("Would you like a receipt? (Y/N)");
 		while (true) {
 			nextLine = scanner.nextLine();
-			if (nextLine.equals("Y")) {
+			if (nextLine.trim().equalsIgnoreCase("Y")) {
 				user.createReceipt();
 				System.out.println("Your receipt has been created");
-			} else if (nextLine.equals("N")) {
+			} else if (nextLine.trim().equalsIgnoreCase("N")) {
 				continue;
 			} else {
 				System.out.println("Invalid input, only Y/N");
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * Rates the concert on a scale of 1 to 5.
 	 * @param concert - The concert searched by the user.
 	 */
-	private void rateConcert(String concert) {
+	/*private void rateConcert(String concert) {
 		System.out.println("Type in your rating for this concert on a scale of 1 to 5");
 		
 		int rating = 0;
@@ -930,18 +932,18 @@ public class TicketingAppUI {
 		
 		user.rateEvent(concert, rating);
 		System.out.println("Rating has been recorded");
-	}
+	}*/
 
 	/**
 	 * Writes a concert review for the desired concert.
 	 * @param concert - The concert searched by the user.
 	 */
-	private void writeConcertReview(String concert) {
+	/*private void writeConcertReview(String concert) {
 		System.out.println("Type in your review for this concert");
 		String review = scanner.nextLine();
 		user.writeEventReview(concert, review);
 		System.out.println("Review has been recorded");
-	}
+	}*/
 
 	/**
 	 * Adds an event to the user's watchlist
@@ -1157,40 +1159,40 @@ public class TicketingAppUI {
 		ArrayList<String> producers = new ArrayList<String>();
 		while(true) {
 			String producer = scanner.nextLine();
-			if(producer.equals("Done")) break;
+			if(producer.trim().equalsIgnoreCase("Done")) break;
 			producers.add(producer);
 		}
 		
 		Show show = null;
 		
-		if(showType.equals("Movie")) {
+		if(showType.trim().equalsIgnoreCase("Movie")) {
 			System.out.println("Type in the genre of this movie");
 			String genre = scanner.nextLine();
 			System.out.println("Type in the major actors in this movie. Type 'Done' when finished");
 			ArrayList<String> actors = new ArrayList<String>();
 			while(true) {
 				String actor = scanner.nextLine();
-				if(actor.equals("Done")) break;
+				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
 			show = new Movie(showName, ageRating, genre, actors, producers);
 		}
-		else if(showType.equals("Play")) {
+		else if(showType.trim().equalsIgnoreCase("Play")) {
 			System.out.println("Type in the major actors in this play. Type 'Done' when finished");
 			ArrayList<String> actors = new ArrayList<String>();
 			while(true) {
 				String actor = scanner.nextLine();
-				if(actor.equals("Done")) break;
+				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
 			show = new Play(showName, ageRating, actors, producers);
 		}
-		else if(showType.equals("Concert")) {
+		else if(showType.trim().equalsIgnoreCase("Concert")) {
 			System.out.println("Type in the major performers in this concert. Type 'Done' when finished");
 			ArrayList<String> performers = new ArrayList<String>();
 			while(true) {
 				String performer = scanner.nextLine();
-				if(performer.equals("Done")) break;
+				if(performer.trim().equalsIgnoreCase("Done")) break;
 				performers.add(performer);
 			}
 			show = new Concert(showName, ageRating, performers, producers);
@@ -1249,13 +1251,6 @@ public class TicketingAppUI {
 			System.out.println("Only an employee level user can use this function");
 			return;
 		}
-
-		/*user.displayTicketsRefunded();
-		System.out.println("Type in the name of the customer to give a refund to");
-		String customerName = scanner.nextLine();
-
-
-		user.refundTickets(customerName, main.getUsers());*/
 
 		//this takes care of all the functions here
 		System.out.println("Type in the name of the customer to give a refund to");
