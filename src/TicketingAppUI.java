@@ -641,7 +641,7 @@ public class TicketingAppUI {
 				displayPlayInfo(play);
 				break;
 			case (1):
-				bookPlayConcertTickets(play);
+				bookPlayOrConcertTickets(play);
 				break;
 			case (2):
 				rateShow(play);
@@ -791,7 +791,7 @@ public class TicketingAppUI {
 				displayConcertInfo(concert);
 				break;
 			case (1):
-				bookPlayConcertTickets(concert);
+				bookPlayOrConcertTickets(concert);
 				break;
 			case (2):
 				rateShow(concert);
@@ -815,7 +815,7 @@ public class TicketingAppUI {
 		user.lookAtBasicEventInfo(concert);
 	}
 
-	private void bookPlayConcertTickets(String showName){
+	private void bookPlayOrConcertTickets(String showName){
 		System.out.println("Type in the date you want to see this show (MM/DD/YYYY)");
 		String date = scanner.nextLine();
 		if(date.trim().equalsIgnoreCase("")){
