@@ -192,41 +192,41 @@ public class User {
     }
 
     // Creating new tickets
-    public void bookTickets(String event, String date, String time, int adultTickets, int childTickets, char seatRow, int seatCol) {
+    public void bookTickets(String eventName, String date, String time, int adultTickets, int childTickets, char seatRow, int seatCol) {
     	for(int i = 0; i<adultTickets+childTickets; i++) {
-    		Show s = null;
+    		Show show = null;
     		ArrayList<Movie> movies = JsonParser.loadMovies();
             for(Movie m : movies) {
-            	if(event.equals(m.getName())) {
-            		s = m;
+            	if(eventName.equals(m.getName())) {
+            		show = m;
             		break;
             	}
             }
             
             ArrayList<Play> plays = JsonParser.loadPlays();
-            for(Play p : plays) {
-            	if(event.equals(p.getName())) {
-            		s = p;
+            for(Play play : plays) {
+            	if(eventName.equals(play.getName())) {
+            		show = play;
             		break;
             	}
             }
             
             ArrayList<Concert> concerts = JsonParser.loadConcerts();
-            for(Concert c : concerts) {
-            	if(event.equals(c.getName())) {
-            		s = c;
+            for(Concert concert : concerts) {
+            	if(eventName.equals(concert.getName())) {
+            		show = concert;
             		break;
             	}
             }
-            Event e = new Event(s, date, time);
+            Event event = new Event(show, date, time);
             Seat seat = new Seat('a', 1);
-            if(e.toString().equals(nearestVenue.getAvailableTheater(e).getEvent(e).toString())) {
-            	e = nearestVenue.getAvailableTheater(e).getEvent(e);
-            	seat = nearestVenue.getAvailableTheater(e).getSeat(seatRow, seatCol);
+            if(event.toString().equals(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
+            	event = nearestVenue.getAvailableTheater(event).getEvent(event);
+            	seat = nearestVenue.getAvailableTheater(event).getSeat(seatRow, seatCol);
             	seat.changeSeatAvailability();
             }
-            Ticket t = new Ticket(this.name, 5.0, e, seat, nearestVenue);
-            tickets.add(t);
+            Ticket ticket = new Ticket(this.name, 5.0, event, seat, nearestVenue);
+            tickets.add(ticket);
     	}
     }
     
@@ -370,15 +370,15 @@ public class User {
 
     /**
      * Method which removes a show from the user's watchlist
-     * @param show show to be removed
+     * @param showName show to be removed
      */
-    public void removeFromWatchlist(String show) {
+    public void removeFromWatchlist(String showName) {
         /*for(Show s : watchlist) {
         	if(s.getName().equals(show))
         		watchlist.remove(s);
         }*/
 
-		watchlist.removeIf(s -> s.getName().equals(show));
+		watchlist.removeIf(show -> show.getName().equals(showName));
     }
 
     public void purchaseTickets(Event event, int NumTix) {
