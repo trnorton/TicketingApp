@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 
-
 /**
- * @author Lukacs Ablonczy
- * Defines the Concert Show type
+ * @author Lukacs Ablonczy Defines the Concert Show type
  */
 public class Concert extends Show {
 
@@ -12,34 +10,40 @@ public class Concert extends Show {
 	/**
 	 * Blank constructor, used for creating empty Show types
 	 */
-	public Concert(){
+	public Concert() {
 
 	}
+
 	/**
 	 * Constructor for Concert type
-	 * @param name Name of show
-	 * @param ageRating AgeRating of show
+	 * 
+	 * @param name       Name of show
+	 * @param ageRating  AgeRating of show
 	 * @param performers String Arraylist of performers of concert
-	 * @param producers producers of show
+	 * @param producers  producers of show
 	 */
-	public Concert(String name, int ageRating, ArrayList<String> performers, ArrayList<String> producers) {
+	public Concert(String name, int offRating, int ageRating, ArrayList<String> performers,
+			ArrayList<String> producers) {
 		this.setName(name);
 		this.setAgeRating(ageRating);
+		this.setOffRating(offRating);
 		this.setProducers(producers);
 		this.setPerformers(performers);
 	}
 
 	/**
 	 * Constructor for Concert type
-	 * @param name Name of show
-	 * @param offRating IMDB Rating of show
-	 * @param ageRating AgeRating of show
-	 * @param reviews Reviews of show
+	 * 
+	 * @param name        Name of show
+	 * @param offRating   IMDB Rating of show
+	 * @param ageRating   AgeRating of show
+	 * @param reviews     Reviews of show
 	 * @param custRatings Customer Ratings of show
-	 * @param producers producers of show
-	 * @param performers Performers of Concert
+	 * @param producers   producers of show
+	 * @param performers  Performers of Concert
 	 */
-	public Concert(String name, int offRating, int ageRating, ArrayList<String> reviews, ArrayList<Integer> custRatings, ArrayList<String> producers, ArrayList<String> performers) {
+	public Concert(String name, int offRating, int ageRating, ArrayList<String> reviews, ArrayList<Integer> custRatings,
+			ArrayList<String> producers, ArrayList<String> performers) {
 		this.setName(name);
 		this.setOffRating(offRating);
 		this.setAgeRating(ageRating);
@@ -51,6 +55,7 @@ public class Concert extends Show {
 
 	/**
 	 * Place a performer into this concert's list of performers
+	 * 
 	 * @param performer String name of performer
 	 */
 	public void addPerformer(String performer) {
@@ -69,6 +74,7 @@ public class Concert extends Show {
 
 	/**
 	 * Remove a performer from this concert's list of performers
+	 * 
 	 * @param performer String name of performer
 	 */
 	public void removePerformer(String performer) {
@@ -88,6 +94,7 @@ public class Concert extends Show {
 
 	/**
 	 * Getter for arraylist of performers
+	 * 
 	 * @return String arraylist containing performers' names
 	 */
 	public ArrayList<String> getPerformers() {
@@ -96,6 +103,7 @@ public class Concert extends Show {
 
 	/**
 	 * Setter for this concert's list of performers
+	 * 
 	 * @param performers String arraylist containing names of performers
 	 */
 	public void setPerformers(ArrayList<String> performers) {
@@ -109,6 +117,7 @@ public class Concert extends Show {
 
 	/**
 	 * Returns string describing this concert
+	 * 
 	 * @return Name: Ratings: Producers: Performers:
 	 */
 	@Override

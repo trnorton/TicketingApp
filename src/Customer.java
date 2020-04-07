@@ -5,10 +5,6 @@ public class Customer extends User {
 		super(name, birthday, phoneNumber, address, email);
 	}
 	
-	public void removeEventReview(Event e) {
-		//TODO
-	}
-	
 	public String toString() {
 		return "\n\nName: " + this.getName() +"\nBirthday: " + this.getBirthday() + "\nPhone Number: " + this.getPhoneNumber() +"\nAddress: "+ this.getAddress() + "\nEmail: "+this.getEmail();
 	}

@@ -24,8 +24,9 @@ public class Movie extends Show {
 	 * @param majorActors String Arraylist of actors of movie
 	 * @param producers producers of show
 	 */
-	public Movie(String name, int ageRating, String genre, ArrayList<String> majorActors, ArrayList<String> producers) {
+	public Movie(String name, int offRating, int ageRating, String genre, ArrayList<String> majorActors, ArrayList<String> producers) {
 		this.setName(name);
+		this.setOffRating(offRating);
 		this.setAgeRating(ageRating);
 		this.setGenre(genre);
 		this.setProducers(producers);

@@ -4,7 +4,6 @@ public class MainSystem {
 
 	private ArrayList<Venue> venues;
 	private ArrayList<User> users;
-	private FilterSystem filter;
 	private CustomerSupportSystem custSupport;
 	private static ConcessionsSystem concess;
 	private boolean online;
@@ -12,7 +11,6 @@ public class MainSystem {
 	public MainSystem() {
 		venues = new ArrayList<Venue>();
 		users = new ArrayList<User>();
-		filter = new FilterSystem();
 		custSupport = new CustomerSupportSystem();
 		concess = new ConcessionsSystem();
 		online = true;
@@ -27,16 +25,6 @@ public class MainSystem {
 				System.out.println(v);
 			}
 		}
-	}
-	
-	//TODO ask about this
-	private void applySearchFilters() {
-		
-	}
-	
-	//TODO ask about this
-	private void applyRestrictionFilters() {
-		
 	}
 	
 	public boolean checkIfOnline() {
@@ -74,7 +62,6 @@ public class MainSystem {
 		return null;
 	}
 	
-	//TODO findEmployee
 	 public ArrayList<User> getUsers(){
 		 return users;
 	 }

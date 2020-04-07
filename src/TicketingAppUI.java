@@ -37,6 +37,8 @@ public class TicketingAppUI {
 
 		// ask if user is guest or not, login/proceed as needed
 		logIn();
+		
+		getHomeVenue();
 
 		while (true) {
 			// display Main Menu, which has options on how to proceed
@@ -92,6 +94,20 @@ public class TicketingAppUI {
 			} catch (Exception e) {
 				System.out.println("Not a valid input");
 				continue;
+			}
+		}
+	}
+	
+	private void getHomeVenue() {
+		System.out.println("Input your home venue");
+		while(true) {
+			try{
+				nextLine = scanner.nextLine();
+				user.updateHomeVenue(nextLine, main.getVenues());
+				break;
+			}
+			catch(Exception e) {
+				System.out.println("This venue doesn't exist in the system. Input another home venue");
 			}
 		}
 	}
@@ -933,7 +949,7 @@ public class TicketingAppUI {
 				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
-			show = new Movie(showName, ageRating, genre, actors, producers);
+			show = new Movie(showName, rating, ageRating, genre, actors, producers);
 		}
 		else if(showType.trim().equalsIgnoreCase("Play")) {
 			System.out.println("Type in the major actors in this play. Type 'Done' when finished");
@@ -943,7 +959,7 @@ public class TicketingAppUI {
 				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
-			show = new Play(showName, ageRating, actors, producers);
+			show = new Play(showName, rating, ageRating, actors, producers);
 		}
 		else if(showType.trim().equalsIgnoreCase("Concert")) {
 			System.out.println("Type in the major performers in this concert. Type 'Done' when finished");
@@ -953,7 +969,7 @@ public class TicketingAppUI {
 				if(performer.trim().equalsIgnoreCase("Done")) break;
 				performers.add(performer);
 			}
-			show = new Concert(showName, ageRating, performers, producers);
+			show = new Concert(showName, rating, ageRating, performers, producers);
 		}
 
 
