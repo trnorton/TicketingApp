@@ -64,7 +64,7 @@ public class Event {
 	/**
 	 * Sets this Event's date to a given date.
 	 * 
-	 * @param show - A variable of type String.
+	 * @param date - A variable of type String.
 	 */
 	public void setDate(String date) {
 		this.date = date;
@@ -82,7 +82,7 @@ public class Event {
 	/**
 	 * Sets this Event's time to a given time.
 	 * 
-	 * @param String - A variable of type String.
+	 * @param time - A variable of type String.
 	 */
 	public void setTime(String time) {
 		this.time = time;
