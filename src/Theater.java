@@ -64,7 +64,7 @@ public class Theater {
 	
 	public Event getEvent(Event event) {
 		for(Event e : events) {
-			if(e.toString().equals(event.toString()))
+			if(e.toString().trim().equalsIgnoreCase(event.toString()))
 				return e;
 		}
 		return null;

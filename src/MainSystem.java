@@ -90,7 +90,7 @@ public class MainSystem {
 		Show s = null;
 		ArrayList<Movie> movies = JsonParser.loadMovies();
         for(Movie m : movies) {
-        	if(event.equals(m.getName())) {
+        	if(event.trim().equalsIgnoreCase(m.getName())) {
         		s = m;
         		break;
         	}
@@ -98,7 +98,7 @@ public class MainSystem {
         
         ArrayList<Play> plays = JsonParser.loadPlays();
         for(Play p : plays) {
-        	if(event.equals(p.getName())) {
+        	if(event.trim().equalsIgnoreCase(p.getName())) {
         		s = p;
         		break;
         	}
@@ -106,7 +106,7 @@ public class MainSystem {
         
         ArrayList<Concert> concerts = JsonParser.loadConcerts();
         for(Concert c : concerts) {
-        	if(event.equals(c.getName())) {
+        	if(event.trim().equalsIgnoreCase(c.getName())) {
         		s = c;
         		break;
         	}
@@ -114,7 +114,7 @@ public class MainSystem {
         Event e = new Event(s, date, time);
 		
 		for(Venue v : venues) {
-			if(v.getAvailableTheater(e).getEvent(e).getShow().getName().equals(event)) {
+			if(v.getAvailableTheater(e).getEvent(e).getShow().getName().trim().equalsIgnoreCase(event)) {
 				v.getAvailableTheater(e).displaySeats();
 				break;
 			}
