@@ -22,6 +22,9 @@ public class TicketingAppUI {
 			"Add to watchlist", "Return to main menu" };
 	private String[] venueSearchMenuOptions = { "Make this venue your home venue", "Return to main menu" };
 
+	/**
+	 * Default constructor for TicketingAppUI
+	 */
 	TicketingAppUI() {
 		scanner = new Scanner(System.in);
 		main = new MainSystem();
