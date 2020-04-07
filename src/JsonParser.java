@@ -65,7 +65,7 @@ public class JsonParser {
 	public static <T extends Show> void saveData(ArrayList<T> showList) {
 		T typeChecker = showList.get(0);
 		setType(typeChecker);
-		String filepath = getFilePath(typeChecker);
+		String filepath = getFilePath();
 
 		try {
 			File jsonFile = new File("src/" + filepath + FILENAME_EXTENSION);
