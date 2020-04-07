@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 /**
  * Representation of a venue, a location where shows are held
- * @author placeholder TODO: Enter author name
+ * 
+ * @author Taylor Norton
  */
 public class Venue {
 
@@ -17,9 +18,10 @@ public class Venue {
 
 	/**
 	 * Parametrized constructor for Venue
-	 * @param name name of the venue
-	 * @param address address of the venue
-	 * @param numOfTheaters number of theaters at that venue
+	 * 
+	 * @param name          - name of the venue
+	 * @param address       - address of the venue
+	 * @param numOfTheaters - number of theaters at that venue
 	 */
 	public Venue(String name, String address, int numOfTheaters) {
 		this.name = name;
@@ -33,28 +35,28 @@ public class Venue {
 	}
 
 	/**
-	 * @return the venue's current name
+	 * @return String - the venue's current name
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name the venue's new name
+	 * @param name - the venue's new name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @return the venue's current address
+	 * @return String - the venue's current address
 	 */
 	public String getAddress() {
 		return address;
 	}
 
 	/**
-	 * @param address the venue's new address
+	 * @param address - the venue's new address
 	 */
 	public void setAddress(String address) {
 		this.address = address;
@@ -71,7 +73,8 @@ public class Venue {
 
 	/**
 	 * Method which adds a user review to the venue's review list
-	 * @param r the review to be added to the review list
+	 * 
+	 * @param r - the review to be added to the review list
 	 */
 	public void addReview(String r) {
 		reviews.add(r);
@@ -79,7 +82,8 @@ public class Venue {
 
 	/**
 	 * Method which removes a user review from the venue's review list
-	 * @param r review to be removed from the review list
+	 * 
+	 * @param r - review to be removed from the review list
 	 */
 	public void removeReview(String r) {
 		reviews.remove(r);
@@ -96,7 +100,8 @@ public class Venue {
 
 	/**
 	 * Method which adds a customer rating to the venue's rating list
-	 * @param r the customer rating to be added to the rating list
+	 * 
+	 * @param r - the customer rating to be added to the rating list
 	 */
 	public void addCustRating(int r) {
 		custRatings.add(r);
@@ -104,33 +109,27 @@ public class Venue {
 
 	/**
 	 * Method which removes a customer rating from the venue's rating list
-	 * @param r the customer rating to be removed from the rating list
+	 * 
+	 * @param r - the customer rating to be removed from the rating list
 	 */
 	public void removeCustRating(int r) {
 		custRatings.remove(r);
 	}
 
-	/**
-	 * Method which calculates the average rating of the venue
-	 * @return the total rating of the venue divided by the number of ratings, rounded down
-	 */
 	private int getAverageCustRating() {
 		int sum = 0;
 		for (int r : custRatings) {
 			sum += r;
 		}
 		try {
-		return sum / custRatings.size();
-		}
-		catch(Exception e) {
+			return sum / custRatings.size();
+		} catch (Exception e) {
 			return 0;
 		}
 	}
-	
-	//TODO
 
 	/**
-	 * @return the list of theatres available at the venue
+	 * @return Theater[] - the list of theatres available at the venue
 	 */
 	public Theater[] getTheaters() {
 		return theaters;
@@ -138,14 +137,17 @@ public class Venue {
 
 	/**
 	 * Method which checks if an event is showing at one of the theatres
-	 * @param e event to be searched
-	 * @return true if the event is showing at one of the theatres, false otherwise
+	 * 
+	 * @param e - event to be searched
+	 * @return boolean - true if the event is showing at one of the theatres, false
+	 *         otherwise
 	 */
 	public boolean hasAvailableTheater(Event e) {
-		for(int i = 0; i<theaters.length;i++) {
-			if(theaters[i].getEvent(e) == null)
+		for (int i = 0; i < theaters.length; i++) {
+			if (theaters[i].getEvent(e) == null)
 				continue;
-			if(theaters[i].hasAvailableSeat() && e.toString().trim().equalsIgnoreCase(theaters[i].getEvent(e).toString()))
+			if (theaters[i].hasAvailableSeat()
+					&& e.toString().trim().equalsIgnoreCase(theaters[i].getEvent(e).toString()))
 				return true;
 		}
 		return false;
@@ -153,21 +155,24 @@ public class Venue {
 
 	/**
 	 * Method which shows which theatre an event is showing in
-	 * @param e event to be searched
-	 * @return the theatre that is showing the event e
+	 * 
+	 * @param e - event to be searched
+	 * @return Theater - the theatre that is showing the event e
 	 */
 	public Theater getAvailableTheater(Event e) {
-		for(int i = 0; i<theaters.length;i++) {
-			if(theaters[i].getEvent(e) == null)
+		for (int i = 0; i < theaters.length; i++) {
+			if (theaters[i].getEvent(e) == null)
 				continue;
-			if(theaters[i].hasAvailableSeat() && e.toString().trim().equalsIgnoreCase(theaters[i].getEvent(e).toString()))
+			if (theaters[i].hasAvailableSeat()
+					&& e.toString().trim().equalsIgnoreCase(theaters[i].getEvent(e).toString()))
 				return theaters[i];
 		}
 		return null;
 	}
 
 	/**
-	 * @return Basic description of the venue, including name, address, and average rating
+	 * @return String - Basic description of the venue, including name, address, and
+	 *         average rating
 	 */
 	public String toString() {
 		return "Name: " + name + "\nAddress: " + address + "\nOverall Customer Rating: " + getAverageCustRating();
