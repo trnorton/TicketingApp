@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
+ * Representation of a user of the ticketing app and all the functionality available to users
+ * If invoked directly, this class will be used for guest users
  * @author Seidberg Jyles Tagra
  * @author https://github.com/AkashiCat
  */
