@@ -305,6 +305,7 @@ public class User {
             Event event = new Event(show, date, time);
             Theater theater = new Theater('A', 25, 30);
             Seat seat = new Seat('a', 1);
+
             if(event.toString().equals(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
             	theater = nearestVenue.getAvailableTheater(event);
             	event = theater.getEvent(event);
