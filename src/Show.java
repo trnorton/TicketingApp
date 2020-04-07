@@ -74,8 +74,8 @@ public abstract class Show {
 	 * Prints out the customer reviews of the show.
 	 */
 	public void displayReviews() {
-		for (String r : reviews) {
-			System.out.println(r);
+		for (String review : reviews) {
+			System.out.println(review);
 		}
 	}
 
@@ -84,8 +84,8 @@ public abstract class Show {
 	 * 
 	 * @param r - A variable of type String.
 	 */
-	public void addReview(String r) {
-		reviews.add(r);
+	public void addReview(String review) {
+		reviews.add(review);
 	}
 
 	/**
@@ -93,16 +93,16 @@ public abstract class Show {
 	 * 
 	 * @param r - A variable of type String.
 	 */
-	public void removeReview(String r) {
-		reviews.remove(r);
+	public void removeReview(String review) {
+		reviews.remove(review);
 	}
 
 	/**
 	 * Prints out the customer ratings of the show.
 	 */
 	public void displayCustRatings() {
-		for (int r : custRatings) {
-			System.out.println(r);
+		for (int rating : custRatings) {
+			System.out.println(rating);
 		}
 	}
 
@@ -111,8 +111,8 @@ public abstract class Show {
 	 * 
 	 * @param r - A variable of type Integer.
 	 */
-	public void addCustRating(Integer r) {
-		custRatings.add(r);
+	public void addCustRating(Integer rating) {
+		custRatings.add(rating);
 	}
 
 	/**
@@ -120,14 +120,14 @@ public abstract class Show {
 	 * 
 	 * @param r - A variable of type Integer.
 	 */
-	public void removeCustRating(Integer r) {
-		custRatings.remove(r);
+	public void removeCustRating(Integer rating) {
+		custRatings.remove(rating);
 	}
 
 	private int getAverageCustRating() {
 		int sum = 0;
-		for (int r : custRatings) {
-			sum += r;
+		for (int rating : custRatings) {
+			sum += rating;
 		}
 
 		if (custRatings.size() == 0)

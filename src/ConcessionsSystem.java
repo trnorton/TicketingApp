@@ -24,8 +24,8 @@ public class ConcessionsSystem {
 	 * 
 	 * @param c - A variable of type Concession.
 	 */
-	public void addConcessions(Concession c) {
-		concessions.add(c);
+	public void addConcessions(Concession concession) {
+		concessions.add(concession);
 	}
 
 	/**
@@ -33,16 +33,16 @@ public class ConcessionsSystem {
 	 * 
 	 * @param c - A variable of type Concession.
 	 */
-	public void removeConcessions(Concession c) {
-		concessions.remove(c);
+	public void removeConcessions(Concession concession) {
+		concessions.remove(concession);
 	}
 
 	/**
 	 * Displays all Concessions in the list.
 	 */
 	public void showConcessions() {
-		for (Concession c : concessions) {
-			System.out.println(c);
+		for (Concession concession : concessions) {
+			System.out.println(concession);
 		}
 	}
 
