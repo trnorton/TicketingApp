@@ -22,9 +22,6 @@ public class JsonParser {
 	private static final String GENRE = "genre";
 	private static final String PERFORMERS = "performers";
 
-	//relative filepath finder
-	String currentWorkingDirectory = System.getProperty("user.dir");
-
 	//File names and Show type markers
 	private static final String TYPE_MOVIE = "Movies";
 	private static final String TYPE_PLAY = "Plays";
@@ -217,10 +214,8 @@ public class JsonParser {
 
 		ArrayList<T> shows = new ArrayList<>();
 		try {
-			
-			//JSONParser parser = new JSONParser();
 
-			String filepath = getFilePath(show);
+			String filepath = getFilePath();
 			File jsonFile = new File("src/" + filepath + FILENAME_EXTENSION);
 			if(!jsonFile.exists() || jsonFile.length() == 0){
 				System.out.println("No " + filepath + " to load...");
@@ -331,17 +326,14 @@ public class JsonParser {
 
 		if(reviews == null){
 			reviews = new ArrayList<>();
-//			reviews.add("");
 		}
 
 		if(custRatings == null){
 			custRatings = new ArrayList<>();
-//			custRatings.add(0);
 		}
 
 		if(producers == null){
 			producers = new ArrayList<>();
-//			producers.add("");
 		}
 
 		try {
@@ -371,11 +363,9 @@ public class JsonParser {
 
 	/**
 	 * Assits in determining the filepath by returning the string to use when building the filepath
-	 * @param show Any Show type
 	 * @return String constant to use in filepath
 	 */
-	private static String getFilePath(Show show) {
-		Show typeChecker = show;
+	private static String getFilePath() {
 		if (isMovie)
 			return TYPE_MOVIE;
 		else if (isPlay)
