@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.File;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -10,8 +8,6 @@ import java.util.ArrayList;
  * @author https://github.com/AkashiCat
  */
 public class User {
-    public static final int DIGIT4_MOD = 10000;
-    public static final int DIGIT2_MOD = 100;
     public static final int MIN = 0;
 
     private String name;
@@ -74,7 +70,12 @@ public class User {
 
         return age;
     }
-    
+
+    /**
+     * Method which searches the movie database for a specific movie
+     * @param movieName name of the movie to be searched for
+     * @return a Movie that has a name matching the parameter, if any
+     */
     public Movie searchForMovie(String movieName) {
 		if(movieName == null){
 			System.out.println("Null movie name given");
@@ -95,7 +96,12 @@ public class User {
 
         return null;
     }
-    
+
+    /**
+     * Method which searches the play database for a specific play
+     * @param playName name of the play to be searched for
+     * @return a Play that has a name matching the parameter, if any
+     */
     public Play searchForPlay(String playName) {
 		if(playName == null){
 			System.out.println("Null play name given");
@@ -116,7 +122,12 @@ public class User {
 
         return null;
     }
-    
+
+    /**
+     * Method which searches the concert database for a specific play
+     * @param concertName name of the concert to be searched for
+     * @return a Concert that has a name matching the parameter, if any
+     */
     public Concert searchForConcert(String concertName) {
     	if(concertName == null){
 			System.out.println("Null concert name given");
@@ -137,7 +148,13 @@ public class User {
 
         return null;
     }
-    
+
+    /**
+     * Method which searches a list of venues for a specific venue
+     * @param venue name of venue to be searched for
+     * @param venueList list of venues being searched
+     * @return a Venue with a name that matches the venue parameter, if any
+     */
     public Venue searchForVenue(String venue, ArrayList<Venue> venueList) {
     	if(venue == null){
     		System.out.println("Null venue name given");
@@ -157,8 +174,11 @@ public class User {
 
     	return null;
     }
-    
 
+    /**
+     * Method which displays the information of any event that matches the parameter
+     * @param event name of the event to be searched
+     */
     public void lookAtBasicEventInfo(String event) {
     	ArrayList<Movie> movies = JsonParser.loadMovies();
         for(Movie m : movies) {
@@ -185,6 +205,11 @@ public class User {
         }
     }
 
+    /**
+     * Method which attempts to update the user's home venue, if it exists
+     * @param venue name of the new home venue
+     * @param venues list of venues to be searched for
+     */
     public void updateHomeVenue(String venue, ArrayList<Venue> venues) {
     	for(Venue v : venues) {
     		if(venue.equals(v.getName()))
@@ -192,7 +217,16 @@ public class User {
     	}
     }
 
-    // Creating new tickets
+    /**
+     * Method which creates new tickets with specific seat numbers
+     * @param eventName name of the event the user is booking tickets for
+     * @param date date of the event showing
+     * @param time time of the event showing
+     * @param adultTickets number of tickets for adults being purchased
+     * @param childTickets number of tickets for children being purchased
+     * @param seatRow the desired row in the seating arrangement
+     * @param seatCol the desired column in the seating arrangement
+     */
     public void bookTickets(String eventName, String date, String time, int adultTickets, int childTickets, char seatRow, int seatCol) {
     	for(int i = 0; i<adultTickets+childTickets; i++) {
     		Show show = null;
@@ -233,7 +267,15 @@ public class User {
             applyRewardsPoints();
     	}
     }
-    
+
+    /**
+     * Method for booking tickets without seat numbers on them
+     * @param eventName name of the event the user is booking tickets for
+     * @param date date of the event showing
+     * @param time time of the event showing
+     * @param adultTickets number of tickets for adults to be purchased
+     * @param childTickets number of tickets for children to be purchased
+     */
     public void bookTickets(String eventName, String date, String time, int adultTickets, int childTickets) {
     	for(int i = 0; i<adultTickets+childTickets; i++) {
     		Show show = null;
@@ -275,8 +317,11 @@ public class User {
     	}
     }
 
-    // FileWriter stuff
     //TODO .txt file doesn't always appear
+    /**
+     * Method which takes all of the user's current tickets and concessions and adds up a total price for all of them
+     * The sum, ticket information, and concession information are put into a .txt file
+     */
     public void createReceipt() {
         try {
         	PrintWriter receiptWriter = new PrintWriter(new File("receipt.txt"));
@@ -300,6 +345,11 @@ public class User {
         }
     }
 
+    /**
+     * Method which allows the user to post a rating for a specific event
+     * @param event name of the event the user is rating
+     * @param rating number from 1-10 which represents the user's rating of the event
+     */
     public void rateEvent(String event, int rating) {
     	ArrayList<Movie> movies = JsonParser.loadMovies();
         for(Movie m : movies) {
@@ -328,7 +378,12 @@ public class User {
         	}
         }
     }
-    
+
+    /**
+     * Method which allows the user to write a review for a specific event
+     * @param event name of the event being reviewed
+     * @param review content of the event review
+     */
     public void writeEventReview(String event, String review) {
     	ArrayList<Movie> movies = JsonParser.loadMovies();
         for(Movie m : movies) {
@@ -367,7 +422,11 @@ public class User {
             System.out.println(e);
         }
     }
-    
+
+    /**
+     * Method which shows the user's current list of tickets
+     * Prints out information about each ticket in the list
+     */
     public void displayTickets() {
 
     	if(tickets == null || tickets.isEmpty()){
@@ -379,7 +438,12 @@ public class User {
     		System.out.println(t);
     	}
     }
-    
+
+    /**
+     * Method which allows the user to request a refund for any tickets in their list
+     * @param event name of the event the user is refunding tickets from
+     * @param numTicketsRefunded number of tickets to be refunded.
+     */
     public void requestRefund(String event, int numTicketsRefunded) {
     	
     	int ticketCount = 0;
@@ -431,6 +495,9 @@ public class User {
 		watchlist.removeIf(show -> show.getName().equals(showName));
     }
 
+    /**
+     * Method which adds a rewards point to the user's rewards points total
+     */
     private void applyRewardsPoints() {
     	rewardsPoints++;
     }
@@ -452,7 +519,12 @@ public class User {
     public double getUserDiscount() {
         return this.userDiscount;
     }
-    
+
+    /**
+     * Calls the method in Main System that distributes the user's concessions
+     * @param type type of concessions to be distributed
+     * @param quantity number of concessions of that specific type to be distributed
+     */
     public void receiveConcessions(String type, int quantity) {
     	MainSystem.distributeConcessions(type, quantity);
     }
@@ -497,7 +569,7 @@ public class User {
 
     /**
      * Standard getter for the user's nearest venue
-     * @return the user's nearest venue
+     * @return the user's current nearest venue
      */
     public Venue getVenue() {
         return this.nearestVenue;
@@ -511,86 +583,170 @@ public class User {
         this.nearestVenue = venue;
     }
 
+    /**
+     * Standard getter for the user's name
+     * @return the user's current name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Standard setter for the user's name
+     * @param name the user's new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Standard getter for the user's age
+     * @return the user's current age
+     */
     public int getAge() {
         return age;
     }
 
+    /**
+     * Standard setter for the user's age
+     * @param age the user's new age
+     */
     public void setAge(int age) {
         this.age = age;
     }
 
+    /**
+     * Standard getter for the user's birthday
+     * @return the user's current birthday in dd/mm/yyyy format
+     */
     public String getBirthday() {
         return birthday;
     }
 
+    /**
+     * Standard setter for the user's birthday
+     * @param birthday the user's new birthday. Please don't make a mistake when entering your birthday the first time
+     */
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
+    /**
+     * Standard getter for the user's phone number
+     * @return the user's current phone number
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * Standard setter for the user's phone number
+     * @param phoneNumber the user's new phone number
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Standard getter for the user's address
+     * @return the user's current address
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Standard setter for the user's address
+     * @param address the user's new address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * Standard getter for the user's email address
+     * @return the user's current email address
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Standard setter for the user's email address
+     * @param email the user's new email address
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Standard getter for the user's list of tickets
+     * @return the user's list of tickets
+     */
     public ArrayList<Ticket> getTickets() {
         return this.tickets;
     }
 
+    /**
+     * Method which adds a ticket to the user's list of tickets
+     * @param ticket ticket to be added
+     */
     public void addTicket(Ticket ticket) {
         tickets.add(ticket);
     }
 
+    /**
+     * Method which removes a ticket from the user's list of tickets
+     * @param ticket ticket to be removed
+     */
     public void removeTicket(Ticket ticket) {
         tickets.remove(ticket);
     }
 
+    /**
+     * Standard getter for the user's watchlist
+     * @return the user's current watchlist
+     */
     public ArrayList<Show> getWatchlist() {
         return watchlist;
     }
 
+    /**
+     * Method which adds a show to the user's watchlist
+     * @param show show to be added to the watchlist
+     */
     public void addToList(Show show) {
         watchlist.add(show);
     }
 
+    /**
+     * Method which removes a show from the user's watchlist
+     * @param show show to be added to the watchlist
+     */
     public void removeFromList(Show show) {
         watchlist.remove(show);
     }
 
+    /**
+     * Standard getter for the user's list of concessions
+     * @return the user's current list of concessions
+     */
     public ArrayList<Concession> getConcessions() {
         return this.concessions;
     }
 
+    /**
+     * Method which adds a concession to the user's list of concessions
+     * @param conc concession to be added to the list
+     */
     public void addConcession(Concession conc) {
         concessions.add(conc);
     }
 
+    /**
+     * Method which removes a concession from the user's list of concessions
+     * @param conc concession to be removed from the list
+     */
     public void removeConcession(Concession conc) {
         concessions.remove(conc);
     }
