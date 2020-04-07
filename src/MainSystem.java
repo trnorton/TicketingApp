@@ -33,9 +33,9 @@ public class MainSystem {
 	 * @param location - A variable of type String.
 	 */
 	public void searchForLocation(String location) {
-		for (Venue v : venues) {
-			if (v.getName().trim().equalsIgnoreCase(location)) {
-				System.out.println(v);
+		for (Venue venue : venues) {
+			if (venue.getName().trim().equalsIgnoreCase(location)) {
+				System.out.println(venue);
 			}
 		}
 	}
@@ -86,9 +86,9 @@ public class MainSystem {
 	 * @return User - The User with the same account ID.
 	 */
 	public User findUser(int acctID) {
-		for (User u : users) {
-			if (u.getAccountID() == acctID) {
-				return u;
+		for (User user : users) {
+			if (user.getAccountID() == acctID) {
+				return user;
 			}
 		}
 		return null;
@@ -117,10 +117,10 @@ public class MainSystem {
 	 * 
 	 * @param e - A variable of type Event.
 	 */
-	public void displayAvailableTheater(Event e) {
-		for (Venue v : venues) {
-			if (v.hasAvailableTheater(e)) {
-				v.getAvailableTheater(e).displaySeats();
+	public void displayAvailableTheater(Event event) {
+		for (Venue venue : venues) {
+			if (venue.hasAvailableTheater(event)) {
+				venue.getAvailableTheater(event).displaySeats();
 			}
 		}
 	}
@@ -130,8 +130,8 @@ public class MainSystem {
 	 * 
 	 * @param u - A variable of type User.
 	 */
-	public void addUserToDatabase(User u) {
-		users.add(u);
+	public void addUserToDatabase(User user) {
+		users.add(user);
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getAccountID() == 0)
 				users.get(i).setAccountID(i + 1);
@@ -146,36 +146,36 @@ public class MainSystem {
 	 * @param date  - A variable of type String.
 	 * @param time  - A variable of type String.
 	 */
-	public void displayAvailableTheater(String event, String date, String time) {
-		Show s = null;
+	public void displayAvailableTheater(String eventName, String date, String time) {
+		Show show = null;
 		ArrayList<Movie> movies = JsonParser.loadMovies();
-		for (Movie m : movies) {
-			if (event.trim().equalsIgnoreCase(m.getName())) {
-				s = m;
+		for (Movie movie : movies) {
+			if (eventName.trim().equalsIgnoreCase(movie.getName())) {
+				show = movie;
 				break;
 			}
 		}
 
 		ArrayList<Play> plays = JsonParser.loadPlays();
-		for (Play p : plays) {
-			if (event.trim().equalsIgnoreCase(p.getName())) {
-				s = p;
+		for (Play play : plays) {
+			if (eventName.trim().equalsIgnoreCase(play.getName())) {
+				show = play;
 				break;
 			}
 		}
 
 		ArrayList<Concert> concerts = JsonParser.loadConcerts();
-		for (Concert c : concerts) {
-			if (event.trim().equalsIgnoreCase(c.getName())) {
-				s = c;
+		for (Concert concert : concerts) {
+			if (eventName.trim().equalsIgnoreCase(concert.getName())) {
+				show = concert;
 				break;
 			}
 		}
-		Event e = new Event(s, date, time);
+		Event event = new Event(show, date, time);
 
-		for (Venue v : venues) {
-			if (v.getAvailableTheater(e).getEvent(e).getShow().getName().trim().equalsIgnoreCase(event)) {
-				v.getAvailableTheater(e).displaySeats();
+		for (Venue venue : venues) {
+			if (venue.getAvailableTheater(event).getEvent(event).getShow().getName().trim().equalsIgnoreCase(eventName)) {
+				venue.getAvailableTheater(event).displaySeats();
 				break;
 			}
 		}
