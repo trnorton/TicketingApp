@@ -115,7 +115,7 @@ public class MainSystem {
 	/**
 	 * Prints out the seating map of the Theater showing the given Event.
 	 * 
-	 * @param e - A variable of type Event.
+	 * @param event - A variable of type Event.
 	 */
 	public void displayAvailableTheater(Event event) {
 		for (Venue venue : venues) {
@@ -128,7 +128,7 @@ public class MainSystem {
 	/**
 	 * Adds the given User the list of exisiting users in the main system.
 	 * 
-	 * @param u - A variable of type User.
+	 * @param user - A variable of type User.
 	 */
 	public void addUserToDatabase(User user) {
 		users.add(user);
@@ -142,7 +142,7 @@ public class MainSystem {
 	 * Prints out the seating map of the Theater showing the Event of the same given
 	 * name, date, and time.
 	 * 
-	 * @param event - A variable of type Event.
+	 * @param eventName - A variable of type String.
 	 * @param date  - A variable of type String.
 	 * @param time  - A variable of type String.
 	 */
