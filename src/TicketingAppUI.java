@@ -1379,6 +1379,10 @@ public class TicketingAppUI {
 		//this takes care of all the functions here
 		System.out.println("Type in the name of the customer to give a refund to");
 		String customerName = scanner.nextLine();
+		if(customerName.trim().equalsIgnoreCase("")){
+			System.out.println("Blank customer name given");
+			return;
+		}
 
 		Employee employeeUser = (Employee)user;
 		employeeUser.refundTickets(customerName);
