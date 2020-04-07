@@ -306,12 +306,8 @@ public class User {
             Event event = new Event(show, date, time);
             Theater theater = new Theater('A', 25, 30);
             Seat seat = new Seat('a', 1);
-<<<<<<< HEAD
 
-            if(event.toString().equals(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
-=======
             if(event.toString().trim().equalsIgnoreCase(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
->>>>>>> 5fbf6c490e9612a19a50747fc6423a06a5f74ed3
             	theater = nearestVenue.getAvailableTheater(event);
             	event = theater.getEvent(event);
             	seat = theater.getAvailableSeat();
