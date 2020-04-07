@@ -268,8 +268,7 @@ public class User {
 		Event event = new Event(show, date, time);
 		Theater theater = new Theater('A', 25, 30);
 		Seat seat = new Seat('a', 1);
-		if (event.toString().trim()
-				.equalsIgnoreCase(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
+		if (event.toString().trim().equalsIgnoreCase(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
 			theater = nearestVenue.getAvailableTheater(event);
 			event = theater.getEvent(event);
 			seat = theater.getSeat(seatRow, seatCol);
@@ -318,7 +317,7 @@ public class User {
 				receiptWriter.println(c);
 				totalPrice += c.getPrice();
 			}
-			receiptWriter.println("Total price: $" + totalPrice);
+			receiptWriter.println("Total price: $" + totalPrice + "0");
 			receiptWriter.close();
 		} catch (Exception e) {
 			System.out.println("Error: Receipt unable to print");

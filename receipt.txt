@@ -1,18 +1,18 @@
 ********** Receipt **********
-Ticket for "Guest" at the Name: Venue
+Ticket for "Customer" at the Name: Venue
 Address: 123 Movie St
 Overall Customer Rating: 0
-Theater A
-Frozen 2 - 04/10/2020 - 12:00pm
-Seat: A1
+Theater F
+The Jungle Book - 04/10/2020 - 12:00pm
+Seat: Q14
 Paid: $5.00
 
-Ticket for "Guest" at the Name: Venue
+Ticket for "Customer" at the Name: Venue
 Address: 123 Movie St
 Overall Customer Rating: 0
-Theater A
-Frozen 2 - 04/10/2020 - 12:00pm
-Seat: A2
+Theater F
+The Jungle Book - 04/10/2020 - 12:00pm
+Seat: Q15
 Paid: $5.00
 
 Total price: $10.0
