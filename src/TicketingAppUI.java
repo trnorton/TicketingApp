@@ -968,10 +968,20 @@ public class TicketingAppUI {
 			return;
 		}
 
+		//find venue mainsystem
+		Venue venueToAddEventTo = null;
+		for(Venue venue : allVenues)
+			if(venueName.equals(venue.getName())){
+				venueToAddEventTo = venue;
+				break;
+			}
 
-		//allVenues.add(new Venue(venueName, "test", 5));
+		if(venueToAddEventTo == null){
+			System.out.println("No Venue matching that name...Event not added");
+			return;
+		}
 
-		employeeUser.inputEvent(venueName, allVenues, date, time, show);
+		employeeUser.inputEvent(venueToAddEventTo, date, time, show);
 
 		System.out.println("This event has been added");
 	}
