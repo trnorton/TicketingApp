@@ -22,9 +22,10 @@ public class Concert extends Show {
 	 * @param performers String Arraylist of performers of concert
 	 * @param producers producers of show
 	 */
-	public Concert(String name, int ageRating, ArrayList<String> performers, ArrayList<String> producers) {
+	public Concert(String name, int offRating, int ageRating, ArrayList<String> performers, ArrayList<String> producers) {
 		this.setName(name);
 		this.setAgeRating(ageRating);
+		this.setOffRating(offRating);
 		this.setProducers(producers);
 		this.setPerformers(performers);
 	}

@@ -933,7 +933,7 @@ public class TicketingAppUI {
 				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
-			show = new Movie(showName, ageRating, genre, actors, producers);
+			show = new Movie(showName, rating, ageRating, genre, actors, producers);
 		}
 		else if(showType.trim().equalsIgnoreCase("Play")) {
 			System.out.println("Type in the major actors in this play. Type 'Done' when finished");
@@ -943,7 +943,7 @@ public class TicketingAppUI {
 				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
-			show = new Play(showName, ageRating, actors, producers);
+			show = new Play(showName, rating, ageRating, actors, producers);
 		}
 		else if(showType.trim().equalsIgnoreCase("Concert")) {
 			System.out.println("Type in the major performers in this concert. Type 'Done' when finished");
@@ -953,7 +953,7 @@ public class TicketingAppUI {
 				if(performer.trim().equalsIgnoreCase("Done")) break;
 				performers.add(performer);
 			}
-			show = new Concert(showName, ageRating, performers, producers);
+			show = new Concert(showName, rating, ageRating, performers, producers);
 		}
 
 
@@ -968,10 +968,20 @@ public class TicketingAppUI {
 			return;
 		}
 
+		//find venue mainsystem
+		Venue venueToAddEventTo = null;
+		for(Venue venue : allVenues)
+			if(venueName.equals(venue.getName())){
+				venueToAddEventTo = venue;
+				break;
+			}
 
-		//allVenues.add(new Venue(venueName, "test", 5));
+		if(venueToAddEventTo == null){
+			System.out.println("No Venue matching that name...Event not added");
+			return;
+		}
 
-		employeeUser.inputEvent(venueName, allVenues, date, time, show);
+		employeeUser.inputEvent(venueToAddEventTo, date, time, show);
 
 		System.out.println("This event has been added");
 	}
