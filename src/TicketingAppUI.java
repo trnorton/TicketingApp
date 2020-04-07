@@ -22,6 +22,9 @@ public class TicketingAppUI {
 			"Add to watchlist", "Return to main menu" };
 	private String[] venueSearchMenuOptions = { "Make this venue your home venue", "Return to main menu" };
 
+	/**
+	 * Default constructor for TicketingAppUI
+	 */
 	TicketingAppUI() {
 		scanner = new Scanner(System.in);
 		main = new MainSystem();
@@ -97,7 +100,10 @@ public class TicketingAppUI {
 			}
 		}
 	}
-	
+
+	/**
+	 * Method which prompts the user to enter a home venue
+	 */
 	private void getHomeVenue() {
 		System.out.println("Input your home venue");
 		while(true) {
@@ -458,6 +464,10 @@ public class TicketingAppUI {
 		user.lookAtBasicEventInfo(movie);
 	}
 
+	/**
+	 * Prompts the user to enter a rating for a show
+	 * @param showName - The name of the show being rated
+	 */
 	private void rateShow(String showName){
 		System.out.println("Type in your rating for this event on a scale of 1 to 5");
 
@@ -480,6 +490,10 @@ public class TicketingAppUI {
 		System.out.println("Rating has been recorded");
 	}
 
+	/**
+	 * Prompts the user to write a review for a show
+	 * @param showName - The name of the show being reviewed
+	 */
 	private void writeShowReview(String showName){
 		System.out.println("Type in your review for this movie");
 		String review = scanner.nextLine();
@@ -624,7 +638,10 @@ public class TicketingAppUI {
 		user.lookAtBasicEventInfo(concert);
 	}
 
-
+	/**
+	 * Allows the user to book tickets for a desired show
+	 * @param showName - Name of the show tickets are being booked for
+	 */
 	private void bookTickets(String showName){
 		System.out.println("Type in the date you want to see this show (MM/DD/YYYY)");
 		String date = scanner.nextLine();
@@ -1116,6 +1133,7 @@ public class TicketingAppUI {
 		System.out.println();
 	}
 
+	/** Main method which starts the program */
 	public static void main(String[] args) {
 		TicketingAppUI appInterface = new TicketingAppUI();
 		appInterface.run();
