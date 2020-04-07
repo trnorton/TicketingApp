@@ -82,7 +82,7 @@ public abstract class Show {
 	/**
 	 * Adds a given String to the list of customer reviews.
 	 * 
-	 * @param r - A variable of type String.
+	 * @param review - A variable of type String.
 	 */
 	public void addReview(String review) {
 		reviews.add(review);
@@ -91,7 +91,7 @@ public abstract class Show {
 	/**
 	 * Removes a given String from the list of customer reviews.
 	 * 
-	 * @param r - A variable of type String.
+	 * @param review - A variable of type String.
 	 */
 	public void removeReview(String review) {
 		reviews.remove(review);
@@ -109,7 +109,7 @@ public abstract class Show {
 	/**
 	 * Adds a given Integer to the list of customer ratings.
 	 * 
-	 * @param r - A variable of type Integer.
+	 * @param rating - A variable of type Integer.
 	 */
 	public void addCustRating(Integer rating) {
 		custRatings.add(rating);
@@ -118,7 +118,7 @@ public abstract class Show {
 	/**
 	 * Removes a given Integer from the list of customer ratings.
 	 * 
-	 * @param r - A variable of type Integer.
+	 * @param rating - A variable of type Integer.
 	 */
 	public void removeCustRating(Integer rating) {
 		custRatings.remove(rating);
