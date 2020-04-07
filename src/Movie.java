@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * @author Lukacs Ablonczy
- * Defines the Movie Show type
+ * @author Lukacs Ablonczy Defines the Movie Show type
  */
 public class Movie extends Show {
 
@@ -12,19 +11,21 @@ public class Movie extends Show {
 	/**
 	 * Blank constructor, used for creating empty Show types
 	 */
-	public Movie(){
+	public Movie() {
 
 	}
 
 	/**
 	 * Constructor for Concert type
-	 * @param name Name of show
-	 * @param ageRating AgeRating of show
-	 * @param genre Genre of movie
+	 * 
+	 * @param name        Name of show
+	 * @param ageRating   AgeRating of show
+	 * @param genre       Genre of movie
 	 * @param majorActors String Arraylist of actors of movie
-	 * @param producers producers of show
+	 * @param producers   producers of show
 	 */
-	public Movie(String name, int offRating, int ageRating, String genre, ArrayList<String> majorActors, ArrayList<String> producers) {
+	public Movie(String name, int offRating, int ageRating, String genre, ArrayList<String> majorActors,
+			ArrayList<String> producers) {
 		this.setName(name);
 		this.setOffRating(offRating);
 		this.setAgeRating(ageRating);
@@ -35,16 +36,18 @@ public class Movie extends Show {
 
 	/**
 	 * Constructor for Concert type
-	 * @param name Name of show
-	 * @param offRating IMDB Rating of show
-	 * @param ageRating AgeRating of show
-	 * @param reviews Reviews of show
+	 * 
+	 * @param name        Name of show
+	 * @param offRating   IMDB Rating of show
+	 * @param ageRating   AgeRating of show
+	 * @param reviews     Reviews of show
 	 * @param custRatings Customer Ratings of show
-	 * @param producers producers of show
+	 * @param producers   producers of show
 	 * @param majorActors String Arraylist of actors of movie
-	 * @param genre Genre of movie
+	 * @param genre       Genre of movie
 	 */
-	public Movie(String name, int offRating, int ageRating, ArrayList<String> reviews, ArrayList<Integer> custRatings, ArrayList<String> producers, ArrayList<String> majorActors, String genre) {
+	public Movie(String name, int offRating, int ageRating, ArrayList<String> reviews, ArrayList<Integer> custRatings,
+			ArrayList<String> producers, ArrayList<String> majorActors, String genre) {
 		this.setName(name);
 		this.setOffRating(offRating);
 		this.setAgeRating(ageRating);
@@ -57,6 +60,7 @@ public class Movie extends Show {
 
 	/**
 	 * Getter for genre attribute
+	 * 
 	 * @return String genre of this movie
 	 */
 	public String getGenre() {
@@ -65,6 +69,7 @@ public class Movie extends Show {
 
 	/**
 	 * Setter for genre attribute
+	 * 
 	 * @param genre String genre for this movie
 	 */
 	public void setGenre(String genre) {
@@ -78,6 +83,7 @@ public class Movie extends Show {
 
 	/**
 	 * Places actor's name into majorActors ArrayList
+	 * 
 	 * @param actor String name of actors
 	 */
 	public void addMajorActor(String actor) {
@@ -91,6 +97,7 @@ public class Movie extends Show {
 
 	/**
 	 * Removes name from majorActors arraylist
+	 * 
 	 * @param actor String name of actor to remove
 	 */
 	public void removeMajorActor(String actor) {
@@ -105,6 +112,7 @@ public class Movie extends Show {
 
 	/**
 	 * Returns arraylist of major actors
+	 * 
 	 * @return String arraylist majorActors
 	 */
 	public ArrayList<String> getMajorActors() {
@@ -113,6 +121,7 @@ public class Movie extends Show {
 
 	/**
 	 * Setter for this movie's majorActors
+	 * 
 	 * @param majorActors String arraylist of actor's names
 	 */
 	public void setMajorActors(ArrayList<String> majorActors) {
@@ -121,6 +130,7 @@ public class Movie extends Show {
 
 	/**
 	 * Returns string describing movie
+	 * 
 	 * @return Name: Ratings: Producers: Genre: Famous Actors:
 	 */
 	@Override
