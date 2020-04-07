@@ -6,12 +6,13 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * @author Lukacs Ablonczy
- * This class uses loads and saves JSON files based on the System's movies, concerts, and plays held in ArrayList<String> objects
+ * @author Lukacs Ablonczy This class uses loads and saves JSON files based on
+ *         the System's movies, concerts, and plays held in ArrayList<String>
+ *         objects
  */
 public class JsonParser {
 
-	//Keys for Json Values
+	// Keys for Json Values
 	private static final String NAME = "name";
 	private static final String OFF_RATING = "offRating";
 	private static final String AGE_RATING = "ageRating";
@@ -22,19 +23,20 @@ public class JsonParser {
 	private static final String GENRE = "genre";
 	private static final String PERFORMERS = "performers";
 
-	//File names and Show type markers
+	// File names and Show type markers
 	private static final String TYPE_MOVIE = "Movies";
 	private static final String TYPE_PLAY = "Plays";
 	private static final String TYPE_CONCERT = "Concerts";
 	private static final String FILENAME_EXTENSION = ".json";
 
-	//Keeps track of show type, to avoid repeated instanceof checks
+	// Keeps track of show type, to avoid repeated instanceof checks
 	private static boolean isMovie = false;
 	private static boolean isConcert = false;
 	private static boolean isPlay = false;
 
 	/**
 	 * Loads movies from Movies.json
+	 * 
 	 * @return ArrayList<Movie> of all movies found
 	 */
 	public static ArrayList<Movie> loadMovies() {
@@ -43,6 +45,7 @@ public class JsonParser {
 
 	/**
 	 * Loads concerts from Concerts.json
+	 * 
 	 * @return ArrayList<Concert> of all concerts found
 	 */
 	public static ArrayList<Concert> loadConcerts() {
@@ -51,6 +54,7 @@ public class JsonParser {
 
 	/**
 	 * Loads plays from Plays.json
+	 * 
 	 * @return ArrayList<Play> of all plays found
 	 */
 	public static ArrayList<Play> loadPlays() {
@@ -59,8 +63,9 @@ public class JsonParser {
 
 	/**
 	 * Writes to JSON any ArrayList of any show type
+	 * 
 	 * @param showList ArrayList of a Show child type
-	 * @param <T> The type of Show child contained in the arraylist
+	 * @param <T>      The type of Show child contained in the arraylist
 	 */
 	public static <T extends Show> void saveData(ArrayList<T> showList) {
 		T typeChecker = showList.get(0);
@@ -74,7 +79,7 @@ public class JsonParser {
 			JSONArray showJson = new JSONArray();
 
 			for (T show : showList) {
-				if(nameBlankOrNull(show.getName())){
+				if (nameBlankOrNull(show.getName())) {
 					System.out.println("Will not write show: Name Blank or Null");
 					continue;
 				}
@@ -90,23 +95,30 @@ public class JsonParser {
 	}
 
 	/**
-	 * Checks whether a Show child types name is null or blank, in order to skip it when reading or writing
+	 * Checks whether a Show child types name is null or blank, in order to skip it
+	 * when reading or writing
+	 * 
 	 * @param name String name of Show child type
 	 * @return Whether name is null or blank
 	 */
-	private static boolean nameBlankOrNull(String name){
+	private static boolean nameBlankOrNull(String name) {
 		return name == null || name.equals("");
 	}
 
 	/**
-	 * Loads attributes from JSON that are shared among all Show types for a single object stored in JSON
-	 * @param json JSONObject containing one of the elements of the main JSONArray parsed from the JSON file
-	 * @param newShow Allows the creation of new instances of a generic datatype. Pass to this a show.getClass(), where show is the name of any variable of Show type created outside this method
-	 * @param <T> The type of Show child being currently loaded
+	 * Loads attributes from JSON that are shared among all Show types for a single
+	 * object stored in JSON
+	 * 
+	 * @param json    JSONObject containing one of the elements of the main
+	 *                JSONArray parsed from the JSON file
+	 * @param newShow Allows the creation of new instances of a generic datatype.
+	 *                Pass to this a show.getClass(), where show is the name of any
+	 *                variable of Show type created outside this method
+	 * @param <T>     The type of Show child being currently loaded
 	 * @return Returns A Show child type, with some attributes set, and others null.
 	 */
 	private static <T extends Show> T loadBasicsFromFile(JSONObject json, Class<T> newShow) {
-				T show = null;
+		T show = null;
 		try {
 			show = newShow.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
@@ -141,7 +153,7 @@ public class JsonParser {
 				producers.add((String) (producer));
 			show.setProducers(producers);
 
-		} catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Cannot load show data");
 			return null;
@@ -152,8 +164,11 @@ public class JsonParser {
 
 	/**
 	 * Called by loadDataFromFile to add data to the given show
-	 * @param json JSONObject containing one of the elements of the main JSONArray parsed from the JSON file
-	 * @param movie Movie that will be receiving Genre and MajorActors elements from JSON
+	 * 
+	 * @param json  JSONObject containing one of the elements of the main JSONArray
+	 *              parsed from the JSON file
+	 * @param movie Movie that will be receiving Genre and MajorActors elements from
+	 *              JSON
 	 * @return Movie instance fully constructed
 	 */
 	private static Movie addMovieAttributes(JSONObject json, Movie movie) {
@@ -171,7 +186,9 @@ public class JsonParser {
 
 	/**
 	 * Called by loadDataFromFile to add data to the given show
-	 * @param json JSONObject containing one of the elements of the main JSONArray parsed from the JSON file
+	 * 
+	 * @param json JSONObject containing one of the elements of the main JSONArray
+	 *             parsed from the JSON file
 	 * @param play Play that will be receiving a MajorActors element from JSON
 	 * @return Play instance fully constructed
 	 */
@@ -188,7 +205,9 @@ public class JsonParser {
 
 	/**
 	 * Called by loadDataFromFile to add data to the given show
-	 * @param json JSONObject containing one of the elements of the main JSONArray parsed from the JSON file
+	 * 
+	 * @param json    JSONObject containing one of the elements of the main
+	 *                JSONArray parsed from the JSON file
 	 * @param concert Play that will be receiving a Performers element from JSON
 	 * @return Concert instance fully constructed
 	 */
@@ -196,7 +215,7 @@ public class JsonParser {
 		ArrayList<String> performers = new ArrayList<>();
 		JSONArray performersArray = (JSONArray) json.get(PERFORMERS);
 		for (Object performer : performersArray)
-			performers.add((String)(performer));
+			performers.add((String) (performer));
 
 		concert.setPerformers(performers);
 
@@ -204,10 +223,14 @@ public class JsonParser {
 	}
 
 	/**
-	 * Loads JSON Data from a .json file. Object type and the file to draw from are determined automatically by the method
-	 * @param show Show child type instance, always use either "new Movie()", "new Play()", or "new Concert()"
-	 * @param <T> The name of any type that is a child of the Show type
-	 * @return ArrayList of the Show child type given in the parameter loaded from .json
+	 * Loads JSON Data from a .json file. Object type and the file to draw from are
+	 * determined automatically by the method
+	 * 
+	 * @param show Show child type instance, always use either "new Movie()", "new
+	 *             Play()", or "new Concert()"
+	 * @param <T>  The name of any type that is a child of the Show type
+	 * @return ArrayList of the Show child type given in the parameter loaded from
+	 *         .json
 	 */
 	private static <T extends Show> ArrayList<T> loadDataFromFile(T show) {
 		setType(show);
@@ -217,23 +240,23 @@ public class JsonParser {
 
 			String filepath = getFilePath();
 			File jsonFile = new File("src/" + filepath + FILENAME_EXTENSION);
-			if(!jsonFile.exists() || jsonFile.length() == 0){
+			if (!jsonFile.exists() || jsonFile.length() == 0) {
 				System.out.println("No " + filepath + " to load...");
 				return null;
 			}
 
-
-			JSONArray showArray = (JSONArray) new JSONParser().parse(new FileReader("src/" + filepath + FILENAME_EXTENSION));
+			JSONArray showArray = (JSONArray) new JSONParser()
+					.parse(new FileReader("src/" + filepath + FILENAME_EXTENSION));
 
 			for (Object jsonObject : showArray) {
 				JSONObject json = (JSONObject) jsonObject;
-				if(json == null){
+				if (json == null) {
 					continue;
 				}
 
 				T newShow = (T) loadBasicsFromFile(json, show.getClass());
 
-				if(nameBlankOrNull(newShow.getName()))
+				if (nameBlankOrNull(newShow.getName()))
 					continue;
 
 				if (isMovie) {
@@ -256,8 +279,11 @@ public class JsonParser {
 	}
 
 	/**
-	 * Json Simple sucks, so this method cleans up the broken JSON by removing unnecessary quotation marks and escape characters
-	 * @param json The string version of json. Most likely a JSONArray or JSONObject .toJSONString()
+	 * Json Simple sucks, so this method cleans up the broken JSON by removing
+	 * unnecessary quotation marks and escape characters
+	 * 
+	 * @param json The string version of json. Most likely a JSONArray or JSONObject
+	 *             .toJSONString()
 	 * @return Useable JSON to print to file
 	 */
 	private static String fixJson(String json) {
@@ -265,10 +291,13 @@ public class JsonParser {
 	}
 
 	/**
-	 * Used to take a generic Show child type, adds the type's unique attributes to the JSONObject being build by saveData
+	 * Used to take a generic Show child type, adds the type's unique attributes to
+	 * the JSONObject being build by saveData
+	 * 
 	 * @param show Show child type instance
-	 * @param <T> The name of any type that is a child of the Show type
-	 * @return JSONObject that contains all of the attributes of the given instace of a Show child type
+	 * @param <T>  The name of any type that is a child of the Show type
+	 * @return JSONObject that contains all of the attributes of the given instace
+	 *         of a Show child type
 	 */
 	private static <T extends Show> JSONObject getShowJSON(T show) {
 		JSONObject showInfo = getBasicJSON(show);
@@ -300,7 +329,7 @@ public class JsonParser {
 
 				showInfo.put(PERFORMERS, performersArray.toJSONString());
 			}
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Cannot save show json...");
 		}
@@ -309,10 +338,13 @@ public class JsonParser {
 	}
 
 	/**
-	 * Retrieves JSON from .json that is common to all Show types to start off a JSONObject
+	 * Retrieves JSON from .json that is common to all Show types to start off a
+	 * JSONObject
+	 * 
 	 * @param show Show child type instance
-	 * @param <T> The name of any type that is a child of the Show type
-	 * @return JSONObject that contains all of the attributes of the given instace of a Show child type
+	 * @param <T>  The name of any type that is a child of the Show type
+	 * @return JSONObject that contains all of the attributes of the given instace
+	 *         of a Show child type
 	 */
 	private static <T extends Show> JSONObject getBasicJSON(T show) {
 		JSONObject showInfo = new JSONObject();
@@ -324,15 +356,15 @@ public class JsonParser {
 		ArrayList<Integer> custRatings = show.getCustRatings();
 		ArrayList<String> producers = show.getProducers();
 
-		if(reviews == null){
+		if (reviews == null) {
 			reviews = new ArrayList<>();
 		}
 
-		if(custRatings == null){
+		if (custRatings == null) {
 			custRatings = new ArrayList<>();
 		}
 
-		if(producers == null){
+		if (producers == null) {
 			producers = new ArrayList<>();
 		}
 
@@ -346,14 +378,13 @@ public class JsonParser {
 			JSONArray producersArray = new JSONArray();
 			producersArray.addAll(producers);
 
-
 			showInfo.put(NAME, name);
 			showInfo.put(OFF_RATING, offRating);
 			showInfo.put(AGE_RATING, ageRating);
 			showInfo.put(REVIEWS, reviewsArray.toJSONString());
 			showInfo.put(CUST_RATINGS, custRatingsArray.toJSONString());
 			showInfo.put(PRODUCERS, producersArray.toJSONString());
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Cannot save Show json...");
 			return null;
@@ -362,7 +393,9 @@ public class JsonParser {
 	}
 
 	/**
-	 * Assits in determining the filepath by returning the string to use when building the filepath
+	 * Assits in determining the filepath by returning the string to use when
+	 * building the filepath
+	 * 
 	 * @return String constant to use in filepath
 	 */
 	private static String getFilePath() {
@@ -380,8 +413,9 @@ public class JsonParser {
 
 	/**
 	 * Sets markers for the Show child type given by parameter
+	 * 
 	 * @param show Any instance of a show child type
-	 * @param <T> The name of any type that is a child of show
+	 * @param <T>  The name of any type that is a child of show
 	 */
 	private static <T extends Show> void setType(T show) {
 		if (show instanceof Movie) {

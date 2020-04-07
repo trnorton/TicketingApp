@@ -169,11 +169,19 @@ public class TicketingAppUI {
 	 */
 	private int getUserCommand(int numCommands) {
 		System.out.println("Type the number corresponding to the action you want to take");
+		while(true) {
+		try {
 		nextLine = scanner.nextLine();
 		int command = Integer.parseInt(nextLine) - 1;
 		if (command >= 0 && command <= numCommands - 1)
 			return command;
 		return -1;
+		} catch(Exception e) {
+			System.out.println("This is not a number");
+			System.out.println("Type the number corresponding to the action you want to take");
+			continue;
+		}
+		}
 
 	}
 
