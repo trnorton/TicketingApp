@@ -9,7 +9,7 @@ public class Movie extends Show {
 	private String genre;
 
 	/**
-	 * Blank constructor, used for creating empty Show types
+	 * Blank constructor, used for creating empty Show types and later setting values
 	 */
 	public Movie() {
 

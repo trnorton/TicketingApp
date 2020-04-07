@@ -8,7 +8,7 @@ public class Concert extends Show {
 	private ArrayList<String> performers;
 
 	/**
-	 * Blank constructor, used for creating empty Show types
+	 * Blank constructor, used for creating empty Show types and later setting values
 	 */
 	public Concert() {
 
