@@ -8,7 +8,7 @@ public class Play extends Show {
 	private ArrayList<String> majorActors;
 
 	/**
-	 * Blank constructor, used for creating empty Show types
+	 * Blank constructor, used for creating empty Show types and later setting values
 	 */
 	public Play() {
 

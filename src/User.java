@@ -218,13 +218,13 @@ public class User {
 	/**
 	 * Method which attempts to update the user's home venue, if it exists
 	 * 
-	 * @param venue  name of the new home venue
+	 * @param venueName  name of the new home venue
 	 * @param venues list of venues to be searched for
 	 */
-	public void updateHomeVenue(String venue, ArrayList<Venue> venues) {
-		for (Venue v : venues) {
-			if (venue.trim().equalsIgnoreCase(v.getName()))
-				nearestVenue = v;
+	public void updateHomeVenue(String venueName, ArrayList<Venue> venues) {
+		for (Venue venue : venues) {
+			if (venueName.trim().equalsIgnoreCase(venue.getName()))
+				nearestVenue = venue;
 		}
 	}
 
@@ -239,13 +239,12 @@ public class User {
 	 * @param seatRow      the desired row in the seating arrangement
 	 * @param seatCol      the desired column in the seating arrangement
 	 */
-	public void bookTickets(String eventName, String date, String time, int adultTickets, int childTickets,
-			char seatRow, int seatCol) {
+	public void bookTickets(String eventName, String date, String time, int adultTickets, int childTickets, char seatRow, int seatCol) {
 		Show show = null;
 		ArrayList<Movie> movies = JsonParser.loadMovies();
-		for (Movie m : movies) {
-			if (eventName.trim().equalsIgnoreCase(m.getName())) {
-				show = m;
+		for (Movie movie : movies) {
+			if (eventName.trim().equalsIgnoreCase(movie.getName())) {
+				show = movie;
 				break;
 			}
 		}
@@ -306,15 +305,15 @@ public class User {
 			PrintWriter receiptWriter = new PrintWriter(new File("receipt.txt"));
 			receiptWriter.println("********** Receipt **********");
 			double totalPrice = 0;
-			for (Ticket t : tickets) {
-				receiptWriter.println(t);
-				totalPrice += t.getPrice();
+			for (Ticket ticket : tickets) {
+				receiptWriter.println(ticket);
+				totalPrice += ticket.getPrice();
 			}
-			for (Concession c : concessions) {
+			for (Concession concession : concessions) {
 				if (concessions.size() == 0)
 					break;
-				receiptWriter.println(c);
-				totalPrice += c.getPrice();
+				receiptWriter.println(concession);
+				totalPrice += concession.getPrice();
 			}
 			receiptWriter.println("Total price: $" + totalPrice + "0");
 			receiptWriter.close();
@@ -332,27 +331,27 @@ public class User {
 	 */
 	public void rateEvent(String event, int rating) {
 		ArrayList<Movie> movies = JsonParser.loadMovies();
-		for (Movie m : movies) {
-			if (event.trim().equalsIgnoreCase(m.getName())) {
-				m.addCustRating(rating);
+		for (Movie movie : movies) {
+			if (event.trim().equalsIgnoreCase(movie.getName())) {
+				movie.addCustRating(rating);
 				JsonParser.saveData(movies);
 				return;
 			}
 		}
 
 		ArrayList<Play> plays = JsonParser.loadPlays();
-		for (Play p : plays) {
-			if (event.trim().equalsIgnoreCase(p.getName())) {
-				p.addCustRating(rating);
+		for (Play play : plays) {
+			if (event.trim().equalsIgnoreCase(play.getName())) {
+				play.addCustRating(rating);
 				JsonParser.saveData(plays);
 				return;
 			}
 		}
 
 		ArrayList<Concert> concerts = JsonParser.loadConcerts();
-		for (Concert c : concerts) {
-			if (event.trim().equalsIgnoreCase(c.getName())) {
-				c.addCustRating(rating);
+		for (Concert concert : concerts) {
+			if (event.trim().equalsIgnoreCase(concert.getName())) {
+				concert.addCustRating(rating);
 				JsonParser.saveData(concerts);
 				return;
 			}
@@ -367,27 +366,27 @@ public class User {
 	 */
 	public void writeEventReview(String event, String review) {
 		ArrayList<Movie> movies = JsonParser.loadMovies();
-		for (Movie m : movies) {
-			if (event.trim().equalsIgnoreCase(m.getName())) {
-				m.addReview(review);
+		for (Movie movie : movies) {
+			if (event.trim().equalsIgnoreCase(movie.getName())) {
+				movie.addReview(review);
 				JsonParser.saveData(movies);
 				return;
 			}
 		}
 
 		ArrayList<Play> plays = JsonParser.loadPlays();
-		for (Play p : plays) {
-			if (event.trim().equalsIgnoreCase(p.getName())) {
-				p.addReview(review);
+		for (Play play : plays) {
+			if (event.trim().equalsIgnoreCase(play.getName())) {
+				play.addReview(review);
 				JsonParser.saveData(plays);
 				return;
 			}
 		}
 
 		ArrayList<Concert> concerts = JsonParser.loadConcerts();
-		for (Concert c : concerts) {
-			if (event.trim().equalsIgnoreCase(c.getName())) {
-				c.addReview(review);
+		for (Concert concert : concerts) {
+			if (event.trim().equalsIgnoreCase(concert.getName())) {
+				concert.addReview(review);
 				JsonParser.saveData(concerts);
 				return;
 			}
@@ -399,8 +398,8 @@ public class User {
 	 * list
 	 */
 	public void displayWatchlist() {
-		for (Show e : watchlist) {
-			System.out.println(e);
+		for (Show show : watchlist) {
+			System.out.println(show);
 		}
 	}
 
@@ -415,8 +414,8 @@ public class User {
 			return;
 		}
 
-		for (Ticket t : tickets) {
-			System.out.println(t);
+		for (Ticket ticket : tickets) {
+			System.out.println(ticket);
 		}
 	}
 
@@ -448,25 +447,25 @@ public class User {
 	 */
 	public void addToWatchlist(String show) {
 		ArrayList<Movie> movies = JsonParser.loadMovies();
-		for (Movie m : movies) {
-			if (show.trim().equalsIgnoreCase(m.getName())) {
-				watchlist.add(m);
+		for (Movie movie : movies) {
+			if (show.trim().equalsIgnoreCase(movie.getName())) {
+				watchlist.add(movie);
 				return;
 			}
 		}
 
 		ArrayList<Play> plays = JsonParser.loadPlays();
-		for (Play p : plays) {
-			if (show.trim().equalsIgnoreCase(p.getName())) {
-				watchlist.add(p);
+		for (Play play : plays) {
+			if (show.trim().equalsIgnoreCase(play.getName())) {
+				watchlist.add(play);
 				return;
 			}
 		}
 
 		ArrayList<Concert> concerts = JsonParser.loadConcerts();
-		for (Concert c : concerts) {
-			if (show.trim().equalsIgnoreCase(c.getName())) {
-				watchlist.add(c);
+		for (Concert concert : concerts) {
+			if (show.trim().equalsIgnoreCase(concert.getName())) {
+				watchlist.add(concert);
 				return;
 			}
 		}
