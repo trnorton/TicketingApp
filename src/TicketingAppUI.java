@@ -933,7 +933,7 @@ public class TicketingAppUI {
 				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
-			show = new Movie(showName, ageRating, genre, actors, producers);
+			show = new Movie(showName, rating, ageRating, genre, actors, producers);
 		}
 		else if(showType.trim().equalsIgnoreCase("Play")) {
 			System.out.println("Type in the major actors in this play. Type 'Done' when finished");
@@ -943,7 +943,7 @@ public class TicketingAppUI {
 				if(actor.trim().equalsIgnoreCase("Done")) break;
 				actors.add(actor);
 			}
-			show = new Play(showName, ageRating, actors, producers);
+			show = new Play(showName, rating, ageRating, actors, producers);
 		}
 		else if(showType.trim().equalsIgnoreCase("Concert")) {
 			System.out.println("Type in the major performers in this concert. Type 'Done' when finished");
@@ -953,7 +953,7 @@ public class TicketingAppUI {
 				if(performer.trim().equalsIgnoreCase("Done")) break;
 				performers.add(performer);
 			}
-			show = new Concert(showName, ageRating, performers, producers);
+			show = new Concert(showName, rating, ageRating, performers, producers);
 		}
 
 

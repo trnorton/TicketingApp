@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
 /**
  * @author Lukacs Ablonczy
@@ -22,8 +21,9 @@ public class Play extends Show {
 	 * @param majorActors String Arraylist of actors of movie
 	 * @param producers producers of show
 	 */
-	public Play(String name, int ageRating, ArrayList<String> majorActors, ArrayList<String> producers) {
+	public Play(String name, int offRating, int ageRating, ArrayList<String> majorActors, ArrayList<String> producers) {
 		this.setName(name);
+		this.setOffRating(offRating);
 		this.setAgeRating(ageRating);
 		this.setProducers(producers);
 		this.setMajorActors(majorActors);
