@@ -37,6 +37,8 @@ public class TicketingAppUI {
 
 		// ask if user is guest or not, login/proceed as needed
 		logIn();
+		
+		getHomeVenue();
 
 		while (true) {
 			// display Main Menu, which has options on how to proceed
@@ -92,6 +94,20 @@ public class TicketingAppUI {
 			} catch (Exception e) {
 				System.out.println("Not a valid input");
 				continue;
+			}
+		}
+	}
+	
+	private void getHomeVenue() {
+		System.out.println("Input your home venue");
+		while(true) {
+			try{
+				nextLine = scanner.nextLine();
+				user.updateHomeVenue(nextLine, main.getVenues());
+				break;
+			}
+			catch(Exception e) {
+				System.out.println("This venue doesn't exist in the system. Input another home venue");
 			}
 		}
 	}
