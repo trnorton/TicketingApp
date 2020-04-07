@@ -65,7 +65,7 @@ public class Theater {
 			System.out.print(alphabet[i] + " ");
 
 			for (int j = 0; j < seats[i].length; j++) {
-				if (seats[i][j].checkIfTaken() == true)
+				if (seats[i][j].checkIfTaken())
 					seats[i][j].setSeatStatus("X");
 				System.out.print(seats[i][j].displaySeat() + "");
 			}
@@ -76,40 +76,40 @@ public class Theater {
 	/**
 	 * Adds a given Event to the list of Events.
 	 * 
-	 * @param e - A variable of tpye Event.
+	 * @param event - A variable of tpye Event.
 	 */
-	public void addEvent(Event e) {
-		events.add(e);
+	public void addEvent(Event event) {
+		events.add(event);
 	}
 
 	/**
 	 * Removes a given Event from the list of Events.
 	 * 
-	 * @param e - A variable of tpye Event.
+	 * @param event - A variable of tpye Event.
 	 */
-	public void removeEvent(Event e) {
-		events.remove(e);
+	public void removeEvent(Event event) {
+		events.remove(event);
 	}
 
 	/**
 	 * Prints out all the events within a Theater.
 	 */
 	public void displayEvents() {
-		for (Event e : events) {
-			System.out.println(e);
+		for (Event event : events) {
+			System.out.println(event);
 		}
 	}
 
 	/**
 	 * Returns a given Event if it is showing in the Theater.
 	 * 
-	 * @param event - A variable of type Event.
+	 * @param givenEvent - A variable of type Event.
 	 * @return Event - The Event found in the theater.
 	 */
-	public Event getEvent(Event event) {
-		for (Event e : events) {
-			if (e.toString().trim().equalsIgnoreCase(event.toString()))
-				return e;
+	public Event getEvent(Event givenEvent) {
+		for (Event event : events) {
+			if (event.toString().trim().equalsIgnoreCase(givenEvent.toString()))
+				return event;
 		}
 		return null;
 	}
@@ -137,7 +137,7 @@ public class Theater {
 	public Seat getAvailableSeat() {
 		for (int i = 0; i < seats.length; i++) {
 			for (int j = 0; j < seats[i].length; j++) {
-				if (seats[i][j].checkIfTaken() == false)
+				if (!seats[i][j].checkIfTaken())
 					return seats[i][j];
 			}
 		}
