@@ -968,10 +968,20 @@ public class TicketingAppUI {
 			return;
 		}
 
+		//find venue mainsystem
+		Venue venueToAddEventTo = null;
+		for(Venue venue : allVenues)
+			if(venueName.equals(venue.getName())){
+				venueToAddEventTo = venue;
+				break;
+			}
 
-		//allVenues.add(new Venue(venueName, "test", 5));
+		if(venueToAddEventTo == null){
+			System.out.println("No Venue matching that name...Event not added");
+			return;
+		}
 
-		employeeUser.inputEvent(venueName, allVenues, date, time, show);
+		employeeUser.inputEvent(venueToAddEventTo, date, time, show);
 
 		System.out.println("This event has been added");
 	}
@@ -1019,6 +1029,10 @@ public class TicketingAppUI {
 		//this takes care of all the functions here
 		System.out.println("Type in the name of the customer to give a refund to");
 		String customerName = scanner.nextLine();
+		if(customerName.trim().equalsIgnoreCase("")){
+			System.out.println("Blank customer name given");
+			return;
+		}
 
 		Employee employeeUser = (Employee)user;
 		employeeUser.refundTickets(customerName);
