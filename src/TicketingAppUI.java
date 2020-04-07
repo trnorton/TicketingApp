@@ -136,7 +136,6 @@ public class TicketingAppUI {
 		} else if (user instanceof Employee) {
 			mainMenuOptions.add("Input Event");
 			mainMenuOptions.add("Input Discount");
-			mainMenuOptions.add("Input Ticket Prices");
 			mainMenuOptions.add("Refund Ticket");
 			mainMenuOptions.add("Logout");
 		} else if (user instanceof Admin) {
