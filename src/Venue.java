@@ -88,7 +88,7 @@ public class Venue {
 		for(int i = 0; i<theaters.length;i++) {
 			if(theaters[i].getEvent(e) == null)
 				continue;
-			if(theaters[i].hasAvailableSeat() && e.toString().equals(theaters[i].getEvent(e).toString()))
+			if(theaters[i].hasAvailableSeat() && e.toString().trim().equalsIgnoreCase(theaters[i].getEvent(e).toString()))
 				return true;
 		}
 		return false;
@@ -98,7 +98,7 @@ public class Venue {
 		for(int i = 0; i<theaters.length;i++) {
 			if(theaters[i].getEvent(e) == null)
 				continue;
-			if(theaters[i].hasAvailableSeat() && e.toString().equals(theaters[i].getEvent(e).toString()))
+			if(theaters[i].hasAvailableSeat() && e.toString().trim().equalsIgnoreCase(theaters[i].getEvent(e).toString()))
 				return theaters[i];
 		}
 		return null;
