@@ -217,7 +217,7 @@ public class User {
     			nearestVenue = v;
     	}
     }
-
+    
     /**
      * Method which creates new tickets with specific seat numbers
      * @param eventName name of the event the user is booking tickets for
@@ -229,7 +229,6 @@ public class User {
      * @param seatCol the desired column in the seating arrangement
      */
     public void bookTickets(String eventName, String date, String time, int adultTickets, int childTickets, char seatRow, int seatCol) {
-    	for(int i = 0; i<adultTickets+childTickets; i++) {
     		Show show = null;
     		ArrayList<Movie> movies = JsonParser.loadMovies();
             for(Movie m : movies) {
@@ -262,60 +261,27 @@ public class User {
             	event = theater.getEvent(event);
             	seat = theater.getSeat(seatRow, seatCol);
             	seat.changeSeatAvailability();
+            	Ticket ticket = new Ticket(this.name, 5.00, event, seat, theater, nearestVenue);
+            	tickets.add(ticket);
+        
+            	try {
+            		for(int j = 0; j < (adultTickets+childTickets)-1; j++) {
+            			seat = theater.getSeats(seatRow)[seatCol+j];
+            			seat.changeSeatAvailability();
+            			ticket = new Ticket(this.name, 5.00, event, seat, theater, nearestVenue);
+                    	tickets.add(ticket);
+            			}
+            	} catch(Exception e) {
+            		for(int j = seatCol-2; j >= seatCol-(adultTickets+childTickets); j--) {
+            			seat = theater.getSeats(seatRow)[j];
+            			seat.changeSeatAvailability();
+            			ticket = new Ticket(this.name, 5.00, event, seat, theater, nearestVenue);
+                    	tickets.add(ticket);
+            		}
+            	}
             }
-            Ticket ticket = new Ticket(this.name, 5.00, event, seat, theater, nearestVenue);
-            tickets.add(ticket);
             applyRewardsPoints();
-    	}
-    }
-
-    /**
-     * Method for booking tickets without seat numbers on them
-     * @param eventName name of the event the user is booking tickets for
-     * @param date date of the event showing
-     * @param time time of the event showing
-     * @param adultTickets number of tickets for adults to be purchased
-     * @param childTickets number of tickets for children to be purchased
-     */
-    public void bookTickets(String eventName, String date, String time, int adultTickets, int childTickets) {
-    	for(int i = 0; i<adultTickets+childTickets; i++) {
-    		Show show = null;
-    		ArrayList<Movie> movies = JsonParser.loadMovies();
-            for(Movie m : movies) {
-            	if(eventName.trim().equalsIgnoreCase(m.getName())) {
-            		show = m;
-            		break;
-            	}
-            }
-            
-            ArrayList<Play> plays = JsonParser.loadPlays();
-            for(Play play : plays) {
-            	if(eventName.trim().equalsIgnoreCase(play.getName())) {
-            		show = play;
-            		break;
-            	}
-            }
-            
-            ArrayList<Concert> concerts = JsonParser.loadConcerts();
-            for(Concert concert : concerts) {
-            	if(eventName.trim().equalsIgnoreCase(concert.getName())) {
-            		show = concert;
-            		break;
-            	}
-            }
-            Event event = new Event(show, date, time);
-            Theater theater = new Theater('A', 25, 30);
-            Seat seat = new Seat('a', 1);
-            if(event.toString().trim().equalsIgnoreCase(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
-            	theater = nearestVenue.getAvailableTheater(event);
-            	event = theater.getEvent(event);
-            	seat = theater.getAvailableSeat();
-            	seat.changeSeatAvailability();
-            }
-            Ticket ticket = new Ticket(this.name, 5.00, event, seat, theater, nearestVenue);
-            tickets.add(ticket);
-            applyRewardsPoints();
-    	}
+    
     }
 
     //TODO .txt file doesn't always appear

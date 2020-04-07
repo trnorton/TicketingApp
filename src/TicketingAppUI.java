@@ -679,30 +679,26 @@ public class TicketingAppUI {
 		if (numChildTickets < 0)
 			return;
 
-		if (numAdultTickets + numChildTickets == 1) {
-			main.displayAvailableTheater(showName, date, time);
+		main.displayAvailableTheater(showName, date, time);
 
-			System.out.println("Where would you like to sit?");
-			System.out.println("Type in character corresponding to the row you want to sit on");
-			char row = scanner.nextLine().charAt(0);
-			if (row == ' ') {
-				System.out.println("Invalid row given");
-				return;
-			}
-
-			int col = 0;
-			System.out.println("Type in number corresponding to the seat you want to sit on at that row");
-			try {
-				col = Integer.parseInt(scanner.nextLine());
-			} catch (Exception e) {
-				System.out.println("Invalid number of seat number");
-				return;
-			}
-
-			user.bookTickets(showName, date, time, numAdultTickets, numChildTickets, row, col);
-		} else {
-			user.bookTickets(showName, date, time, numAdultTickets, numChildTickets);
+		System.out.println("Where would you like to sit?");
+		System.out.println("Type in character corresponding to the row you want to sit on");
+		char row = scanner.nextLine().charAt(0);
+		if (row == ' ') {
+			System.out.println("Invalid row given");
+			return;
 		}
+
+		int col = 0;
+		System.out.println("Type in number corresponding to the seat you want to sit on at that row");
+		try {
+			col = Integer.parseInt(scanner.nextLine());
+		} catch (Exception e) {
+			System.out.println("Invalid number of seat number");
+			return;
+		}
+
+		user.bookTickets(showName, date, time, numAdultTickets, numChildTickets, row, col);
 
 		System.out.println("Tickets have been booked!");
 

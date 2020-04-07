@@ -92,6 +92,12 @@ public class Seat {
 	 */
 	public void changeSeatAvailability() {
 		isTaken = !isTaken;
+		if(seatStatus.equals(" ")) {
+			seatStatus = "X";
+		}
+		else {
+			seatStatus = " ";
+		}
 	}
 
 	/**

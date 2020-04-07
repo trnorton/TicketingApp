@@ -163,6 +163,22 @@ public class Theater {
 	}
 
 	/**
+	 * Returns the array of Seats corresponding to the given row character.
+	 * 
+	 * @param row - A varaible of type char.
+	 * @return Seat[] - The array of Seats.
+	 */
+	public Seat[] getSeats(char row) {
+		for (int i = 0; i < seats.length; i++) {
+			for (int j = 0; j < seats[i].length; j++) {
+				if (seats[i][j].getRow() == row)
+					return seats[i];
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Returns a String representation of the Theater.
 	 * 
 	 * @return String - The String representation of the Theater.

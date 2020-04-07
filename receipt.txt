@@ -1,0 +1,26 @@
+********** Receipt **********
+Ticket for "Customer" at the Name: Venue
+Address: 123 Movie St
+Overall Customer Rating: 0
+Theater F
+The Jungle Book - 04/10/2020 - 12:00pm
+Seat: A1
+Paid: $5.00
+
+Ticket for "Customer" at the Name: Venue
+Address: 123 Movie St
+Overall Customer Rating: 0
+Theater F
+The Jungle Book - 04/10/2020 - 12:00pm
+Seat: A3
+Paid: $5.00
+
+Ticket for "Customer" at the Name: Venue
+Address: 123 Movie St
+Overall Customer Rating: 0
+Theater F
+The Jungle Book - 04/10/2020 - 12:00pm
+Seat: A3
+Paid: $5.00
+
+Total price: $15.0
