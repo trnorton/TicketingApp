@@ -296,7 +296,6 @@ public class User {
 
 	}
 
-	// TODO .txt file doesn't always appear
 	/**
 	 * Method which takes all of the user's current tickets and concessions and adds
 	 * up a total price for all of them The sum, ticket information, and concession
