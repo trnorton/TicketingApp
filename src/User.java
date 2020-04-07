@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 public class User {
     public static final int MIN = 0;
-
     private String name;
     private int age;
     private String birthday;
@@ -91,7 +90,7 @@ public class User {
 		}
 
         for(Movie movie : movies) {
-        	if(movieName.equals(movie.getName())) {
+        	if(movieName.trim().equalsIgnoreCase(movie.getName())) {
         		return movie;
         	}
         }
@@ -117,7 +116,7 @@ public class User {
 		}
 
         for(Play play : plays) {
-        	if(playName.equals(play.getName())) {
+        	if(playName.trim().equalsIgnoreCase(play.getName())) {
         		return play;
         	}
         }
@@ -143,7 +142,7 @@ public class User {
 		}
 
         for(Concert concert : concerts) {
-        	if(concertName.equals(concert.getName())) {
+        	if(concertName.trim().equalsIgnoreCase(concert.getName())) {
         		return concert;
         	}
         }
@@ -169,7 +168,7 @@ public class User {
 		}
 
     	for(Venue v : venueList) {
-    		if(venue.equals(v.getName())) {
+    		if(venue.trim().equalsIgnoreCase(v.getName())) {
     			return v;
     		}
     	}
@@ -184,7 +183,7 @@ public class User {
     public void lookAtBasicEventInfo(String event) {
     	ArrayList<Movie> movies = JsonParser.loadMovies();
         for(Movie m : movies) {
-        	if(event.equals(m.getName())) {
+        	if(event.trim().equalsIgnoreCase(m.getName())) {
         		System.out.println(m);
         		return;
         	}
@@ -192,7 +191,7 @@ public class User {
         
         ArrayList<Play> plays = JsonParser.loadPlays();
         for(Play p : plays) {
-        	if(event.equals(p.getName())) {
+        	if(event.trim().equalsIgnoreCase(p.getName())) {
         		System.out.println(p);
         		return;
         	}
@@ -200,7 +199,7 @@ public class User {
         
         ArrayList<Concert> concerts = JsonParser.loadConcerts();
         for(Concert c : concerts) {
-        	if(event.equals(c.getName())) {
+        	if(event.trim().equalsIgnoreCase(c.getName())) {
         		System.out.println(c);
         		return;
         	}
@@ -214,7 +213,7 @@ public class User {
      */
     public void updateHomeVenue(String venue, ArrayList<Venue> venues) {
     	for(Venue v : venues) {
-    		if(venue.equals(v.getName()))
+    		if(venue.trim().equalsIgnoreCase(v.getName()))
     			nearestVenue = v;
     	}
     }
@@ -234,7 +233,7 @@ public class User {
     		Show show = null;
     		ArrayList<Movie> movies = JsonParser.loadMovies();
             for(Movie m : movies) {
-            	if(eventName.equals(m.getName())) {
+            	if(eventName.trim().equalsIgnoreCase(m.getName())) {
             		show = m;
             		break;
             	}
@@ -242,7 +241,7 @@ public class User {
             
             ArrayList<Play> plays = JsonParser.loadPlays();
             for(Play play : plays) {
-            	if(eventName.equals(play.getName())) {
+            	if(eventName.trim().equalsIgnoreCase(play.getName())) {
             		show = play;
             		break;
             	}
@@ -250,7 +249,7 @@ public class User {
             
             ArrayList<Concert> concerts = JsonParser.loadConcerts();
             for(Concert concert : concerts) {
-            	if(eventName.equals(concert.getName())) {
+            	if(eventName.trim().equalsIgnoreCase(concert.getName())) {
             		show = concert;
             		break;
             	}
@@ -258,7 +257,7 @@ public class User {
             Event event = new Event(show, date, time);
             Theater theater = new Theater('A', 25, 30);
             Seat seat = new Seat('a', 1);
-            if(event.toString().equals(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
+            if(event.toString().trim().equalsIgnoreCase(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
             	theater = nearestVenue.getAvailableTheater(event);
             	event = theater.getEvent(event);
             	seat = theater.getSeat(seatRow, seatCol);
@@ -283,7 +282,7 @@ public class User {
     		Show show = null;
     		ArrayList<Movie> movies = JsonParser.loadMovies();
             for(Movie m : movies) {
-            	if(eventName.equals(m.getName())) {
+            	if(eventName.trim().equalsIgnoreCase(m.getName())) {
             		show = m;
             		break;
             	}
@@ -291,7 +290,7 @@ public class User {
             
             ArrayList<Play> plays = JsonParser.loadPlays();
             for(Play play : plays) {
-            	if(eventName.equals(play.getName())) {
+            	if(eventName.trim().equalsIgnoreCase(play.getName())) {
             		show = play;
             		break;
             	}
@@ -299,7 +298,7 @@ public class User {
             
             ArrayList<Concert> concerts = JsonParser.loadConcerts();
             for(Concert concert : concerts) {
-            	if(eventName.equals(concert.getName())) {
+            	if(eventName.trim().equalsIgnoreCase(concert.getName())) {
             		show = concert;
             		break;
             	}
@@ -307,7 +306,7 @@ public class User {
             Event event = new Event(show, date, time);
             Theater theater = new Theater('A', 25, 30);
             Seat seat = new Seat('a', 1);
-            if(event.toString().equals(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
+            if(event.toString().trim().equalsIgnoreCase(nearestVenue.getAvailableTheater(event).getEvent(event).toString())) {
             	theater = nearestVenue.getAvailableTheater(event);
             	event = theater.getEvent(event);
             	seat = theater.getAvailableSeat();
@@ -355,7 +354,7 @@ public class User {
     public void rateEvent(String event, int rating) {
     	ArrayList<Movie> movies = JsonParser.loadMovies();
         for(Movie m : movies) {
-        	if(event.equals(m.getName())) {
+        	if(event.trim().equalsIgnoreCase(m.getName())) {
         		m.addCustRating(rating);
         		JsonParser.saveData(movies);
         		return;
@@ -364,7 +363,7 @@ public class User {
         
         ArrayList<Play> plays = JsonParser.loadPlays();
         for(Play p : plays) {
-        	if(event.equals(p.getName())) {
+        	if(event.trim().equalsIgnoreCase(p.getName())) {
         		p.addCustRating(rating);
         		JsonParser.saveData(plays);
         		return;
@@ -373,7 +372,7 @@ public class User {
         
         ArrayList<Concert> concerts = JsonParser.loadConcerts();
         for(Concert c : concerts) {
-        	if(event.equals(c.getName())) {
+        	if(event.trim().equalsIgnoreCase(c.getName())) {
         		c.addCustRating(rating);
         		JsonParser.saveData(concerts);
         		return;
@@ -389,7 +388,7 @@ public class User {
     public void writeEventReview(String event, String review) {
     	ArrayList<Movie> movies = JsonParser.loadMovies();
         for(Movie m : movies) {
-        	if(event.equals(m.getName())) {
+        	if(event.trim().equalsIgnoreCase(m.getName())) {
         		m.addReview(review);
         		JsonParser.saveData(movies);
         		return;
@@ -398,7 +397,7 @@ public class User {
         
         ArrayList<Play> plays = JsonParser.loadPlays();
         for(Play p : plays) {
-        	if(event.equals(p.getName())) {
+        	if(event.trim().equalsIgnoreCase(p.getName())) {
         		p.addReview(review);
         		JsonParser.saveData(plays);
         		return;
@@ -407,7 +406,7 @@ public class User {
         
         ArrayList<Concert> concerts = JsonParser.loadConcerts();
         for(Concert c : concerts) {
-        	if(event.equals(c.getName())) {
+        	if(event.trim().equalsIgnoreCase(c.getName())) {
         		c.addReview(review);
         		JsonParser.saveData(concerts);
         		return;
@@ -450,7 +449,7 @@ public class User {
     	
     	int ticketCount = 0;
     	for(Ticket ticket: tickets) {
-    		if(ticket.getEvent().getShow().getName().equals(event)) {
+    		if(ticket.getEvent().getShow().getName().trim().equalsIgnoreCase(event)) {
     			tickets.remove(ticket);
     			ticketCount++;
     			if(ticketCount == numTicketsRefunded)
@@ -466,7 +465,7 @@ public class User {
     public void addToWatchlist(String show) {
         ArrayList<Movie> movies = JsonParser.loadMovies();
         for(Movie m : movies) {
-        	if(show.equals(m.getName())) {
+        	if(show.trim().equalsIgnoreCase(m.getName())) {
         		watchlist.add(m);
         		return;
         	}
@@ -474,7 +473,7 @@ public class User {
         
         ArrayList<Play> plays = JsonParser.loadPlays();
         for(Play p : plays) {
-        	if(show.equals(p.getName())) {
+        	if(show.trim().equalsIgnoreCase(p.getName())) {
         		watchlist.add(p);
         		return;
         	}
@@ -482,7 +481,7 @@ public class User {
         
         ArrayList<Concert> concerts = JsonParser.loadConcerts();
         for(Concert c : concerts) {
-        	if(show.equals(c.getName())) {
+        	if(show.trim().equalsIgnoreCase(c.getName())) {
         		watchlist.add(c);
         		return;
         	}
