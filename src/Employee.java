@@ -93,9 +93,6 @@ public class Employee extends User {
 	 * @param refundRequester The String name of a user requesting a refund
 	 */
 	public void refundTickets(String refundRequester) {
-		// ArrayList<Ticket> tickets = ticketsToRefundToCustomers.stream().filter((t) ->
-		// t.getName().equals(refundRequester)).collect(Collectors.toCollection(ArrayList::new));
-		// Look at what I made ^^
 
 		ArrayList<Ticket> tickets = new ArrayList<>();
 		for (Ticket t : ticketsToRefundToCustomers)

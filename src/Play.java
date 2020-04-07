@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * @author Lukacs Ablonczy
- * Defines the Play Show type
+ * @author Lukacs Ablonczy Defines the Play Show type
  */
 public class Play extends Show {
 
@@ -11,15 +10,17 @@ public class Play extends Show {
 	/**
 	 * Blank constructor, used for creating empty Show types
 	 */
-	public Play(){
+	public Play() {
 
 	}
+
 	/**
 	 * Constructor for Play type
-	 * @param name Name of show
-	 * @param ageRating AgeRating of show
+	 * 
+	 * @param name        Name of show
+	 * @param ageRating   AgeRating of show
 	 * @param majorActors String Arraylist of actors of movie
-	 * @param producers producers of show
+	 * @param producers   producers of show
 	 */
 	public Play(String name, int offRating, int ageRating, ArrayList<String> majorActors, ArrayList<String> producers) {
 		this.setName(name);
@@ -31,15 +32,17 @@ public class Play extends Show {
 
 	/**
 	 * Constructor for Play type
-	 * @param name Name of show
-	 * @param offRating IMDB Rating of show
-	 * @param ageRating AgeRating of show
-	 * @param reviews Reviews of show
+	 * 
+	 * @param name        Name of show
+	 * @param offRating   IMDB Rating of show
+	 * @param ageRating   AgeRating of show
+	 * @param reviews     Reviews of show
 	 * @param custRatings Customer Ratings of show
-	 * @param producers producers of show
+	 * @param producers   producers of show
 	 * @param majorActors String Arraylist of actors of movie
 	 */
-	public Play(String name, int offRating, int ageRating, ArrayList<String> reviews, ArrayList<Integer> custRatings, ArrayList<String> producers, ArrayList<String> majorActors) {
+	public Play(String name, int offRating, int ageRating, ArrayList<String> reviews, ArrayList<Integer> custRatings,
+			ArrayList<String> producers, ArrayList<String> majorActors) {
 		this.setName(name);
 		this.setOffRating(offRating);
 		this.setAgeRating(ageRating);
@@ -51,6 +54,7 @@ public class Play extends Show {
 
 	/**
 	 * Places actor's name into majorActors ArrayList
+	 * 
 	 * @param actor String name of actors
 	 */
 	public void addMajorActor(String actor) {
@@ -69,6 +73,7 @@ public class Play extends Show {
 
 	/**
 	 * Removes name from majorActors arraylist
+	 * 
 	 * @param actor String name of actor to remove
 	 */
 	public void removeMajorActor(String actor) {
@@ -88,6 +93,7 @@ public class Play extends Show {
 
 	/**
 	 * Returns arraylist of major actors
+	 * 
 	 * @return String arraylist majorActors
 	 */
 	public ArrayList<String> getMajorActors() {
@@ -96,6 +102,7 @@ public class Play extends Show {
 
 	/**
 	 * Setter for this movie's majorActors
+	 * 
 	 * @param majorActors String arraylist of actor's names
 	 */
 	public void setMajorActors(ArrayList<String> majorActors) {
@@ -107,9 +114,9 @@ public class Play extends Show {
 		this.majorActors = majorActors;
 	}
 
-
 	/**
 	 * Returns string describing movie
+	 * 
 	 * @return Name: Ratings: Producers: Famous Actors:
 	 */
 	@Override
@@ -117,7 +124,7 @@ public class Play extends Show {
 		StringBuilder actorsString = new StringBuilder();
 		for (String actor : majorActors)
 			actorsString.append(actor).append(" ");
-		
+
 		return "Play" + super.toString() + "\nFamous Actors: " + actorsString + "\n";
 	}
 }
