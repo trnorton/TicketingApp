@@ -116,6 +116,10 @@ public class Venue {
 		custRatings.remove(rating);
 	}
 
+	/**
+	 * Calculates the average customer rating of the venue
+	 * @return the average rating of the venue, rounded down
+	 */
 	private int getAverageCustRating() {
 		int sum = 0;
 		for (int r : custRatings) {
