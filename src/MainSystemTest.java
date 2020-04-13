@@ -135,21 +135,13 @@ class MainSystemTest {
 	
 	@Test
 	public void testAddInvalidUserToDatabase() {
-		/*MainSystem main = new MainSystem();
-		User newUser = null;
-		main.addUserToDatabase(newUser);
-		assertEquals(newUser, main.getUsers().get(main.getUsers().size()-1));*/
 		MainSystem main = new MainSystem();
 		Throwable exception = assertThrows(
 	            NullPointerException.class, () -> {
-	            	//MainSystem main = new MainSystem();
-	        		//User newUser = null;
-	        		//main.addUserToDatabase(newUser);
 	        		main.addUserToDatabase(null);
 	            }
 	    );
 	 
-	   // assertEquals("null", exception.getMessage());
 		assertNull(main.getUsers().get(main.getUsers().size()-1));
 	}
 
@@ -167,14 +159,7 @@ class MainSystemTest {
 	
 	@Test
 	public void testDisplayAvailableTheaterInvalidStringStringString() {
-		/*final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		 
-        System.setOut(new PrintStream(outContent));
-        MainSystem main = new MainSystem();
-      
-        main.displayAvailableTheater("The Beatles Are Back (from the grave)", "04/10/2020", "12:00pm");
-        assertEquals("", outContent.toString());*/
-        
+
 		final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
   		 
         System.setOut(new PrintStream(outContent));
