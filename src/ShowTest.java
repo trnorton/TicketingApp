@@ -19,7 +19,7 @@ class ShowTest {
 	}
 
 	@Test
-	public void testSetName() {
+	public void testSetValidName() {
 		ArrayList<String> majorActors = new ArrayList<String>();
 		majorActors.add("Elsa");
 		ArrayList<String> producers = new ArrayList<String>();
@@ -27,6 +27,17 @@ class ShowTest {
 		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
 		show.setName("Frozen 2");
 		assertEquals(show.getName(), "Frozen 2");
+	}
+	
+	@Test
+	public void testSetInvalidName() {
+		ArrayList<String> majorActors = new ArrayList<String>();
+		majorActors.add("Elsa");
+		ArrayList<String> producers = new ArrayList<String>();
+		producers.add("Disney");
+		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
+		show.setName(null);
+		assertNull(show.getName());
 	}
 
 	@Test
@@ -40,7 +51,7 @@ class ShowTest {
 	}
 
 	@Test
-	public void testSetOffRating() {
+	public void testSetValidOffRating() {
 		ArrayList<String> majorActors = new ArrayList<String>();
 		majorActors.add("Elsa");
 		ArrayList<String> producers = new ArrayList<String>();
@@ -48,6 +59,17 @@ class ShowTest {
 		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
 		show.setOffRating(4);
 		assertEquals(show.getOffRating(), 4);
+	}
+	
+	@Test
+	public void testSetInvalidOffRating() {
+		ArrayList<String> majorActors = new ArrayList<String>();
+		majorActors.add("Elsa");
+		ArrayList<String> producers = new ArrayList<String>();
+		producers.add("Disney");
+		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
+		show.setOffRating(0);
+		assertEquals(show.getOffRating(), 0, "Official rating can't be anything outside the range 1-10");
 	}
 
 	@Test
@@ -61,7 +83,7 @@ class ShowTest {
 	}
 
 	@Test
-	public void testSetAgeRating() {
+	public void testSetValidAgeRating() {
 		ArrayList<String> majorActors = new ArrayList<String>();
 		majorActors.add("Elsa");
 		ArrayList<String> producers = new ArrayList<String>();
@@ -69,6 +91,17 @@ class ShowTest {
 		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
 		show.setAgeRating(13);
 		assertEquals(show.getAgeRating(), 13);
+	}
+	
+	@Test
+	public void testSetInvalidAgeRating() {
+		ArrayList<String> majorActors = new ArrayList<String>();
+		majorActors.add("Elsa");
+		ArrayList<String> producers = new ArrayList<String>();
+		producers.add("Disney");
+		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
+		show.setAgeRating(0);
+		assertEquals(show.getAgeRating(), 0, "Age rating can't be anything other than a normal age of a person");
 	}
 
 	@Test
@@ -193,7 +226,7 @@ class ShowTest {
 	}
 
 	@Test
-	public void testSetProducers() {
+	public void testSetValidProducers() {
 		ArrayList<String> majorActors = new ArrayList<String>();
 		majorActors.add("Elsa");
 		ArrayList<String> producers = new ArrayList<String>();
@@ -204,6 +237,19 @@ class ShowTest {
 		newProducers.add("Fox");
 		show.setProducers(newProducers);
 		assertEquals(show.getProducers(), newProducers);
+	}
+	
+	@Test
+	public void testSetInvalidProducers() {
+		ArrayList<String> majorActors = new ArrayList<String>();
+		majorActors.add("Elsa");
+		ArrayList<String> producers = new ArrayList<String>();
+		producers.add("Disney");
+		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
+		
+		ArrayList<String> newProducers = null;
+		show.setProducers(newProducers);
+		assertNull(show.getProducers());
 	}
 
 	@Test
@@ -227,7 +273,7 @@ class ShowTest {
 	}
 
 	@Test
-	public void testSetReviews() {
+	public void testSetValidReviews() {
 		ArrayList<String> majorActors = new ArrayList<String>();
 		majorActors.add("Elsa");
 		ArrayList<String> producers = new ArrayList<String>();
@@ -238,6 +284,19 @@ class ShowTest {
 		newReviews.add("New review");
 		show.setReviews(newReviews);
 		assertEquals(show.getReviews(), newReviews);
+	}
+	
+	@Test
+	public void testSetInvalidReviews() {
+		ArrayList<String> majorActors = new ArrayList<String>();
+		majorActors.add("Elsa");
+		ArrayList<String> producers = new ArrayList<String>();
+		producers.add("Disney");
+		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
+		
+		ArrayList<String> newReviews = null;
+		show.setReviews(newReviews);
+		assertNull(show.getReviews());
 	}
 
 	@Test
@@ -251,7 +310,7 @@ class ShowTest {
 	}
 
 	@Test
-	public void testSetCustRatings() {
+	public void testSetValidCustRatings() {
 		ArrayList<String> majorActors = new ArrayList<String>();
 		majorActors.add("Elsa");
 		ArrayList<String> producers = new ArrayList<String>();
@@ -262,6 +321,19 @@ class ShowTest {
 		newRatings.add(1);
 		show.setCustRatings(newRatings);
 		assertEquals(show.getCustRatings(), newRatings);
+	}
+	
+	@Test
+	public void testSetInvalidCustRatings() {
+		ArrayList<String> majorActors = new ArrayList<String>();
+		majorActors.add("Elsa");
+		ArrayList<String> producers = new ArrayList<String>();
+		producers.add("Disney");
+		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
+		
+		ArrayList<Integer> newRatings = null;
+		show.setCustRatings(newRatings);
+		assertNull(show.getCustRatings());
 	}
 
 	@Test
