@@ -15,21 +15,38 @@ class ConcessionsSystemTest {
 	}
 
 	@Test
-	public void testAddConcessions() {
+	public void testAddValidConcessions() {
 		ConcessionsSystem concessions = new ConcessionsSystem();
 		int initialSize = concessions.getConcessions().size();
 		concessions.addConcessions(new Concession("Pizza", 5.0, 50));
 		int finalSize = concessions.getConcessions().size();
 		assertSame(initialSize+1, finalSize);
 	}
+	
+	@Test
+	public void testAddInvalidConcessions() {
+		ConcessionsSystem concessions = new ConcessionsSystem();
+		concessions.addConcessions(null);
+		int finalSize = concessions.getConcessions().size();
+		assertNull(concessions.getConcessions().get(finalSize-1));
+	}
 
 	@Test
-	public void testRemoveConcessions() {
+	public void testRemoveValidConcessions() {
 		ConcessionsSystem concessions = new ConcessionsSystem();
 		int initialSize = concessions.getConcessions().size();
 		concessions.removeConcessions(concessions.getConcessions().get(0));
 		int finalSize = concessions.getConcessions().size();
 		assertSame(initialSize-1, finalSize);
+	}
+	
+	@Test
+	public void testRemoveInvalidConcessions() {
+		ConcessionsSystem concessions = new ConcessionsSystem();
+		int initialSize = concessions.getConcessions().size();
+		concessions.removeConcessions(null);
+		int finalSize = concessions.getConcessions().size();
+		assertSame(initialSize, finalSize);
 	}
 
 	
