@@ -11,10 +11,10 @@ public abstract class Show {
 	private int offRating;
 	private int ageRating;
 
-	private ArrayList<String> reviews;
+	private ArrayList<String> reviews = new ArrayList<String>();
 
-	private ArrayList<Integer> custRatings;
-	private ArrayList<String> producers;
+	private ArrayList<Integer> custRatings = new ArrayList<Integer>();
+	private ArrayList<String> producers = new ArrayList<String>();
 
 	/**
 	 * Returns the name of the show.

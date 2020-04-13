@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class Play extends Show {
 
-	private ArrayList<String> majorActors;
+	private ArrayList<String> majorActors = new ArrayList<String>();
 
 	/**
 	 * Blank constructor, used for creating empty Show types and later setting values
