@@ -14,7 +14,7 @@ public class TicketTest {
 	@Test
 	public void setNameTestValid(){
 		Ticket ticket = new Ticket();
-		ticket.setName("Harry Potter");
+		ticket.setName("Harry Potter");ada
 
 		Assert.assertEquals("Harry Potter", ticket.getName());
 	}
