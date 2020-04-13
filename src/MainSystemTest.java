@@ -33,16 +33,6 @@ class MainSystemTest {
         MainSystem main = new MainSystem();
         main.searchForLocation("No venue");
         assertEquals("", outContent.toString());
-		/*Throwable exception = assertThrows(
-	            IllegalArgumentException.class, () -> {
-	            	final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	       		 
-	                System.setOut(new PrintStream(outContent));
-	                MainSystem main = new MainSystem();
-	                main.searchForLocation("No venue");
-	            }
-	    , "Venue not found");
-		assertEquals("Venue not found", exception.getMessage());*/
 	}
 
 	
