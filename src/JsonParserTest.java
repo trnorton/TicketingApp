@@ -42,16 +42,5 @@ public class JsonParserTest {
 		Assert.assertFalse(concerts.isEmpty());
 	}
 
-	@Test
-	public void saveMoviesTest(){
-		
-
-	}
-
-	@Test
-	public void savePlaysTest(){}
-
-	@Test
-	public void saveConcertsTest(){}
 
 }
