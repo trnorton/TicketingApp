@@ -31,7 +31,7 @@ class EventTest {
 	}
 
 	@Test
-	public void testSetShow() {
+	public void testSetValidShow() {
 		ArrayList<Movie> movies = JsonParser.loadMovies();
 		Movie movie = null;
 		for (Movie m : movies) {
@@ -42,6 +42,19 @@ class EventTest {
 		event.setShow(movie);
 		assertEquals(event.getShow(), movie);
 	}
+	
+	@Test
+	public void testSetInvalidShow() {
+		ArrayList<Movie> movies = JsonParser.loadMovies();
+		Movie movie = null;
+		for (Movie m : movies) {
+			if (m.getName().equals("Frozen 2"))
+				movie = m;
+		}
+		Event event = new Event(movie, "04/10/2020", "12:00pm");
+		event.setShow(null);
+		assertNull(event.getShow());
+	}
 
 	@Test
 	public void testGetDate() {
@@ -50,10 +63,17 @@ class EventTest {
 	}
 
 	@Test
-	public void testSetDate() {
+	public void testSetValidDate() {
 		Event event = new Event(null, "04/10/2020", "12:00pm");
 		event.setDate("06/05/2020");
 		assertEquals(event.getDate(), "06/05/2020");
+	}
+	
+	@Test
+	public void testSetInvalidDate() {
+		Event event = new Event(null, "04/10/2020", "12:00pm");
+		event.setDate("Date");
+		assertNotNull(event.getDate(), "Date can't be anything but MM/DD/YYYY");
 	}
 
 	@Test
@@ -63,10 +83,17 @@ class EventTest {
 	}
 
 	@Test
-	public void testSetTime() {
+	public void testSetValidTime() {
 		Event event = new Event(null, "04/10/2020", "12:00pm");
 		event.setTime("06:00pm");
 		assertEquals(event.getTime(), "06:00pm");
+	}
+	
+	@Test
+	public void testSetInvalidTime() {
+		Event event = new Event(null, "04/10/2020", "12:00pm");
+		event.setTime("Time");
+		assertNotNull(event.getTime(), "Time can't be anything but HH:MM[am/pm]");
 	}
 
 	@Test
