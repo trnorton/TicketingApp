@@ -1,6 +1,8 @@
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -81,14 +83,44 @@ public class AdminTest {
 		ArrayList<Venue> venuesNew = new ArrayList<>(Arrays.asList(venue));
 		admin.addVenue(venue.getName(), venuesNew);
 
-		//Class<?> adminClass = admin.getClass();
-		//Field field = adminClass.getDeclaredField(venueList);
-		//field.setAccessible(true);
+
+	}
+	
+	@Test
+	public void removeVenueTest(){
+		final String name = "Luke";
+		final String bday = "10/10/2020";
+		final String phoneNumber = "1234567890";
+		final String address = "123 Fake Street";
+		final String email = "fake@fake.com";
+		final Admin admin = new Admin(name, bday, phoneNumber, address, email);
 
 
 
+		Venue venue = new Venue("Test", "null", 0);
+		ArrayList<Venue> venuesNew = new ArrayList<>(Arrays.asList(venue));
+		admin.addVenue(venue.getName(), venuesNew);
+		admin.removeVenue(venue.getName());
 
-
+	}
+	
+	@Test
+	public void testInputEvent() {
+		final String name = "Luke";
+		final String bday = "10/10/2020";
+		final String phoneNumber = "1234567890";
+		final String address = "123 Fake Street";
+		final String email = "fake@fake.com";
+		final Admin admin = new Admin(name, bday, phoneNumber, address, email);
+		
+		Venue venue = new Venue("Venue", "123 Movie St", 12);
+		ArrayList<String> majorActors = new ArrayList<String>();
+		majorActors.add("Elsa");
+		ArrayList<String> producers = new ArrayList<String>();
+		producers.add("Disney");
+		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
+		admin.inputEvent(venue, "04/10/2020", "12:00pm", show);
+		assertNotNull(venue.getAvailableTheater(new Event(show, "04/10/2020", "12:00pm")).getEvent(new Event(show, "04/10/2020", "12:00pm")));
 	}
 
 }

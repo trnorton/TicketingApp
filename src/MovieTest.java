@@ -2,6 +2,9 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import javax.print.attribute.standard.MediaSize;
+
+import static org.junit.Assert.assertNotNull;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +26,21 @@ public class MovieTest {
 
 		Assert.assertEquals(EXPECTED.getName(), movie.getName());
 
+	}
+	
+	@Test
+	public void testMovieSecondConstructor() {
+		final String NAME = "Harry Potter";
+		final int AGERATING = 0;
+		final int OFFRATING = 0;
+		final String GENRE = "Action";
+		final ArrayList<String> ACTORS = new ArrayList<>(Arrays.asList("Daniel Radcliffe"));
+		final ArrayList<String> PRODUCERS = new ArrayList<>(Arrays.asList("Daniel Radcliffe"));
+		final ArrayList<String> REVIEWS = new ArrayList<>(Arrays.asList("Review"));
+		final ArrayList<Integer> RATINGS = new ArrayList<>(Arrays.asList(3));
+		
+		final Movie EXPECTED = new Movie(NAME, OFFRATING, AGERATING, REVIEWS, RATINGS, PRODUCERS, ACTORS, GENRE);
+		assertNotNull(EXPECTED);
 	}
 
 	@Test
