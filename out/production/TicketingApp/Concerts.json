@@ -1,18 +1,1 @@
-[{
-    "name": "",
-    "offRating": "",
-    "ageRating": "",
-    "reviews": [],
-    "ratings": [],
-    "producers": ["", "", ""],
-    "performers": ["", "", ""]
-  }, {
-    "name": "",
-    "offRating": "",
-    "ageRating": "",
-    "reviews": [],
-    "ratings": [],
-    "producers": ["", "", ""],
-    "performers": ["", "", ""]
-  }
-]
+[{"custRatings":[5,4,5,5,4,5,1,5,3,2,5,5],"performers":["Paul McCartney","Ringo","Zombie A","Zombie B"],"reviews":["AAAAAAAHH (good)","AAAAAAAAHH (bad)","A midnight delight to be sure"],"offRating":2,"name":"The Beatles Are Back (from the grave)","ageRating":13,"producers":["The CIA","The MI6","The Illuminati"]}]
