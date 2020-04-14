@@ -20,6 +20,7 @@ public class EmployeeTest {
 		final String phoneNumber = "1234567890";
 		final String address = "123 Fake Street";
 		final String email = "fake@fake.com";
+		//workVenue will not have the correct value due to logic errors in code
 		final Venue workVenue = null;
 		final Employee employee = new Employee(name, bday, phoneNumber, address, email, workVenue);
 

@@ -1,11 +1,10 @@
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.junit.Assert.*;
 
 public class ConcertTest {
 
@@ -24,6 +23,20 @@ public class ConcertTest {
 
 		Assert.assertEquals(EXPECTED.getName(), concert.getName());
 
+	}
+
+	@Test
+	public void testNullPerformerName() {
+		final String NAME = "Harry Potter";
+		final int AGERATING = 0;
+		final int OFFRATING = 0;
+		final String GENRE = "Action";
+		final ArrayList<String> ACTORS = new ArrayList<>(Arrays.asList("Daniel Radcliffe"));
+		final ArrayList<String> PRODUCERS = new ArrayList<>(Arrays.asList("Daniel Radcliffe"));
+
+		final Concert concert = new Concert(NAME, OFFRATING, AGERATING, null, null, PRODUCERS, ACTORS);
+		concert.addPerformer(null);
+		assertEquals(1, concert.getPerformers().size());
 	}
 	
 	@Test
@@ -83,11 +96,22 @@ public class ConcertTest {
 	@Test
 	public void removePerformerTestValid(){
 		Concert concert = new Concert();
-		final String ACTORNAME = "Bob dunes";
+		final String ACTORNAME = "Bob Dunes";
 		concert.setPerformers(new ArrayList<String>(Arrays.asList(ACTORNAME)));
 		final int LENGTH = 0;
 
 		concert.removePerformer(ACTORNAME);
+		Assert.assertEquals(LENGTH, concert.getPerformers().size());
+	}
+
+	@Test
+	public void removePerformerTestInvalid() {
+		Concert concert = new Concert();
+		final String ACTORNAME = "Bob Dunes";
+		concert.setPerformers(new ArrayList<String>(Arrays.asList(ACTORNAME)));
+		final int LENGTH = 1;
+
+		concert.removePerformer(null);
 		Assert.assertEquals(LENGTH, concert.getPerformers().size());
 	}
 
@@ -105,7 +129,6 @@ public class ConcertTest {
 
 		final String MOVIESTRING = "Concert" + " Name: " + NAME + "\nIMDB Rating: " + OFFRATING + "\nAge Rating: " + AGERATING
 				+ "\nOverall Viewer Rating: " + 0 + "\nProducers: " + PRODUCERS +  "\nFamous Actors: " + ACTORS + "\n";
-
 
 	}
 
