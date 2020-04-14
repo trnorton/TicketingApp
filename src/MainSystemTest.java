@@ -101,7 +101,7 @@ class MainSystemTest {
         ArrayList<Movie> movies = JsonParser.loadMovies();
 		Movie movie = null;
 		for (Movie m : movies) {
-			if (m.getName().equals("Frozen 2"))
+			if (m.getName().equals("Harry Potter"))
 				movie = m;
 		}
         main.displayAvailableTheater(new Event(movie, "04/10/2020", "12:00pm"));
@@ -115,13 +115,13 @@ class MainSystemTest {
         System.setOut(new PrintStream(outContent));
         MainSystem main = new MainSystem();
         
-        ArrayList<Concert> concerts = JsonParser.loadConcerts();
-		Concert concert = null;
-		for (Concert c : concerts) {
-			if (c.getName().equals("The Beatles Are Back (from the grave)"))
-				concert = c;
-		}
-        main.displayAvailableTheater(new Event(concert, "04/10/2020", "12:00pm"));
+		Throwable exception = assertThrows(
+	            NullPointerException.class, () -> {
+	         
+	              
+	                main.displayAvailableTheater(null);
+	            }
+	    );
         assertEquals("", outContent.toString());
 	}
 
@@ -153,7 +153,7 @@ class MainSystemTest {
         System.setOut(new PrintStream(outContent));
         MainSystem main = new MainSystem();
       
-        main.displayAvailableTheater("Frozen 2", "04/10/2020", "12:00pm");
+        main.displayAvailableTheater("Frozen", "04/10/2020", "12:00pm");
         assertNotNull(outContent.toString());
 	}
 	

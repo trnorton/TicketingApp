@@ -58,7 +58,7 @@ public class UserTest {
 
     @Test
     public void testSearchForMovie() {
-        assertEquals(movies.get(0).toString(), testUser.searchForMovie("Frozen 2").toString());
+        assertEquals(movies.get(1).toString(), testUser.searchForMovie("Frozen").toString());
     }
 
     @Test
@@ -99,8 +99,8 @@ public class UserTest {
     @Test
     public void testLookAtBasicEventInfo() {
         System.setOut(new PrintStream(outContent));
-        testUser.lookAtBasicEventInfo("Frozen 2");
-        assertEquals(movies.get(0).toString() + "\n", outContent.toString());
+        testUser.lookAtBasicEventInfo("Frozen");
+        assertEquals(movies.get(1).toString() + "\n", outContent.toString());
     }
 
     @Test
@@ -125,7 +125,7 @@ public class UserTest {
     @Test
     public void testBookTickets() {
         testUser.updateHomeVenue("Venue", venues);
-        testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 3, 2, alphabet[4], 7);
+        testUser.bookTickets("Frozen", "04/10/2020", "12:00pm", 3, 2, alphabet[4], 7);
         assertEquals(5, testUser.getTickets().size());
     }
 
@@ -141,13 +141,13 @@ public class UserTest {
     @Test
     public void testCreateReceipt() {
         testUser.updateHomeVenue("Venue", venues);
-        testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 1, 0, alphabet[4], 7);
+        testUser.bookTickets("Frozen", "04/10/2020", "12:00pm", 1, 0, alphabet[4], 7);
         String receipt = "********** Receipt **********\n" +
                 "Ticket for \"Johnny\" at the Name: Venue\n" +
                 "Address: 123 Movie St\n" +
                 "Overall Customer Rating: 4\n" +
                 "Theater A\n" +
-                "Frozen 2 - 04/10/2020 - 12:00pm\n" +
+                "Frozen - 04/10/2020 - 12:00pm\n" +
                 "Seat: E7\n" +
                 "Paid: $5.00\n" +
                 "\nTotal price: $5.00\n";
@@ -168,34 +168,36 @@ public class UserTest {
 
     @Test
     public void testRateEvent() {
-        testUser.rateEvent("Frozen 2", 3);
-        assertEquals(3, movies.get(0).getCustRatings().get(movies.get(0).getCustRatings().size() - 1));
+        testUser.rateEvent("Frozen", 3);
+        movies = JsonParser.loadMovies();
+        assertEquals(3, movies.get(1).getCustRatings().get(movies.get(1).getCustRatings().size() - 1));
     }
 
     @Test
     public void testWriteEventReview() {
-        testUser.writeEventReview("Frozen 2", "Test Review");
-        assertEquals("Test Review", movies.get(0).getReviews().get(movies.get(0).getReviews().size() - 1));
+        testUser.writeEventReview("Frozen", "Test Review");
+        movies = JsonParser.loadMovies();
+        assertEquals("Test Review", movies.get(1).getReviews().get(movies.get(1).getReviews().size() - 1));
     }
 
     @Test
     public void testDisplayWatchlist() {
         System.setOut(new PrintStream(outContent));
-        testUser.addToWatchlist("Frozen 2");
+        testUser.addToWatchlist("Frozen");
         testUser.displayWatchlist();
-        assertEquals(movies.get(0).toString(), testUser.getWatchlist().get(0).toString());
+        assertEquals(movies.get(1).toString(), testUser.getWatchlist().get(0).toString());
     }
 
     @Test
     public void testDisplayTickets() {
         System.setOut(new PrintStream(outContent));
         testUser.updateHomeVenue("Venue", venues);
-        testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 1, 0, alphabet[4], 7);
+        testUser.bookTickets("Frozen", "04/10/2020", "12:00pm", 1, 0, alphabet[4], 7);
         String expected = "Ticket for \"Johnny\" at the Name: Venue\n" +
                 "Address: 123 Movie St\n" +
                 "Overall Customer Rating: 4\n" +
                 "Theater A\n" +
-                "Frozen 2 - 04/10/2020 - 12:00pm\n" +
+                "Frozen - 04/10/2020 - 12:00pm\n" +
                 "Seat: E7\n" +
                 "Paid: $5.00\n\n";
         testUser.displayTickets();
@@ -205,7 +207,7 @@ public class UserTest {
     @Test
     public void testRequestRefund() {
     	testUser.updateHomeVenue("Venue", venues);
-    	testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 2, 5, alphabet[4], 7);
+    	testUser.bookTickets("Frozen", "04/10/2020", "12:00pm", 2, 5, alphabet[4], 7);
         //testUser.requestRefund("Frozen 2", 3);
         assertEquals(7, testUser.getTickets().size(), "This method wasn't implemented properly");
     }
@@ -213,15 +215,15 @@ public class UserTest {
     @Test
     public void testRequestRefundExcess() {
     	testUser.updateHomeVenue("Venue", venues);
-    	testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 3, 2, alphabet[4], 7);
+    	testUser.bookTickets("Frozen", "04/10/2020", "12:00pm", 3, 2, alphabet[4], 7);
         //testUser.requestRefund("Frozen 2", 12);
         assertEquals(5, testUser.getTickets().size(), "This method wasn't implemented properly");
     }
 
     @Test
     public void testAddToWatchlist() {
-        testUser.addToWatchlist("Frozen 2");
-        assertEquals(movies.get(0).toString(), testUser.getWatchlist().get(0).toString());
+        testUser.addToWatchlist("Frozen");
+        assertEquals(movies.get(movies.size()-1).toString(), testUser.getWatchlist().get(0).toString());
     }
 
     @Test
@@ -232,16 +234,16 @@ public class UserTest {
 
     @Test
     public void testRemoveFromWatchlist() {
-        testUser.addToWatchlist("Frozen 2");
-        testUser.addToWatchlist("The Jungle Book");
-        testUser.removeFromWatchlist("Frozen 2");
-        assertEquals(movies.get(1).toString(), testUser.getWatchlist().get(0).toString());
+        testUser.addToWatchlist("Frozen");
+        testUser.addToWatchlist("Harry Potter");
+        testUser.removeFromWatchlist("Frozen");
+        assertEquals(movies.get(0).toString(), testUser.getWatchlist().get(0).toString());
     }
 
     @Test
     public void testRemoveFromWatchlistFail() {
-        testUser.addToWatchlist("Frozen 2");
-        testUser.removeFromWatchlist("Frozen 3");
+        testUser.addToWatchlist("Frozen");
+        testUser.removeFromWatchlist("Frozen 2");
         assertEquals(1, testUser.getWatchlist().size());
     }
 

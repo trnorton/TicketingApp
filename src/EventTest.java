@@ -101,11 +101,11 @@ class EventTest {
 		ArrayList<Movie> movies = JsonParser.loadMovies();
 		Movie movie = null;
 		for (Movie m : movies) {
-			if (m.getName().equals("Frozen 2"))
+			if (m.getName().equals("Frozen"))
 				movie = m;
 		}
 		Event event = new Event(movie, "04/10/2020", "12:00pm");
-		assertEquals(event.toString(), "Frozen 2 - 04/10/2020 - 12:00pm");
+		assertEquals(event.toString(), "Frozen - 04/10/2020 - 12:00pm");
 	}
 
 }

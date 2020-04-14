@@ -190,7 +190,7 @@ public class MainSystem {
 				ArrayList<Movie> movies = JsonParser.loadMovies();
 				Movie movie = null;
 				for (Movie m : movies) {
-					if (m.getName().equals("Frozen 2"))
+					if (m.getName().equals("Frozen"))
 						movie = m;
 				}
 				Event e = new Event(movie, "04/10/2020", "12:00pm");
@@ -199,7 +199,7 @@ public class MainSystem {
 				ArrayList<Movie> movies = JsonParser.loadMovies();
 				Movie movie = null;
 				for (Movie m : movies) {
-					if (m.getName().equals("The Jungle Book"))
+					if (m.getName().equals("Harry Potter"))
 						movie = m;
 				}
 				Event e = new Event(movie, "04/10/2020", "12:00pm");
