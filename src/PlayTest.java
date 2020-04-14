@@ -1,6 +1,8 @@
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,6 +23,19 @@ public class PlayTest {
 
 		Assert.assertEquals(EXPECTED.getName(), play.getName());
 
+	}
+	
+	@Test
+	public void testPlayFirstConstructor() {
+		final String NAME = "Harry Potter";
+		final int AGERATING = 0;
+		final int OFFRATING = 0;
+		final String GENRE = "Action";
+		final ArrayList<String> ACTORS = new ArrayList<>(Arrays.asList("Daniel Radcliffe"));
+		final ArrayList<String> PRODUCERS = new ArrayList<>(Arrays.asList("Daniel Radcliffe"));
+		
+		final Play EXPECTED = new Play(NAME, OFFRATING, AGERATING, PRODUCERS, ACTORS);
+		assertNotNull(EXPECTED);
 	}
 
 	@Test
