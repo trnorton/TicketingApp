@@ -279,6 +279,12 @@ public class UserTest {
     public void testName() {
         assertEquals("Johnny", testUser.getName());
     }
+    
+    @Test
+    public void testSetName() {
+        testUser.setName("Doug");
+    	assertEquals("Doug", testUser.getName());
+    }
 
     @Test
     public void testAge() {
