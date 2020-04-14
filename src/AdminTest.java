@@ -1,6 +1,10 @@
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -42,6 +46,24 @@ public class AdminTest {
 		Assert.assertEquals(output, admin.toString());
 
 
+	}
+
+	@Test
+	public void venueListTest() throws IOException {
+		final String name = "Luke";
+		final String bday = "10/10/2020";
+		final String phoneNumber = "1234567890";
+		final String address = "123 Fake Street";
+		final String email = "fake@fake.com";
+		final Admin admin = new Admin(name, bday, phoneNumber, address, email);
+
+		MainSystem mainSystem = new MainSystem();
+		admin.addVenue("Venue", mainSystem.getVenues());
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		admin.displayVenues();
+		Assert.assertEquals(mainSystem.getVenues().get(0).toString() + "\n", outContent.toString());
+		outContent.close();
 	}
 
 	@Test
