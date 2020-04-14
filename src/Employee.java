@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Employee extends User {
 
 	private Venue workVenue;
-	private ArrayList<Ticket> ticketsToRefundToCustomers;
+	private ArrayList<Ticket> ticketsToRefundToCustomers = new ArrayList<Ticket>();
 
 	/**
 	 * Parametrized constructor for User

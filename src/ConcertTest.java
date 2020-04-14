@@ -1,6 +1,9 @@
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,6 +24,19 @@ public class ConcertTest {
 
 		Assert.assertEquals(EXPECTED.getName(), concert.getName());
 
+	}
+	
+	@Test
+	public void testConcertFirstConstructor() {
+		final String NAME = "Harry Potter";
+		final int AGERATING = 0;
+		final int OFFRATING = 0;
+		final String GENRE = "Action";
+		final ArrayList<String> ACTORS = new ArrayList<>(Arrays.asList("Daniel Radcliffe"));
+		final ArrayList<String> PRODUCERS = new ArrayList<>(Arrays.asList("Daniel Radcliffe"));
+
+		final Concert EXPECTED = new Concert(NAME, OFFRATING, AGERATING, PRODUCERS, ACTORS);
+		assertNotNull(EXPECTED);
 	}
 
 	@Test
@@ -85,10 +101,10 @@ public class ConcertTest {
 		final ArrayList<String> PRODUCERS = new ArrayList<>(Arrays.asList("Daniel Radcliffe"));
 
 		final Concert concert = new Concert(NAME, OFFRATING, AGERATING, null, null, PRODUCERS, ACTORS);
+		
 
 		final String MOVIESTRING = "Concert" + " Name: " + NAME + "\nIMDB Rating: " + OFFRATING + "\nAge Rating: " + AGERATING
 				+ "\nOverall Viewer Rating: " + 0 + "\nProducers: " + PRODUCERS +  "\nFamous Actors: " + ACTORS + "\n";
-
 
 
 	}

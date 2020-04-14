@@ -1,0 +1,10 @@
+********** Receipt **********
+Ticket for "Johnny" at the Name: Venue
+Address: 123 Movie St
+Overall Customer Rating: 4
+Theater A
+Frozen 2 - 04/10/2020 - 12:00pm
+Seat: E7
+Paid: $5.00
+
+Total price: $5.00

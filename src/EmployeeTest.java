@@ -2,6 +2,12 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -118,6 +124,63 @@ public class EmployeeTest {
 		employee.setTicketsToRefundToCustomers(ticketsToRefund);
 
 		Assert.assertEquals(ticketsToRefund, employee.getTicketsToRefundToCustomers());
+	}
+	
+	@Test
+	public void testInputEvent() {
+		final String name = "Luke";
+		final String bday = "10/10/2020";
+		final String phoneNumber = "1234567890";
+		final String address = "123 Fake Street";
+		final String email = "fake@fake.com";
+		final Venue workVenue = null;
+		final Employee employee = new Employee(name, bday, phoneNumber, address, email, workVenue);
+		
+		Venue venue = new Venue("Venue", "123 Movie St", 12);
+		ArrayList<String> majorActors = new ArrayList<String>();
+		majorActors.add("Elsa");
+		ArrayList<String> producers = new ArrayList<String>();
+		producers.add("Disney");
+		Show show = new Movie("Frozen", 5, 8, "Animated", majorActors, producers);
+		employee.inputEvent(venue, "04/10/2020", "12:00pm", show);
+		assertNotNull(venue.getAvailableTheater(new Event(show, "04/10/2020", "12:00pm")).getEvent(new Event(show, "04/10/2020", "12:00pm")));
+	}
+	
+	@Test
+	public void testAddTicketToRefund() {
+		final String name = "Luke";
+		final String bday = "10/10/2020";
+		final String phoneNumber = "1234567890";
+		final String address = "123 Fake Street";
+		final String email = "fake@fake.com";
+		final Venue workVenue = null;
+		final Employee employee = new Employee(name, bday, phoneNumber, address, email, workVenue);
+		
+		Ticket ticket = new Ticket();
+		employee.addTicketToRefund(ticket);
+		assertEquals(ticket, employee.getTicketsToRefundToCustomers().get(0));
+		
+	}
+	
+	@Test
+	public void testRefundTickets() {
+		final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		 
+        System.setOut(new PrintStream(outContent));
+		
+		final String name = "Luke";
+		final String bday = "10/10/2020";
+		final String phoneNumber = "1234567890";
+		final String address = "123 Fake Street";
+		final String email = "fake@fake.com";
+		final Venue workVenue = null;
+		final Employee employee = new Employee(name, bday, phoneNumber, address, email, workVenue);
+		
+		Ticket ticket = new Ticket();
+		ticket.setName("Name");
+		employee.addTicketToRefund(ticket);
+		employee.refundTickets("Name");
+		assertEquals(outContent.toString(), "Refunding Name 1 tickets for a total amount of 0 dollars!!\n");
 	}
 
 }
