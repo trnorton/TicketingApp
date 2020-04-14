@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class Concert extends Show {
 
-	private ArrayList<String> performers;
+	private ArrayList<String> performers = new ArrayList<String>();
 
 	/**
 	 * Blank constructor, used for creating empty Show types and later setting values

@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class Movie extends Show {
 
-	private ArrayList<String> majorActors;
+	private ArrayList<String> majorActors = new ArrayList<String>();
 	private String genre;
 
 	/**
