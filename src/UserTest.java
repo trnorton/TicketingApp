@@ -124,7 +124,7 @@ public class UserTest {
 
     @Test
     public void testBookTickets() {
-        testUser.updateHomeVenue("PlaysRUs", venues);
+        testUser.updateHomeVenue("Venue", venues);
         testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 3, 2, alphabet[4], 7);
         assertEquals(5, testUser.getTickets().size());
     }
@@ -132,8 +132,10 @@ public class UserTest {
     @Test
     public void testBookTicketsFail() {
         testUser.updateHomeVenue("Venue", venues);
-        testUser.bookTickets("Frozen 2", "04/11/2020", "12:00pm", 3, 2, alphabet[4], 7);
-        assertNull(testUser.getTickets());
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+        	testUser.bookTickets("Frozen 2", "04/11/2020", "12:00pm", 3, 2, alphabet[4], 7);
+        });
+        assertEquals(testUser.getTickets().toString(), "[]");
     }
 
     @Test
@@ -187,6 +189,7 @@ public class UserTest {
     @Test
     public void testDisplayTickets() {
         System.setOut(new PrintStream(outContent));
+        testUser.updateHomeVenue("Venue", venues);
         testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 1, 0, alphabet[4], 7);
         String expected = "Ticket for \"Johnny\" at the Name: Venue\n" +
                 "Address: 123 Movie St\n" +
@@ -194,21 +197,23 @@ public class UserTest {
                 "Theater A\n" +
                 "Frozen 2 - 04/10/2020 - 12:00pm\n" +
                 "Seat: E7\n" +
-                "Paid: $5.00";
+                "Paid: $5.00\n\n";
         testUser.displayTickets();
-        assertEquals(expected, testUser.getTickets().toString());
+        assertEquals(expected, outContent.toString());
     }
 
     @Test
     public void testRequestRefund() {
-        testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 2, 5, alphabet[4], 7);
+    	testUser.updateHomeVenue("Venue", venues);
+    	testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 2, 5, alphabet[4], 7);
         testUser.requestRefund("Frozen 2", 3);
         assertEquals(4, testUser.getTickets().size());
     }
 
     @Test
     public void testRequestRefundExcess() {
-        testUser.bookTickets("Frozen 3", "04/10/2020", "12:00pm", 3, 2, alphabet[4], 7);
+    	testUser.updateHomeVenue("Venue", venues);
+    	testUser.bookTickets("Frozen 2", "04/10/2020", "12:00pm", 3, 2, alphabet[4], 7);
         testUser.requestRefund("Frozen 2", 12);
         assertEquals(0, testUser.getTickets().size());
     }
