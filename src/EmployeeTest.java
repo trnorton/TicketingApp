@@ -8,6 +8,23 @@ import java.util.Arrays;
 public class EmployeeTest {
 
 	@Test
+	public void employeeValuesTest(){
+		final String name = "Luke";
+		final String bday = "10/10/2020";
+		final String phoneNumber = "1234567890";
+		final String address = "123 Fake Street";
+		final String email = "fake@fake.com";
+		final Venue workVenue = null;
+		final Employee employee = new Employee(name, bday, phoneNumber, address, email, workVenue);
+
+		Assert.assertEquals(name, employee.getName());
+		Assert.assertEquals(bday, employee.getBirthday());
+		Assert.assertEquals(phoneNumber, employee.getPhoneNumber());
+		Assert.assertEquals(address, employee.getAddress());
+		Assert.assertEquals(email, employee.getEmail());
+	}
+
+	@Test
 	public void inputDiscountTest(){
 		final String name = "Luke";
 		final String bday = "10/10/2020";
